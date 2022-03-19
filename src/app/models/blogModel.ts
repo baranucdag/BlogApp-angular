@@ -1,4 +1,4 @@
-export interface Blog{
+export interface BlogModel{
     ıd:number;
     userId:number;
     categoryId:number;

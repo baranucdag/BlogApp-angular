@@ -1,6 +1,7 @@
+import { AuthInterceptor } from './interceptors/auth.interceptor';
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
-import { HttpClientModule } from '@angular/common/http';
+import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { ReactiveFormsModule, FormBuilder, FormsModule } from '@angular/forms';
 import { ToastrModule } from 'ngx-toastr';
 import {BrowserAnimationsModule} from "@angular/platform-browser/animations"
@@ -12,6 +13,7 @@ import { LoginComponent } from './components/login/login.component';
 import { NaviComponent } from './components/navi/navi.component';
 import { FooterComponent } from './components/footer/footer.component';
 import { RegisterComponent } from './components/register/register.component';
+import { BlogAddComponent } from './components/blog-add/blog-add.component';
 
 @NgModule({
   declarations: [
@@ -21,6 +23,7 @@ import { RegisterComponent } from './components/register/register.component';
     NaviComponent,
     FooterComponent,
     RegisterComponent,
+    BlogAddComponent,
   ],
   imports: [
     BrowserModule,
@@ -34,7 +37,7 @@ import { RegisterComponent } from './components/register/register.component';
     }),
 
   ],
-  providers: [],
+  providers: [{provide:HTTP_INTERCEPTORS, useClass:AuthInterceptor, multi:true}],
   bootstrap: [AppComponent],
 })
 export class AppModule {}

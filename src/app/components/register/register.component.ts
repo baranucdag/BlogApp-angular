@@ -35,6 +35,11 @@ export class RegisterComponent implements OnInit {
       let registerModel = Object.assign({},this.registerForm.value);
       this.authService.register(registerModel).subscribe(response=>{
         console.log(response.data)
+        this.toastrService.info(response.message);
+      },
+      errorResponse=>{
+        this.toastrService.error("user already exist")
+        console.log("user already exist")
       })
     }
   }
