@@ -29,21 +29,24 @@ export class LoginComponent implements OnInit {
   login() {
     if (this.loginForm.valid) {
       console.log(this.loginForm.value);
-      let loginModel = Object.assign({},this.loginForm.value)
+      let loginModel = Object.assign({}, this.loginForm.value);
       this.authService.login(loginModel).subscribe(
-        response=>{
-          console.log(response.data)
-          this.toastrService.info(response.message)
-          localStorage.setItem("token",response.data.token)
+        (response) => {
+          //todo:proje bitince commend'a al
+          console.log(response.data);
+          this.toastrService.info(response.message);
+          if (response.data.token != null) {
+            localStorage.setItem('token', response.data.token);
+          }
+          else[
+            this.toastrService.error("Token error!")
+          ]
         },
-        responseError=>{
-          console.log(responseError)
-          this.toastrService.error(responseError.error
-          )
+        (responseError) => {
+          console.log(responseError);
+          this.toastrService.error(responseError.error);
         }
-      )
+      );
     }
   }
-
-  
 }

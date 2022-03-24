@@ -1,9 +1,9 @@
 export interface BlogModel{
-    ıd:number;
+    id:number;
     userId:number;
     categoryId:number;
     blogTitle:string;
     blogContent:string;
     likedCount:number;
-    createdTime:Date;
+    createdAt:Date;
 }

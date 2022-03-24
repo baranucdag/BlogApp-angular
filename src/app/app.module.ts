@@ -10,10 +10,13 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { BlogComponent } from './components/blog/blog.component';
 import { LoginComponent } from './components/login/login.component';
-import { NaviComponent } from './components/navi/navi.component';
+import { NaviComponent } from './components/navigation/navi.component';
 import { FooterComponent } from './components/footer/footer.component';
 import { RegisterComponent } from './components/register/register.component';
 import { BlogAddComponent } from './components/blog-add/blog-add.component';
+import { MastheadComponent } from './components/masthead/masthead.component';
+import { AboutComponent } from './components/about/about.component';
+import { ContactComponent } from './components/contact/contact.component';
 
 @NgModule({
   declarations: [
@@ -24,6 +27,9 @@ import { BlogAddComponent } from './components/blog-add/blog-add.component';
     FooterComponent,
     RegisterComponent,
     BlogAddComponent,
+    MastheadComponent,
+    AboutComponent,
+    ContactComponent,
   ],
   imports: [
     BrowserModule,

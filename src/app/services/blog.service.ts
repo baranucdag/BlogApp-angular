@@ -15,8 +15,7 @@ export class BlogService {
     let apiUrl = this.baseApiUrl + 'getall';
     return this.httClient.get<ListResponsModel<BlogModel>>(apiUrl);
   }
-
-  postBlog(blogModel:BlogModel){
+  addBlog(blogModel:BlogModel){
     let apiUrl = this.baseApiUrl+'add';
     return this.httClient.post(apiUrl,blogModel);
   }

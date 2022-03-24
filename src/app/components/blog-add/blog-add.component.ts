@@ -38,9 +38,9 @@ export class BlogAddComponent implements OnInit {
 
   addBlog() {
     if (this.blogAddForm.valid) {
-      console.log(this.blogAddForm.value);
+      //console.log(this.blogAddForm.value);
       let blogModel = Object.assign({}, this.blogAddForm.value);
-      this.blogService.postBlog(blogModel).subscribe(response=>{
+      this.blogService.addBlog(blogModel).subscribe(response=>{
         this.toastService.info("Blog added succesfully")
       },
       responseError=>{

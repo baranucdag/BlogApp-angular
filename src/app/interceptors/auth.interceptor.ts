@@ -11,11 +11,11 @@ import { Observable } from 'rxjs';
 export class AuthInterceptor implements HttpInterceptor {
 
   constructor() {}
-
+  //todo:token nullCheck
   //adding something extra to request (token)
   intercept(request: HttpRequest<unknown>, next: HttpHandler): Observable<HttpEvent<unknown>> {
-    let token = localStorage.getItem("token");  //get token
-    let newRequest:HttpRequest<any>;            //define new request
+    let token = localStorage.getItem("token");  
+    let newRequest:HttpRequest<any>;            
     newRequest=request.clone({
       headers:request.headers.set("Authorization","Bearer " + token)  //set new request headers
     })

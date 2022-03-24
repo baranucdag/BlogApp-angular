@@ -27,7 +27,7 @@ export class LoginGuard implements CanActivate {
     | Promise<boolean | UrlTree>
     | boolean
     | UrlTree {
-    
+      //kullanıcı giriş yapmadıysa logine yönlendir.
       if(this.authService.isAuthenticated()){
         return true;
       }

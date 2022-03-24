@@ -10,6 +10,7 @@ import { Component, OnInit } from '@angular/core';
 })
 export class RegisterComponent implements OnInit {
   registerForm: FormGroup;
+  year:string;
   constructor(
     private authService: AuthService,
     private toastrService: ToastrService,
@@ -18,6 +19,7 @@ export class RegisterComponent implements OnInit {
 
   ngOnInit(): void {
     this.createRegisterform();
+    this.getYear();
   }
 
   createRegisterform() {
@@ -42,5 +44,9 @@ export class RegisterComponent implements OnInit {
         console.log("user already exist")
       })
     }
+  }
+
+  getYear(){
+    this.year=new Date().getFullYear().toString();
   }
 }

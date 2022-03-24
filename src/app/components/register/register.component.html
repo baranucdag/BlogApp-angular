@@ -11,7 +11,6 @@
         />
         <label for="floatingInput">Email address</label>
       </div>
-
       <div class="form-floating">
         <input
           type="text"
@@ -40,10 +39,14 @@
         <label for="floatingPassword">Password</label>
       </div>
 
-      <button class="w-100 btn btn-lg btn-primary" type="submit"  (click)="register()">
-        REGİSTER
+      <button
+        class="w-100 btn btn-lg btn-primary"
+        type="submit"
+        (click)="register()"
+      >
+        Register
       </button>
-      <p class="mt-5 mb-3 text-muted">&copy; 2017–2021</p>
+      <p class="mt-5 mb-3 text-muted">&copy; {{year}}</p>
     </form>
   </main>
 </body>
