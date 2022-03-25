@@ -1,3 +1,4 @@
+import { BlogDetailComponent } from './components/blog-detail/blog-detail.component';
 import { ContactComponent } from './components/contact/contact.component';
 import { AboutComponent } from './components/about/about.component';
 import { LoginGuard } from './guards/login.guard';
@@ -16,6 +17,7 @@ const routes: Routes = [
     //children: [{ path: 'add', component: BlogAddComponent }],
   },
   { path: 'blog/add', component: BlogAddComponent, canActivate: [LoginGuard] },
+  { path: 'blog/detail/:id', component: BlogDetailComponent },
   { path: 'login', component: LoginComponent },
   { path: 'register', component: RegisterComponent },
   { path: 'about', component: AboutComponent },

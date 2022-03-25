@@ -18,6 +18,7 @@ export class LoginComponent implements OnInit {
 
   ngOnInit(): void {
     this.createLoginForm();
+
   }
   createLoginForm() {
     this.loginForm = this.formBuilder.group({
@@ -25,6 +26,7 @@ export class LoginComponent implements OnInit {
       password: ['', Validators.required],
     });
   }
+
 
   login() {
     if (this.loginForm.valid) {

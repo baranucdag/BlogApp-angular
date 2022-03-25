@@ -1,10 +1,46 @@
-<table class="table">
-  <thead>
-    <tr>
-      <th>BLOGS</th>
-    </tr>
-  </thead>
-  <tr *ngFor="let blog of blogs">
-    <td>{{ blog.blogContent }}</td>
-  </tr>
-</table>
+<h1 style="text-align: center; margin-bottom: 12px; color: lightslategray">
+  Recent Posts
+</h1>
+<div class="row">
+  <div class="col-lg-8 col-md-10 mx-auto">
+    <div *ngFor="let blog of blogs; let i = index">
+      <div *ngIf="i < 5">
+        <div class="post-preview">
+          <a (click)="onSelect(blog.id)" class="pointer">
+            <h2>
+              {{
+                blog.blogTitle.length > 38
+                  ? blog.blogTitle.substring(0, 40) + "..."
+                  : blog.blogTitle
+              }}
+            </h2>
+            <h5>
+              {{
+                blog.blogContent.length > 48
+                  ? blog.blogContent.substring(0, 70) + "..."
+                  : blog.blogContent
+              }}
+            </h5></a
+          >
+
+          <p class="post-meta">
+            Date : {{ blog.createdAt | date :'medium'}}
+            <a href="#"></a>
+          </p>
+        </div>
+      </div>
+
+      
+    </div>
+
+    <div class="clearfix">
+      <!-- <a class="btn btn-secondary float-left pointer" routerLink="/blog/add">
+        New Post
+        <i class="fa fa-plus" aria-hidden="true"></i
+      ></a> -->
+      <a class="btn btn-secondary float-right pointer" routerLink="/posts">
+        All Posts &rarr;
+      </a>
+    </div>
+  </div>
+</div>
