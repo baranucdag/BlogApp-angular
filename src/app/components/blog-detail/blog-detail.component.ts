@@ -33,9 +33,7 @@ export class BlogDetailComponent implements OnInit {
 
   getBlogDetails() {
     this.blogService.getBlogDetails(this.id).subscribe(response => {
-      console.log(response.data);
+      this.blogDetail=response.data;
     });
-
-  
   }
 }

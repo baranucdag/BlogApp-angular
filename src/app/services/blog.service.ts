@@ -23,7 +23,12 @@ export class BlogService {
   }
 
   getBlogDetails(id: number): Observable<SingleResponseModel<BlogDetailModel>> {
-    let apiUrl = this.baseApiUrl + 'getblogdetails?id:' + id;
+    let apiUrl = this.baseApiUrl + 'getblogdetails?id=' + id;
     return this.httClient.get<SingleResponseModel<BlogDetailModel>>(apiUrl);
+  }
+
+  getBlogById(id:number):Observable<SingleResponseModel<BlogModel>>{
+    let apiUrl= this.baseApiUrl + 'getblogbyid?blogId='+id;
+    return this.httClient.get<SingleResponseModel<BlogModel>>(apiUrl);
   }
 }

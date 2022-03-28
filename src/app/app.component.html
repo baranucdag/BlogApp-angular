@@ -1,30 +1,24 @@
 <app-navi></app-navi>
 <app-masthead></app-masthead>
-<div class="container"><router-outlet></router-outlet></div>
+<div class="container">
+  <router-outlet></router-outlet>
+  <hr/>
+</div>
 <app-footer></app-footer>
 
 <!-- -
-  --postdetail component for view,
-  --admin panel,
-  -contact form,
   --post form component,
   --icon ekleme,
-  --mathead image fonksiyon ile çağrılacak
   --searchbar düşün
+  --admin paneli heakyuz github dashboard paneli
   -->
 
-  <!--
-    --register ve login componentler modal şeklinde olsun
-    --admin paneli heakyuz github dashboard paneli
+<!--
+    yapılacaklar:
+    1-:masthead de blog title yazdırılacak.
+    2-:masthead de eğer o anda detail component te ise blogun image i gösterilecek yoksa default ımage.
+    3-:detail component te blog bilgilerinin gösterilmesi.
+    4-:add,login,register,edit ekranlarının modal şekilde gösterilmesi
+    5-:blog component te tarih gösterilmesi (pipe nedir göster)
+    6-:home component te post sayısı (click) ile fonksiyon çalıştır indexi arttır her seferinde
   -->
-
-
-  <!--
-
-    sorunlar:login ve register ekranları modal şekilde sunulacak,
-    blog (home) ekranında her bir blog için sunulan bilgiler düzeltilecek,
-    blogDetail veri çekme 
-    blog(home) ekranında postların hepinin yada bir kısmının görüntülenmesi
-    blog(home) ekranında postların tarihllerinin görğntülenmesi
-    blogadd component modal şekilde ekranda gösterilecek
-  -->  

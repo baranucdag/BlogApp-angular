@@ -15,7 +15,6 @@ import { Router } from '@angular/router';
 export class BlogComponent implements OnInit {
   blogs: BlogModel[] = [];
   blogDetails: BlogDetailModel[] = [];
-  currentUser: UserModel;
 
   constructor(
     private blogService: BlogService,
@@ -33,19 +32,9 @@ export class BlogComponent implements OnInit {
     });
   }
 
-  getUserById(id: number) {
-    this.userService.getUserById(id).subscribe((response) => {
-      this.currentUser = response.data;
-    });
-  }
 
   onSelect(id: number) {
     this.router.navigate(['blog/detail/' + id]);
   }
 
-  getAllPost(par: boolean) {
-    if (par) {
-      return "i<5";
-    } else return;
-  }
 }

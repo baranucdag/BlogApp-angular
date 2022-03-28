@@ -19,6 +19,7 @@ import { AboutComponent } from './components/about/about.component';
 import { ContactComponent } from './components/contact/contact.component';
 import { BlogDetailComponent } from './components/blog-detail/blog-detail.component';
 import { NaviComponent } from './components/navigation/navi.component';
+import {ModalModule} from 'ngx-bootstrap/modal';
 
 @NgModule({
   declarations: [
@@ -41,8 +42,8 @@ import { NaviComponent } from './components/navigation/navi.component';
     ReactiveFormsModule,
     AppRoutingModule,
     FormsModule,
+    ModalModule.forRoot(),
     BrowserAnimationsModule,
-  
     ToastrModule.forRoot({
       positionClass: 'toast-bottom-right',
     }),
