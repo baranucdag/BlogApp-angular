@@ -11,13 +11,9 @@ import { RouterModule, Routes } from '@angular/router';
 
 const routes: Routes = [
   { path: '', pathMatch: 'full', component: BlogComponent },
-  {
-    path: 'blog',
-    component: BlogComponent,
-    //children: [{ path: 'add', component: BlogAddComponent }],
-  },
-  { path: 'blog/add', component: BlogAddComponent, canActivate: [LoginGuard] },
+  { path: 'blog', component: BlogComponent },
   { path: 'blog/detail/:id', component: BlogDetailComponent },
+  { path: 'blog/add', component: BlogAddComponent, canActivate: [LoginGuard] },
   { path: 'login', component: LoginComponent },
   { path: 'register', component: RegisterComponent },
   { path: 'about', component: AboutComponent },

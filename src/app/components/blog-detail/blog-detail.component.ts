@@ -12,28 +12,29 @@ export class BlogDetailComponent implements OnInit {
   id: number = 0;
   blogDetail: BlogDetailModel;
   constructor(
-    private router: Router,
     private route: ActivatedRoute,
     private blogService: BlogService
   ) {}
 
   ngOnInit(): void {
     this.getParameter();
-    this.getBlogDetails();
   }
 
+  //get parametr 'id' and set it to id local variable
   getParameter() {
     this.route.params.subscribe((params) => {
       if (params !== null && params !== undefined) {
         this.id = Number(params['id']);
-        console.log(this.id)
+        this.getBlogDetails();
       }
     });
   }
 
+  //get blog details by id variable (from route)
   getBlogDetails() {
     this.blogService.getBlogDetails(this.id).subscribe(response => {
       this.blogDetail=response.data;
+      console.log(response.data.blogTitle)
     });
   }
 }

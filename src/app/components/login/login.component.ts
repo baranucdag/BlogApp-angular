@@ -1,3 +1,4 @@
+import { Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
 import { AuthService } from './../../services/auth.service';
 import { Component, OnInit } from '@angular/core';
@@ -13,13 +14,16 @@ export class LoginComponent implements OnInit {
   constructor(
     private formBuilder: FormBuilder,
     private authService: AuthService,
-    private toastrService: ToastrService
+    private toastrService: ToastrService,
+    private router:Router
   ) {}
 
   ngOnInit(): void {
     this.createLoginForm();
 
   }
+
+  //create login form
   createLoginForm() {
     this.loginForm = this.formBuilder.group({
       email: ['', Validators.required],
@@ -27,7 +31,7 @@ export class LoginComponent implements OnInit {
     });
   }
 
-
+  //login operations: hide token in localstorage
   login() {
     if (this.loginForm.valid) {
       console.log(this.loginForm.value);
@@ -43,6 +47,7 @@ export class LoginComponent implements OnInit {
           else[
             this.toastrService.error("Token error!")
           ]
+          this.router.navigate(['blog'])
         },
         (responseError) => {
           console.log(responseError);

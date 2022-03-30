@@ -15,26 +15,28 @@ import { Router } from '@angular/router';
 export class BlogComponent implements OnInit {
   blogs: BlogModel[] = [];
   blogDetails: BlogDetailModel[] = [];
+  blogCount: number = 6;
+  date:Date;
 
-  constructor(
-    private blogService: BlogService,
-    private userService: UserService,
-    private router: Router
-  ) {}
+  constructor(private blogService: BlogService, private router: Router) {}
 
   ngOnInit(): void {
     this.getAllBlogs();
   }
 
+  //get all blogs
   getAllBlogs() {
     this.blogService.getAll().subscribe((response) => {
       this.blogs = response.data;
     });
   }
 
-
+  //navigate to detail component by choosen blog
   onSelect(id: number) {
     this.router.navigate(['blog/detail/' + id]);
   }
 
+  riseCountOfBlog() {
+    this.blogCount = this.blogCount + 5;
+  }
 }

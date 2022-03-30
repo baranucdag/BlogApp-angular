@@ -193,7 +193,10 @@ body {
       transform: translate3d(0, 100%, 0);
     }
   }
-  
+  header#image.masthead {
+    height: 520px;
+  }
+
   header.masthead {
     margin-bottom: 50px;
     background: no-repeat center center;

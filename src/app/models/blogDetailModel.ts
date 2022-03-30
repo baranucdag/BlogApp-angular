@@ -6,3 +6,4 @@ export interface BlogDetailModel {
   ownerMail: string;
   createdAt: Date;
 }
+//todo:owner mail değiştir db ismi ile gir

@@ -22,15 +22,17 @@ export class RegisterComponent implements OnInit {
     this.getYear();
   }
 
+  //create register form
   createRegisterform() {
     this.registerForm = this.formBuilder.group({
       email: ['', Validators.required],
       firstName: ['', Validators.required],
       lastName: ['', Validators.required],
-      password: ['', Validators.required],
+      password: ['', Validators.required]
     });
   }
 
+  //register operations
   register() {
     if(this.registerForm.valid){
       console.log(this.registerForm.value)
@@ -46,6 +48,7 @@ export class RegisterComponent implements OnInit {
     }
   }
 
+  //get year 
   getYear(){
     this.year=new Date().getFullYear().toString();
   }
