@@ -13,13 +13,13 @@ import { BlogComponent } from './components/blog/blog.component';
 import { LoginComponent } from './components/login/login.component';
 import { FooterComponent } from './components/footer/footer.component';
 import { RegisterComponent } from './components/register/register.component';
-import { BlogAddComponent } from './components/blog-add/blog-add.component';
-import { MastheadComponent } from './components/masthead/masthead.component';
-import { AboutComponent } from './components/about/about.component';
-import { ContactComponent } from './components/contact/contact.component';
-import { BlogDetailComponent } from './components/blog-detail/blog-detail.component';
+import { BlogAddComponent } from './components/blog/blog-add/blog-add.component';
+import { AboutComponent } from './components/blog/about/about.component';
+import { BlogDetailComponent } from './components/blog/blog-detail/blog-detail.component';
 import { NaviComponent } from './components/navigation/navi.component';
 import {ModalModule} from 'ngx-bootstrap/modal';
+import { ReversePipe } from './pipes/reverse.pipe';
+import { BlogsComponent } from './components/blog/blogs/blogs.component';
 
 @NgModule({
   declarations: [
@@ -30,10 +30,10 @@ import {ModalModule} from 'ngx-bootstrap/modal';
     FooterComponent,
     RegisterComponent,
     BlogAddComponent,
-    MastheadComponent,
     AboutComponent,
-    ContactComponent,
-    BlogDetailComponent
+    BlogDetailComponent,
+    ReversePipe,
+    BlogsComponent,
   ],
   imports: [
     BrowserModule,
