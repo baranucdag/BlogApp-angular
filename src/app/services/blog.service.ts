@@ -11,6 +11,8 @@ import { BlogDetailModel } from '../models/blogDetailModel';
 })
 export class BlogService {
   baseApiUrl = 'https://localhost:44313/api/blogs/';
+  isDetailOpened:boolean;
+  isHomeOpened:boolean;
   constructor(private httClient: HttpClient) {}
 
   getAll(): Observable<ListResponsModel<BlogModel>> {
@@ -22,6 +24,11 @@ export class BlogService {
     return this.httClient.post(apiUrl, blogModel);
   }
 
+  updateBlog(blogModel:BlogModel){
+    let apiUrl = this.baseApiUrl + 'update';
+    return this.httClient.post(apiUrl,blogModel); 
+  }
+
   getBlogDetails(id: number): Observable<SingleResponseModel<BlogDetailModel>> {
     let apiUrl = this.baseApiUrl + 'getblogdetails?id=' + id;
     return this.httClient.get<SingleResponseModel<BlogDetailModel>>(apiUrl);
@@ -31,4 +38,5 @@ export class BlogService {
     let apiUrl= this.baseApiUrl + 'getblogbyid?blogId='+id;
     return this.httClient.get<SingleResponseModel<BlogModel>>(apiUrl);
   }
+
 }

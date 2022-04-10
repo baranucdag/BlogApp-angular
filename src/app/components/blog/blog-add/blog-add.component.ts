@@ -1,25 +1,19 @@
-import {
-  FormsModule,
-  FormBuilder,
-  FormGroup,
-  Validators,
-} from '@angular/forms';
-import { ToastrService } from 'ngx-toastr';
-import { BlogService } from './../../services/blog.service';
 import { Component, OnInit } from '@angular/core';
-import { BlogModel } from 'src/app/models/blogModel';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { ToastrService } from 'ngx-toastr';
+import { BlogService } from 'src/app/services/blog.service';
 
 @Component({
   selector: 'app-blog-add',
   templateUrl: './blog-add.component.html',
-  styleUrls: ['./blog-add.component.css'],
+  styleUrls: ['./blog-add.component.css']
 })
 export class BlogAddComponent implements OnInit {
   blogAddForm: FormGroup;
   constructor(
     private blogService: BlogService,
     private toastService: ToastrService,
-    private FormBuilder: FormBuilder
+    private formBuilder: FormBuilder
   ) {}
 
   ngOnInit(): void {
@@ -27,7 +21,7 @@ export class BlogAddComponent implements OnInit {
   }
 
   createBlogAddForm() {
-    this.blogAddForm = this.FormBuilder.group({
+    this.blogAddForm = this.formBuilder.group({
       userId: ['', Validators.required],
       categoryId: ['', Validators.required],
       blogTitle: ['', Validators.required],

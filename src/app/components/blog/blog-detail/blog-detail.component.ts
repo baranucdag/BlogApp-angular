@@ -1,16 +1,16 @@
+import { Component, EventEmitter, OnInit, Output } from '@angular/core';
+import { ActivatedRoute } from '@angular/router';
 import { BlogDetailModel } from 'src/app/models/blogDetailModel';
-import { BlogService } from './../../services/blog.service';
-import { ActivatedRoute, Router } from '@angular/router';
-import { Component, OnInit } from '@angular/core';
+import { BlogService } from 'src/app/services/blog.service';
 
 @Component({
   selector: 'app-blog-detail',
   templateUrl: './blog-detail.component.html',
-  styleUrls: ['./blog-detail.component.css'],
+  styleUrls: ['./blog-detail.component.css']
 })
 export class BlogDetailComponent implements OnInit {
   id: number = 0;
-  blogDetail: BlogDetailModel;
+  blogDetail:BlogDetailModel;
   constructor(
     private route: ActivatedRoute,
     private blogService: BlogService
@@ -18,6 +18,7 @@ export class BlogDetailComponent implements OnInit {
 
   ngOnInit(): void {
     this.getParameter();
+    
   }
 
   //get parametr 'id' and set it to id local variable
@@ -26,15 +27,16 @@ export class BlogDetailComponent implements OnInit {
       if (params !== null && params !== undefined) {
         this.id = Number(params['id']);
         this.getBlogDetails();
+        console.log(params['id'])
       }
     });
   }
-
+ 
   //get blog details by id variable (from route)
   getBlogDetails() {
     this.blogService.getBlogDetails(this.id).subscribe(response => {
       this.blogDetail=response.data;
-      console.log(response.data.blogTitle)
     });
   }
+
 }

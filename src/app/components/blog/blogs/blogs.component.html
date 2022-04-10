@@ -1,0 +1,45 @@
+<h1 style="text-align: center; margin-bottom: 12px; color: lightslategray">
+  Recent Posts
+</h1>
+<div class="container">
+  <div class="row">
+    <div class="col-lg-8 col-md-10 mx-auto">
+      <div *ngFor="let blog of blogs | reverse; let i = index">
+        <div *ngIf="i < blogCount">
+          <div class="post-preview">
+            <a (click)="onSelect(blog.id)" class="pointer">
+              <h2 class="post-title">
+                {{
+                  blog.blogTitle.length > 38
+                    ? blog.blogTitle.substring(0, 40) + "..."
+                    : blog.blogTitle
+                }}
+              </h2>
+              <h3 class="post-subtitle">
+                {{
+                  blog.blogContent.length > 48
+                    ? blog.blogContent.substring(0, 70) + "..."
+                    : blog.blogContent
+                }}
+              </h3>
+            </a>
+            <p class="post-meta">
+              Date : {{ blog.createdAt | date: "medium" }}
+              <a href="#"></a>
+            </p>
+          </div>
+        </div>
+      </div>
+
+      <div class="clearfix">
+        <a
+          id="btnSeeMore"
+          class="btn btn-secondary col-lg-6 float-right pointer"
+          (click)="riseCountOfBlog()"
+        >
+          See More Blog
+        </a>
+      </div>
+    </div>
+  </div>
+</div>

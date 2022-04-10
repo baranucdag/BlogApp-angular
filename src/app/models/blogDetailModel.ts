@@ -3,7 +3,7 @@ export interface BlogDetailModel {
   blogTitle: string;
   blogContent: string;
   categoryName: string;
-  ownerMail: string;
+  email: string;
   createdAt: Date;
 }
 //todo:owner mail değiştir db ismi ile gir

@@ -1,3 +1,4 @@
+import { BlogEditComponent } from './components/blog/blog-edit/blog-edit.component';
 import { BlogsComponent } from './components/blog/blogs/blogs.component';
 import { BlogDetailComponent } from './components/blog/blog-detail/blog-detail.component';
 import { AboutComponent } from './components/blog/about/about.component';
@@ -19,11 +20,11 @@ const routes: Routes = [
       { path: 'add', component: BlogAddComponent, canActivate: [LoginGuard] },
       { path: ':id/detail', component: BlogDetailComponent },
       { path: 'about', component: AboutComponent },
+      { path: 'edit', component: BlogEditComponent },
     ],
   },
   { path: 'login', component: LoginComponent },
   { path: 'register', component: RegisterComponent },
-
 ];
 
 @NgModule({

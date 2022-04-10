@@ -1,17 +1,20 @@
-import { BlogModel } from 'src/app/models/blogModel';
-import { BlogService } from './../../services/blog.service';
 import { Component, OnInit } from '@angular/core';
-import { BlogDetailModel } from 'src/app/models/blogDetailModel';
 import { Router } from '@angular/router';
+import { BlogDetailModel } from 'src/app/models/blogDetailModel';
+import { BlogModel } from 'src/app/models/blogModel';
+import { BlogService } from 'src/app/services/blog.service';
 
 @Component({
-  selector: 'app-blog',
-  templateUrl: './blog.component.html',
-  styleUrls: ['./blog.component.css'],
+  selector: 'app-blogs',
+  templateUrl: './blogs.component.html',
+  styleUrls: ['./blogs.component.css']
 })
-export class BlogComponent implements OnInit {
+
+export class BlogsComponent implements OnInit {
   blogs: BlogModel[] = [];
-  blogCount: number = 6;
+  blogDetails: BlogDetailModel[] = [];
+  blogCount: number = 5;
+  date:Date;
 
   constructor(private blogService: BlogService, private router: Router) {}
 
@@ -28,9 +31,10 @@ export class BlogComponent implements OnInit {
 
   //navigate to detail component by choosen blog
   onSelect(id: number) {
-    this.router.navigate(['blog/detail/' + id]);
-  }
+    this.router.navigate(['blog/'+id+'/detail']);
 
+  }
+  //reise the amount of blog on main page
   riseCountOfBlog() {
     this.blogCount = this.blogCount + 5;
   }

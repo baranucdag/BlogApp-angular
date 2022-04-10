@@ -4,8 +4,7 @@ import { BrowserModule } from '@angular/platform-browser';
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { ReactiveFormsModule, FormBuilder, FormsModule } from '@angular/forms';
 import { ToastrModule } from 'ngx-toastr';
-import {BrowserAnimationsModule} from "@angular/platform-browser/animations";
-
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -17,9 +16,10 @@ import { BlogAddComponent } from './components/blog/blog-add/blog-add.component'
 import { AboutComponent } from './components/blog/about/about.component';
 import { BlogDetailComponent } from './components/blog/blog-detail/blog-detail.component';
 import { NaviComponent } from './components/navigation/navi.component';
-import {ModalModule} from 'ngx-bootstrap/modal';
+import { ModalModule } from 'ngx-bootstrap/modal';
 import { ReversePipe } from './pipes/reverse.pipe';
 import { BlogsComponent } from './components/blog/blogs/blogs.component';
+import { BlogEditComponent } from './components/blog/blog-edit/blog-edit.component';
 
 @NgModule({
   declarations: [
@@ -34,6 +34,7 @@ import { BlogsComponent } from './components/blog/blogs/blogs.component';
     BlogDetailComponent,
     ReversePipe,
     BlogsComponent,
+    BlogEditComponent,
   ],
   imports: [
     BrowserModule,
@@ -47,9 +48,10 @@ import { BlogsComponent } from './components/blog/blogs/blogs.component';
     ToastrModule.forRoot({
       positionClass: 'toast-bottom-right',
     }),
-
   ],
-  providers: [{provide:HTTP_INTERCEPTORS, useClass:AuthInterceptor, multi:true}],
+  providers: [
+    { provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true },
+  ],
   bootstrap: [AppComponent],
 })
 export class AppModule {}

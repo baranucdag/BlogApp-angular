@@ -1,0 +1,115 @@
+<!-- <div class="container" >
+  <form class="mb-5" id="newPostForm">
+    <h2 class="text-white mb-4">Post Content</h2>
+    <div class="form-group">
+      <input
+        class="form-control py-4"
+        id="headingInput"
+        data-cy="headingInput"
+        type="text"
+        placeholder="Post heading"
+        formControlName="heading"
+      />
+    </div>
+    <div class="form-group">
+      <input
+        class="form-control py-4"
+        id="subHeadingInput"
+        data-cy="subHeadingInput"
+        type="text"
+        placeholder="Post subheading"   
+        formControlName="subHeading"
+      />
+      <div class="invalid-feedback">Subheading required</div>
+      <div class="invalid-feedback">Subheading is not valid</div>
+    </div>
+    <div class="form-group">
+      <input
+        class="form-control py-4"
+        id="backgroundImageInput"
+        data-cy="backgroundImageInput"
+        type="text"
+        placeholder="Post background image (enter a URL)"
+        formControlName="backgroundImage"
+      />
+      <div class="form-text text-white-50">
+        Use an image URL (ex. https://source.unsplash.com/WLUHO9A_xik/1600x900)
+      </div>
+      <div class="invalid-feedback">Background image required</div>
+      <div class="invalid-feedback">Background image is not valid</div>
+    </div>
+    <div class="form-group">
+      <textarea
+        class="form-control py-3"
+        id="bodyInput"
+        autosize
+        data-cy="bodyInput"
+        placeholder="Post body text (markdown supported)"
+        formControlName="body"
+      ></textarea>
+      <div class="invalid-feedback">Body content required</div>
+      <div class="invalid-feedback">Body content is not valid</div>
+    </div>
+    <div class="form-group d-flex align-items-center justify-content-between">
+      <button class="btn btn-primary" type="submit">Create Post</button
+      ><button class="btn btn-primary" data-cy="updateButton" type="submit">
+        Update Post
+      </button>
+    </div>
+  </form>
+  <h2 class="text-white mb-4">Post Preview</h2>
+
+  ><button class="btn btn-danger">Delete Post</button
+  ><ng-template
+    ><div class="modal-header">
+      <h5 class="modal-title">Confirm Delete</h5>
+      <button class="close" type="button" aria-label="Close">
+        <span aria-hidden="true">×</span>
+      </button>
+    </div>
+    <div class="modal-body small">
+      <div class="text-danger">
+        Warning: Deleting a post is permamnent. This action cannot be undone.
+      </div>
+    </div>
+    <div class="modal-footer">
+      <button class="btn btn-danger" type="button">Delete Post</button
+      ><button class="btn btn-secondary" type="button">Cancel</button>
+    </div></ng-template
+  >
+</div> -->
+
+<div class="container">
+    <form *ngIf="blogEditForm" [formGroup]="blogEditForm" >
+    <div class="form-label">
+      <input
+        type="text"
+        formControlName="categoryName"
+        class="form-control"
+        placeholder="Category ID"
+      />
+    </div>
+    <div class="form-label">
+      <input
+        type="text"
+        formControlName="blogTitle"
+        class="form-control"
+        placeholder="Blog Title"
+      />
+    </div>
+    <div class="form-label">
+      <input
+        type="text"
+        formControlName="blogContent"
+        class="form-control"
+        placeholder="Blog Content"
+      />
+    </div>
+      <button
+        class="w-100 btn btn-lg btn-primary"
+        type="submit"
+      >
+        Save Blog
+      </button>
+  </form>
+</div>
