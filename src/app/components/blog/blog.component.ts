@@ -1,8 +1,9 @@
+import { DetailService } from './../../services/detail.service';
 import { BlogModel } from 'src/app/models/blogModel';
 import { BlogService } from './../../services/blog.service';
 import { Component, OnInit } from '@angular/core';
 import { BlogDetailModel } from 'src/app/models/blogDetailModel';
-import { Router } from '@angular/router';
+import { Router, ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'app-blog',
@@ -11,12 +12,25 @@ import { Router } from '@angular/router';
 })
 export class BlogComponent implements OnInit {
   blogs: BlogModel[] = [];
+  id: number;
   blogCount: number = 6;
+  blogHeader?: string;
+  blogHeaderSet: boolean;
 
-  constructor(private blogService: BlogService, private router: Router) {}
+  constructor(
+    private blogService: BlogService,
+    private router: Router,
+    private detailService: DetailService
+  ) {}
 
   ngOnInit(): void {
     this.getAllBlogs();
+
+    this.detailService.blogDetail.subscribe((detail) => {
+      if (detail) {
+        this.blogHeader = detail.blogTitle;
+      }
+    });
   }
 
   //get all blogs
@@ -26,11 +40,7 @@ export class BlogComponent implements OnInit {
     });
   }
 
-  //navigate to detail component by choosen blog
-  onSelect(id: number) {
-    this.router.navigate(['blog/detail/' + id]);
-  }
-
+  //increse number of blog on main page
   riseCountOfBlog() {
     this.blogCount = this.blogCount + 5;
   }

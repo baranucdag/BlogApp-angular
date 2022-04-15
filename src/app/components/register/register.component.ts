@@ -1,7 +1,10 @@
+import { RegisterCheckModel } from './../../models/registerCheckModel';
+import { Router } from '@angular/router';
 import { Form, FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ToastrService } from 'ngx-toastr';
 import { AuthService } from './../../services/auth.service';
 import { Component, OnInit } from '@angular/core';
+import { RegisterModel } from 'src/app/models/registerModel';
 
 @Component({
   selector: 'app-register',
@@ -10,8 +13,9 @@ import { Component, OnInit } from '@angular/core';
 })
 export class RegisterComponent implements OnInit {
   registerForm: FormGroup;
-  year:string;
+  year: string;
   constructor(
+    private router: Router,
     private authService: AuthService,
     private toastrService: ToastrService,
     private formBuilder: FormBuilder
@@ -28,28 +32,43 @@ export class RegisterComponent implements OnInit {
       email: ['', Validators.required],
       firstName: ['', Validators.required],
       lastName: ['', Validators.required],
-      password: ['', Validators.required]
+      password: ['', Validators.required],
+      passwordCheck: ['', Validators.required],
     });
   }
 
   //register operations
   register() {
-    if(this.registerForm.valid){
-      console.log(this.registerForm.value)
-      let registerModel = Object.assign({},this.registerForm.value);
-      this.authService.register(registerModel).subscribe(response=>{
-        console.log(response.data)
-        this.toastrService.info(response.message);
-      },
-      errorResponse=>{
-        this.toastrService.error("user already exist")
-        console.log("user already exist")
-      })
+    if (this.registerForm.valid) {
+      let registerCheckModel: RegisterCheckModel = Object.assign(
+        {},
+        this.registerForm.value
+      );
+      if (registerCheckModel.password == registerCheckModel.passwordCheck) {
+        let registerModel: RegisterModel = {
+          email: registerCheckModel.email,
+          firstName: registerCheckModel.firstName,
+          lastName: registerCheckModel.lastName,
+          password: registerCheckModel.password,
+        };
+        this.authService.register(registerModel).subscribe(
+          (response) => {
+            console.log(response.message);
+            this.toastrService.info('registered succesfully!');
+          },
+          (errorResponse) => {
+            console.log(errorResponse);
+          }
+        );
+      } else {
+        this.toastrService.error('Passwords fields must have the same value!');
+      }
+
     }
   }
 
-  //get year 
-  getYear(){
-    this.year=new Date().getFullYear().toString();
+  //get year
+  getYear() {
+    this.year = new Date().getFullYear().toString();
   }
 }

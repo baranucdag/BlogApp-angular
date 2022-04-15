@@ -1,3 +1,4 @@
+import { AdminModule } from './components/admin/admin.module';
 import { AuthInterceptor } from './interceptors/auth.interceptor';
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
@@ -41,6 +42,7 @@ import { BlogEditComponent } from './components/blog/blog-edit/blog-edit.compone
     AppRoutingModule,
     HttpClientModule,
     ReactiveFormsModule,
+    AdminModule,
     AppRoutingModule,
     FormsModule,
     ModalModule.forRoot(),

@@ -1,10 +1,10 @@
+import { BlogModel } from './../../../models/blogModel';
 import { BlogDetailModel } from 'src/app/models/blogDetailModel';
 import { ActivatedRoute } from '@angular/router';
 import { ToastrModule, ToastrService } from 'ngx-toastr';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Component, OnInit } from '@angular/core';
 import { BlogService } from 'src/app/services/blog.service';
-import { BlogModel } from 'src/app/models/blogModel';
 
 @Component({
   selector: 'app-blog-edit',
@@ -13,7 +13,6 @@ import { BlogModel } from 'src/app/models/blogModel';
 })
 export class BlogEditComponent implements OnInit {
   blogEditForm: FormGroup;
-  blogModel: BlogModel;
   id: number = 7;
   categoryId: number;
   blogTitle: string;
@@ -21,9 +20,10 @@ export class BlogEditComponent implements OnInit {
   constructor(
     private blogService: BlogService,
     private formBuilder: FormBuilder,
-    private route: ActivatedRoute
+    private route: ActivatedRoute,
+    private toasrt: ToastrService
   ) {
-    this.getBlogById();
+    this.getBlogById(7);
   }
 
   ngOnInit(): void {
@@ -38,15 +38,38 @@ export class BlogEditComponent implements OnInit {
     });
   }
 
-  getBlogById() {
-    this.blogService.getBlogDetails(7).subscribe((response) => {
-      console.log(response.message);
-      const blogModel = <BlogDetailModel>response.data;
-      this.blogEditForm = this.formBuilder.group({
-        categoryName: [blogModel.categoryName, Validators.required],
-        blogTitle: [blogModel.blogTitle, Validators.required],
-        blogContent: [blogModel.blogContent, Validators.required],
-      });
-    });
+  getBlogById(id: number) {
+    this.blogService.getBlogById(id).subscribe(
+      (response) => {
+        console.log(response.data.blogTitle);
+        const blogModel = <BlogModel>response.data;
+        this.blogEditForm = this.formBuilder.group({
+          id:blogModel.id,
+          createdAt:blogModel.createdAt,
+          userId:blogModel.userId,
+          likedCount:blogModel.likedCount,
+          categoryId: [blogModel.categoryId, Validators.required],
+          blogTitle: [blogModel.blogTitle, Validators.required],
+          blogContent: [blogModel.blogContent, Validators.required],
+        });
+      },
+      (responseError) => {
+        this.toasrt.error('There is a problem about blog');
+      }
+    );
+  }
+
+  update() {
+    if (this.blogEditForm.valid) {
+      let updatedModel: BlogModel = Object.assign({}, this.blogEditForm.value);
+      this.blogService.updateBlog(updatedModel).subscribe(
+        (response) => {
+          this.toasrt.info("Blog updated succesfully!",updatedModel.blogTitle)
+        },
+        (responseError) => {
+          this.toasrt.error("Blog couldn't updated!")
+        }
+      );
+    }
   }
 }

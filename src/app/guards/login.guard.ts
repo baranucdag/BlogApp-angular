@@ -17,25 +17,23 @@ export class LoginGuard implements CanActivate {
   constructor(
     private authService: AuthService,
     private toastrService: ToastrService,
-    private router:Router
+    private router: Router
   ) {}
   canActivate(
     route: ActivatedRouteSnapshot,
-    state: RouterStateSnapshot,
+    state: RouterStateSnapshot
   ):
     | Observable<boolean | UrlTree>
     | Promise<boolean | UrlTree>
     | boolean
     | UrlTree {
-      //kullanıcı giriş yapmadıysa logine yönlendir.
-      if(this.authService.isAuthenticated()){
-        return true;
-      }
-      else{
-        this.router.navigate(["login"])
-        this.toastrService.error("Please login")
-        return false;
-      }
+    //kullanıcı giriş yapmadıysa logine yönlendir.
+    if (this.authService.isAuthenticated()) {
+      return true;
+    } else {
+      this.toastrService.error('Please login');
+      this.router.navigate(['login']);
+      return false;
+    }
   }
 }
-

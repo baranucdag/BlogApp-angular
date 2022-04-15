@@ -44,10 +44,10 @@ export class LoginComponent implements OnInit {
           if (response.data.token != null) {
             localStorage.setItem('token', response.data.token);
           }
-          else[
+          else{
             this.toastrService.error("Token error!")
-          ]
-          this.router.navigate(['blog'])
+          }
+          this.router.navigate(['blog/blogs'])
         },
         (responseError) => {
           console.log(responseError);

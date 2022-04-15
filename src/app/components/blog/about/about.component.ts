@@ -1,3 +1,4 @@
+import { BlogService } from 'src/app/services/blog.service';
 import { Component, OnInit } from '@angular/core';
 
 @Component({
@@ -10,6 +11,7 @@ export class AboutComponent implements OnInit {
   constructor() { }
 
   ngOnInit(): void {
+    
   }
 
 }

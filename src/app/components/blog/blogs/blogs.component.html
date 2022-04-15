@@ -2,8 +2,19 @@
   Recent Posts
 </h1>
 <div class="container">
+  <div class="d-flex">
+    <input
+      class="form-control me-2"
+      type="search"
+      placeholder="Search"
+      aria-label="Search"
+      [(ngModel)]="search"
+    />
+    <button class="btn btn-outline-success" type="submit">Search</button>
+  </div>
+
   <div class="row">
-    <div class="col-lg-8 col-md-10 mx-auto">
+    <div class="col-lg-8 col-md-10 mx-auto" *ngIf="blogs">
       <div *ngFor="let blog of blogs | reverse; let i = index">
         <div *ngIf="i < blogCount">
           <div class="post-preview">
@@ -22,11 +33,11 @@
                     : blog.blogContent
                 }}
               </h3>
+              <p class="post-meta">
+                Created At : {{ blog.createdAt | date: "mediumDate" }}
+              </p>
+              
             </a>
-            <p class="post-meta">
-              Date : {{ blog.createdAt | date: "medium" }}
-              <a href="#"></a>
-            </p>
           </div>
         </div>
       </div>

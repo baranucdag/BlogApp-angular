@@ -18,7 +18,7 @@ const routes: Routes = [
     children: [
       { path: 'blogs', component: BlogsComponent },
       { path: 'add', component: BlogAddComponent, canActivate: [LoginGuard] },
-      { path: ':id/detail', component: BlogDetailComponent },
+      { path: 'detail/:id', component: BlogDetailComponent },
       { path: 'about', component: AboutComponent },
       { path: 'edit', component: BlogEditComponent },
     ],
