@@ -1,16 +1,24 @@
 <app-navi></app-navi>
+
 <!-- MASTHEAD İÇERİK -->
+<!-- [style.background-image]="backGroundImage" -->
+<!-- style="background-image: url('assets/images/post-bg.jpg')" -->
+<!-- [ngStyle]="{'background-image': url(' + photo + ')}" -->
+<!-- [ngStyle]="{'background-image': 'url(' + backGroundImage + ')'}" -->
+<!-- [style.background-image]="url('assets/images/post-bg.jpg')" -->
+<!-- src="backround-image: url('assets/images/post-bg.jpg')" -->
+
 <header
   class="masthead"
   id="image"
-  [style.background-image]="backGroundImage"
->
-  <div class="overlay"></div> 
+  [ngStyle]="{'background-image': 'url(' + backGroundImage + ')'}"
+> 
+  <div class="overlay"></div>
   <div class="container">
     <div class="row">
       <div class="col-lg-8 col-md-10 mx-auto">
         <div class="site-heading">
-          <h2>{{blogHeader}}</h2>
+          <h2>{{ blogHeader }}  {{backGroundImage}}</h2>
         </div>
       </div>
     </div>
@@ -21,7 +29,3 @@
 <router-outlet></router-outlet>
 <div class="container"><hr /></div>
 <app-footer></app-footer>
-
-
-<!-- [style.background-image]="url('assets/images/post-bg.jpg')" -->
-  <!-- src="backround-image: url('assets/images/post-bg.jpg')" -->

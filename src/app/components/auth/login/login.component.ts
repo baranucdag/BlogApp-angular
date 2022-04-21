@@ -1,6 +1,7 @@
+import { LocalStorageService } from './../../../services/local-storage.service';
 import { Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
-import { AuthService } from './../../services/auth.service';
+import { AuthService } from '../../../services/auth.service';
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 
@@ -15,12 +16,12 @@ export class LoginComponent implements OnInit {
     private formBuilder: FormBuilder,
     private authService: AuthService,
     private toastrService: ToastrService,
-    private router:Router
+    private router: Router,
+    private localStorageService: LocalStorageService
   ) {}
 
   ngOnInit(): void {
     this.createLoginForm();
-
   }
 
   //create login form
@@ -43,11 +44,10 @@ export class LoginComponent implements OnInit {
           this.toastrService.info(response.message);
           if (response.data.token != null) {
             localStorage.setItem('token', response.data.token);
+          } else {
+            this.toastrService.error('Token error!');
           }
-          else{
-            this.toastrService.error("Token error!")
-          }
-          this.router.navigate(['blog/blogs'])
+          this.router.navigate(['blog/blogs']);
         },
         (responseError) => {
           console.log(responseError);

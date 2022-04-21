@@ -35,9 +35,14 @@ export class BlogDetailComponent implements OnInit {
  
   //get blog details by id variable (from route)
   getBlogDetails() {
+    if(this.id ==undefined && this.id ==null){
+      return 
+    }
+    
     this.blogService.getBlogDetails(this.id).subscribe(response => {
       this.blogDetail=response.data;
       this.detailService.blogDetail.next(response.data);
+      console.log(this.blogDetail)
     });
   }
 

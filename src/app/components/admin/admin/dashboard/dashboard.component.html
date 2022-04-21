@@ -1,133 +1,44 @@
 <div class="container">
-    <div class="text text-dark text-center">
-      <h4>İSTATİSTİKLER</h4>
+  <div class="text text-dark text-center">
+    <h4>STATISTICS</h4>
+  </div>
+  <br />
+  <div class="row" style="font-family: system-ui">
+    <div class="card mb-4" style="width: 18rem">
+      <div class="card-body">
+        <h5 class="card-title">BLOGS</h5>
+        <h6 class="card-subtitle mb-2 text-muted">Total Blog Amount</h6>
+        <p class="card-text">The amount of blog is <br /><h4 class="text-center">{{ blogAmount }}</h4>
+        <a routerLink="blogs" class="card-link text-center">Go to blogs</a>
+      </div>
     </div>
-    <br />
-    <div class="row align-items-center">
-      <div class="col-xl-3 col-md-6 mb-4">
-        <div class="card border-left-primary shadow h-100 py-2">
-          <div class="card-body">
-            <div class="row no-gutters align-items-center">
-              <div class="col mr-2">
-                <div
-                  class="text-sm font-weight-bold text-primary text-uppercase mb-1"
-                >
-                  Toplam Araç Sayısı
-                </div>
-                <div class="h5 mb-0 font-weight-bold text-gray-800">Adet</div>
-              </div>
-              <div class="col-auto">
-                <i class="fa-solid fa-file-lines text-gray-300"></i>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
 
-      <div class="col-xl-3 col-md-6 mb-4">
-        <div class="card border-left-success shadow h-100 py-2">
-          <div class="card-body">
-            <div class="row no-gutters align-items-center">
-              <div class="col mr-2">
-                <div
-                  class="text-sm font-weight-bold text-success text-uppercase mb-1"
-                >
-                  Kiral
-                </div>
-                <div class="h5 mb-0 font-weight-bold text-gray-800">
-                  } Adet
-                </div>
-              </div>
-              <div class="col-auto">
-                <i class="fas fa-address-card fa-2x text-gray-300"></i>
-              </div>
-            </div>
-          </div>
-        </div>
+    <div class="card mb-4" style="width: 18rem">
+      <div class="card-body">
+        <h5 class="card-title">CATEGORİES</h5>
+        <h6 class="card-subtitle mb-2 text-muted">Total Category Amount</h6>
+        <p class="card-text">
+          The amount of category <br /><h4 class="text-center">{{ categoryAmount }}</h4>
+        <a href="#" class="card-link text-center">Go to categories</a>
       </div>
+    </div>
 
-      <div class="col-xl-3 col-md-6 mb-4">
-        <div class="card border-left-success shadow h-100 py-2">
-          <div class="card-body">
-            <div class="row no-gutters align-items-center">
-              <div class="col mr-2">
-                <div
-                  class="text-sm font-weight-bold text-success text-uppercase mb-1"
-                >
-                  Toplam Müşteri Sayısı
-                </div>
-                <div class="h5 mb-0 font-weight-bold text-gray-800">
-                  rs } Kişi
-                </div>
-              </div>
-              <div class="col-auto">
-                <i class="fab fa-intercom fa-2x text-gray-300"></i>
-              </div>
-            </div>
-          </div>
-        </div>
+    <div class="card mb-4" style="width: 18rem">
+      <div class="card-body">
+        <h5 class="card-title">USERS</h5>
+        <h6 class="card-subtitle mb-2 text-muted">Amount of Users </h6>
+        <p class="card-text">The amount of user <br /><h4 class="text-center">{{userAmount}}</h4>
+        <a href="#" class="card-link text-center">Go to users</a>
       </div>
+    </div>
 
-      <div class="col-xl-3 col-md-6 mb-4">
-        <div class="card border-left-success shadow h-100 py-2">
-          <div class="card-body">
-            <div class="row no-gutters align-items-center">
-              <div class="col mr-2">
-                <div
-                  class="text-sm font-weight-bold text-success text-uppercase mb-1"
-                >
-                  Toplam Marka Sayısı
-                </div>
-                <div class="h5 mb-0 font-weight-bold text-gray-800">
-                  }Adet
-                </div>
-              </div>
-              <div class="col-auto">
-                <i class="fab fa-intercom fa-2x text-gray-300"></i>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-
-      <div class="col-xl-3 col-md-6 mb-4">
-        <div class="card border-left-success shadow h-100 py-2">
-          <div class="card-body">
-            <div class="row no-gutters align-items-center">
-              <div class="col mr-2">
-                <div
-                  class="text-sm font-weight-bold text-success text-uppercase mb-1"
-                >
-                  Toplam Model Sayısı
-                </div>
-                <div class="h5 mb-0 font-weight-bold text-gray-800">tdet</div>
-              </div>
-              <div class="col-auto">
-                <i class="fab fa-intercom fa-2x text-gray-300"></i>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-
-      <div class="col-xl-3 col-md-6 mb-4">
-        <div class="card border-left-success shadow h-100 py-2">
-          <div class="card-body">
-            <div class="row no-gutters align-items-center">
-              <div class="col mr-2">
-                <div
-                  class="text-sm font-weight-bold text-success text-uppercase mb-1"
-                >
-                  Toplam Para
-                </div>
-                <div class="h5 mb-0 font-weight-bold text-gray-800">k₺</div>
-              </div>
-              <div class="col-auto">
-                <i class="fab fa-intercom fa-2x text-gray-300"></i>
-              </div>
-            </div>
-          </div>
-        </div>
+    <div class="card mb-4" style="width: 18rem">
+      <div class="card-body">
+        <h5 class="card-title">Card title</h5>
+        <h6 class="card-subtitle mb-2 text-muted">Card subtitle</h6>
+        <p class="card-text">Some quick example text to build on the card</p>
+        <a href="#" class="card-link text-center">Go to users</a>
       </div>
     </div>
   </div>
+</div>

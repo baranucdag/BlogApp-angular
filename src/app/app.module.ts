@@ -1,3 +1,4 @@
+import { AuthModule } from './components/auth/auth.module';
 import { AdminModule } from './components/admin/admin.module';
 import { AuthInterceptor } from './interceptors/auth.interceptor';
 import { NgModule } from '@angular/core';
@@ -6,13 +7,14 @@ import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { ReactiveFormsModule, FormBuilder, FormsModule } from '@angular/forms';
 import { ToastrModule } from 'ngx-toastr';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { DataTablesModule } from 'angular-datatables';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { BlogComponent } from './components/blog/blog.component';
-import { LoginComponent } from './components/login/login.component';
+import { LoginComponent } from './components/auth/login/login.component';
 import { FooterComponent } from './components/footer/footer.component';
-import { RegisterComponent } from './components/register/register.component';
+import { RegisterComponent } from './components/auth/register/register.component';
 import { BlogAddComponent } from './components/blog/blog-add/blog-add.component';
 import { AboutComponent } from './components/blog/about/about.component';
 import { BlogDetailComponent } from './components/blog/blog-detail/blog-detail.component';
@@ -39,10 +41,12 @@ import { BlogEditComponent } from './components/blog/blog-edit/blog-edit.compone
   ],
   imports: [
     BrowserModule,
+    DataTablesModule,
     AppRoutingModule,
     HttpClientModule,
     ReactiveFormsModule,
     AdminModule,
+    AuthModule,
     AppRoutingModule,
     FormsModule,
     ModalModule.forRoot(),

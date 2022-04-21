@@ -1,8 +1,8 @@
-import { RegisterCheckModel } from './../../models/registerCheckModel';
+import { RegisterCheckModel } from '../../../models/registerCheckModel';
 import { Router } from '@angular/router';
 import { Form, FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ToastrService } from 'ngx-toastr';
-import { AuthService } from './../../services/auth.service';
+import { AuthService } from '../../../services/auth.service';
 import { Component, OnInit } from '@angular/core';
 import { RegisterModel } from 'src/app/models/registerModel';
 

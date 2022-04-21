@@ -3,8 +3,6 @@ import { DetailService } from './../../services/detail.service';
 import { BlogModel } from 'src/app/models/blogModel';
 import { BlogService } from './../../services/blog.service';
 import { Component, OnInit } from '@angular/core';
-import { BlogDetailModel } from 'src/app/models/blogDetailModel';
-import { Router, ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'app-blog',
@@ -16,7 +14,7 @@ export class BlogComponent implements OnInit {
   blogId: number;
   blogCount: number = 6;
   blogHeader?: string;
-  backGroundImage: '(assets/images/post-bg.jpg)';
+  backGroundImage= 'assets/images/post-bg.jpg';
   blogImagePath: string;
   constructor(
     private blogService: BlogService,
@@ -26,25 +24,19 @@ export class BlogComponent implements OnInit {
 
   ngOnInit(): void {
     this.detailService.blogDetail.subscribe((detail) => {
-      if (detail) {
+      if (detail && detail.blogId) {
         this.blogHeader = detail.blogTitle;
         this.blogId = detail.blogId;
+        this.getBackground(this.blogId);
       }
     });
-
-    if(this.blogId){
-      this.getBackground(this.blogId);
-    }else{
-      this.blogImagePath=this.backGroundImage;
-      console.log('hata mesajı')
-    }
-
   }
+
   //task::eğer default image dönerse blog uygulamasının image ini göster 
   getBackground(id:number) {
     return this.imageService.getByBlogId(id).subscribe((response=>{
       console.log(response.data.imagePath)
-      this.blogImagePath = response.data.imagePath;
+      this.backGroundImage ='assets/images/'+ response.data.imagePath; //localhost eklenecek
     }))
   }
 

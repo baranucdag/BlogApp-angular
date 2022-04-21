@@ -32,12 +32,20 @@
           <a class="nav-link"></a>
         </li>
         
-        <li class="nav-item">
+        <li class="nav-item" *ngIf="isAuthenticated() ==false">
           <a class="nav-link icon" routerLink="/login">
             <span class="fa-stack fa-lg">
               <i class="bi bi-box-arrow-in-right"></i>
             </span>
             login
+          </a>
+        </li>
+        <li class="nav-item" *ngIf="isAuthenticated()">
+          <a class="nav-link icon" (click)="logOut()">
+            <span class="fa-stack fa-lg">
+              <i class="bi bi-box-arrow-left"></i>
+            </span>
+            logout
           </a>
         </li>
       </ul>

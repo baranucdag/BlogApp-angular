@@ -13,7 +13,18 @@ export class UserService {
   constructor(private httpClient: HttpClient) {}
 
   getUserById(id:number) {
-    let apiUrl = this.baseApiUrl + 'User/getbyıd?id='+id;
+    let apiUrl = this.baseApiUrl + 'GetByUserById?id='+id;
     return this.httpClient.get<SingleResponseModel<UserModel>>(apiUrl);
   }
+
+  getAllUsers():Observable<ListResponsModel<UserModel>>{
+    let apiUrl = this.baseApiUrl + 'getall';
+    return this.httpClient.get<ListResponsModel<UserModel>>(apiUrl);
+  }
+
+  delete(user:UserModel){
+    let apiUrl = this.baseApiUrl + 'delete';
+    return this.httpClient.post(apiUrl,user);
+  }
+
 }

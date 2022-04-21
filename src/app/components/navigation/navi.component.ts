@@ -1,3 +1,5 @@
+import { ToastrService } from 'ngx-toastr';
+import { AuthService } from './../../services/auth.service';
 import { Component, OnInit } from '@angular/core';
 
 @Component({
@@ -6,8 +8,7 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./navi.component.css']
 })
 export class NaviComponent implements OnInit {
-  //component ismi navigation/ nullbar düzelt.
-  constructor() { }
+  constructor(private authService:AuthService,private toastr:ToastrService) { }
 
   ngOnInit(): void {
   }
@@ -18,5 +19,10 @@ export class NaviComponent implements OnInit {
     }else{
       return false;
     }
+  }
+
+  logOut(){
+    this.authService.logout();
+    this.toastr.info("Logged out succesfully!")
   }
 }

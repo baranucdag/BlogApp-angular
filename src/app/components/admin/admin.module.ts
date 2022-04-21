@@ -6,6 +6,9 @@ import { SidebarComponent } from './admin/sidebar/sidebar.component';
 import { NavigationComponent } from './admin/navigation/navigation.component';
 import { DashboardComponent } from './admin/dashboard/dashboard.component';
 import { BlogListComponent } from './admin/blog-list/blog-list.component';
+import { DataTablesModule } from 'angular-datatables';
+import { UserListComponent } from './admin/user-list/user-list.component';
+
 
 @NgModule({
   declarations: [
@@ -14,7 +17,9 @@ import { BlogListComponent } from './admin/blog-list/blog-list.component';
     NavigationComponent,
     DashboardComponent,
     BlogListComponent,
+    UserListComponent,
   ],
-  imports: [CommonModule, AdminRoutingModule],
+  imports: [CommonModule, AdminRoutingModule,DataTablesModule ],
+
 })
 export class AdminModule {}
