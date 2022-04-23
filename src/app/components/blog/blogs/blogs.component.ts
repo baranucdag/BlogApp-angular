@@ -1,3 +1,4 @@
+import { ToastrService } from 'ngx-toastr';
 import { AuthService } from './../../../services/auth.service';
 import { LocalStorageService } from './../../../services/local-storage.service';
 import { DetailService } from 'src/app/services/detail.service';
@@ -25,7 +26,8 @@ export class BlogsComponent implements OnInit {
     private blogService: BlogService,
     private router: Router,
     private detailService: DetailService,
-    private authService: AuthService
+    private authService: AuthService,
+    private toastr:ToastrService
   ) {}
 
   ngOnInit(): void {
@@ -53,13 +55,29 @@ export class BlogsComponent implements OnInit {
   //get current user id from auth service (decode jwt token by using JwtHelper)
   getCurrentUser() {
     this.currentUserId = this.authService.currentUserId;
-    console.log(this.currentUserId)
   }
 
   //return true if current user is author of the blog
   isAuthor(blog: BlogModel) {
     if (blog.userId == this.currentUserId) {
-      return;
+      return true;
     }
+    else return false;
+  }
+
+  //navidate to edit component when author of the blog click to edit button 
+  navigateEdit(blog:BlogModel){
+    this.router.navigate(['blog/edit/' + blog.id]);
+  }
+
+  //delete given blog
+  delete(blog:BlogModel){
+    this.blogService.deleteBlog(blog).subscribe((response)=>{
+      this.toastr.success("Blog Deleted")
+      this.getBlogs();
+    },
+    (errorResponse)=>{
+      this.toastr.error(errorResponse.message)
+    })
   }
 }

@@ -10,9 +10,7 @@
       aria-label="Search"
       [(ngModel)]="search"
     />
-    <button class="btn btn-outline-success" type="submit">
-      Search
-    </button>
+    <button class="btn btn-outline-success" type="submit">Search</button>
   </div>
 
   <div class="row">
@@ -39,6 +37,10 @@
                 Created At : {{ blog.createdAt | date: "mediumDate" }}
               </p>
             </a>
+            <p *ngIf="isAuthor(blog)">
+              <a class="btn btn-info" (click)="navigateEdit(blog)">Update</a>
+              <a (click)="delete(blog)" class="btn btn-danger">Delete</a>
+            </p>
           </div>
         </div>
       </div>

@@ -1,3 +1,4 @@
+import { AdminGuard } from './../../guards/admin.guard';
 import { UserListComponent } from './admin/user-list/user-list.component';
 import { BlogListComponent } from './admin/blog-list/blog-list.component';
 import { DashboardComponent } from './admin/dashboard/dashboard.component';
@@ -7,7 +8,7 @@ import { RouterModule, Routes } from '@angular/router';
 const routes: Routes = [
   {
     path: 'admin',
-    component: AdminComponent,
+    component: AdminComponent,canActivate:[AdminGuard],
     children: [
       {
         path: '',

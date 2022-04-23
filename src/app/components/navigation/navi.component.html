@@ -40,8 +40,8 @@
             login
           </a>
         </li>
-        <li class="nav-item" *ngIf="isAuthenticated()">
-          <a class="nav-link icon" (click)="logOut()">
+        <li class="nav-item" *ngIf="isAuthenticated()" (click)="logOut()">
+          <a class="nav-link icon" >
             <span class="fa-stack fa-lg">
               <i class="bi bi-box-arrow-left"></i>
             </span>

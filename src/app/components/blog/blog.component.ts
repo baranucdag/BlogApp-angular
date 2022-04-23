@@ -1,3 +1,4 @@
+import { AuthService } from './../../services/auth.service';
 import { ImageService } from './../../services/image.service';
 import { DetailService } from './../../services/detail.service';
 import { BlogModel } from 'src/app/models/blogModel';
@@ -14,15 +15,17 @@ export class BlogComponent implements OnInit {
   blogId: number;
   blogCount: number = 6;
   blogHeader?: string;
-  backGroundImage= 'assets/images/post-bg.jpg';
-  blogImagePath: string;
+  backGroundImage = 'assets/images/post-bg.jpg';
+  imageDirectoryPath: any;
   constructor(
     private blogService: BlogService,
     private detailService: DetailService,
-    private imageService: ImageService
+    private imageService: ImageService,
+    private authService: AuthService
   ) {}
 
   ngOnInit(): void {
+    this.getUserRoles();
     this.detailService.blogDetail.subscribe((detail) => {
       if (detail && detail.blogId) {
         this.blogHeader = detail.blogTitle;
@@ -32,12 +35,19 @@ export class BlogComponent implements OnInit {
     });
   }
 
-  //task::eğer default image dönerse blog uygulamasının image ini göster 
-  getBackground(id:number) {
-    return this.imageService.getByBlogId(id).subscribe((response=>{
-      console.log(response.data.imagePath)
-      this.backGroundImage ='assets/images/'+ response.data.imagePath; //localhost eklenecek
-    }))
+  //task:eğer default image dönerse blog uygulamasının image ini göster
+  getBackground(id: number) {
+    if(this.blogId!=null && this.blogId!=undefined){
+      return this.imageService.getByBlogId(id).subscribe((response) => {
+        console.log(response.data.imagePath);
+        this.imageDirectoryPath =
+          'https://localhost:44313/uploads/images/'+response.data.imagePath;
+        console.log(this.imageDirectoryPath);
+      });
+    }
+    else{
+     return this.imageDirectoryPath = 'assets/images/post-bg.jpg';
+    }
   }
 
   //get all blogs
@@ -47,8 +57,12 @@ export class BlogComponent implements OnInit {
     });
   }
 
-  //increse number of blog on main page
+  //increase number of blog on main page
   riseCountOfBlog() {
     this.blogCount = this.blogCount + 5;
+  }
+
+  getUserRoles() {
+    console.log(this.authService.currentRoles);
   }
 }

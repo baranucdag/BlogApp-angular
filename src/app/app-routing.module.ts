@@ -4,8 +4,6 @@ import { BlogDetailComponent } from './components/blog/blog-detail/blog-detail.c
 import { AboutComponent } from './components/blog/about/about.component';
 import { LoginGuard } from './guards/login.guard';
 import { BlogAddComponent } from './components/blog/blog-add/blog-add.component';
-import { RegisterComponent } from './components/auth/register/register.component';
-import { LoginComponent } from './components/auth/login/login.component';
 import { BlogComponent } from './components/blog/blog.component';
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
@@ -20,11 +18,9 @@ const routes: Routes = [
       { path: 'add', component: BlogAddComponent, canActivate: [LoginGuard] },
       { path: 'detail/:id', component: BlogDetailComponent },
       { path: 'about', component: AboutComponent },
-      { path: 'edit', component: BlogEditComponent },
+      { path: 'edit/:id', component: BlogEditComponent },
     ],
-  },
-  { path: 'login', component: LoginComponent },
-  { path: 'register', component: RegisterComponent },
+  }
 ];
 
 @NgModule({

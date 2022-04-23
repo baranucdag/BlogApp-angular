@@ -1,21 +1,19 @@
-import { RegisterCheckModel } from '../../../models/registerCheckModel';
-import { Router } from '@angular/router';
-import { Form, FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { ToastrService } from 'ngx-toastr';
-import { AuthService } from '../../../services/auth.service';
 import { Component, OnInit } from '@angular/core';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { ToastrService } from 'ngx-toastr';
+import { RegisterCheckModel } from 'src/app/models/registerCheckModel';
 import { RegisterModel } from 'src/app/models/registerModel';
+import { AuthService } from 'src/app/services/auth.service';
 
 @Component({
   selector: 'app-register',
   templateUrl: './register.component.html',
-  styleUrls: ['./register.component.css'],
+  styleUrls: ['./register.component.css']
 })
 export class RegisterComponent implements OnInit {
   registerForm: FormGroup;
   year: string;
   constructor(
-    private router: Router,
     private authService: AuthService,
     private toastrService: ToastrService,
     private formBuilder: FormBuilder

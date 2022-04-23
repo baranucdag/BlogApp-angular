@@ -1,4 +1,3 @@
-import { AuthModule } from './components/auth/auth.module';
 import { AdminModule } from './components/admin/admin.module';
 import { AuthInterceptor } from './interceptors/auth.interceptor';
 import { NgModule } from '@angular/core';
@@ -12,9 +11,7 @@ import { DataTablesModule } from 'angular-datatables';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { BlogComponent } from './components/blog/blog.component';
-import { LoginComponent } from './components/auth/login/login.component';
 import { FooterComponent } from './components/footer/footer.component';
-import { RegisterComponent } from './components/auth/register/register.component';
 import { BlogAddComponent } from './components/blog/blog-add/blog-add.component';
 import { AboutComponent } from './components/blog/about/about.component';
 import { BlogDetailComponent } from './components/blog/blog-detail/blog-detail.component';
@@ -23,15 +20,14 @@ import { ModalModule } from 'ngx-bootstrap/modal';
 import { ReversePipe } from './pipes/reverse.pipe';
 import { BlogsComponent } from './components/blog/blogs/blogs.component';
 import { BlogEditComponent } from './components/blog/blog-edit/blog-edit.component';
+import { AuthModule } from './components/auth/auth.module';
 
 @NgModule({
   declarations: [
     AppComponent,
     BlogComponent,
-    LoginComponent,
     NaviComponent,
     FooterComponent,
-    RegisterComponent,
     BlogAddComponent,
     AboutComponent,
     BlogDetailComponent,
@@ -40,14 +36,13 @@ import { BlogEditComponent } from './components/blog/blog-edit/blog-edit.compone
     BlogEditComponent,
   ],
   imports: [
+    AdminModule,
+    AuthModule,
     BrowserModule,
     DataTablesModule,
     AppRoutingModule,
     HttpClientModule,
     ReactiveFormsModule,
-    AdminModule,
-    AuthModule,
-    AppRoutingModule,
     FormsModule,
     ModalModule.forRoot(),
     BrowserAnimationsModule,
