@@ -1,0 +1,63 @@
+h3.post-content {
+    padding-top: 20px;
+    font-weight: 300;
+    margin: 0 0 10px;
+    padding-bottom: 50px;
+  }
+
+a:focus,
+a:hover {
+  color: #0085a1;
+}
+
+::-moz-selection {
+  color: #fff;
+  background: #0085a1;
+  text-shadow: none;
+}
+
+::selection {
+  color: #fff;
+  background: #0085a1;
+  text-shadow: none;
+}
+
+body {
+  font-size: 20px;
+  color: #212529;
+  font-family: "Lora", "Times New Roman", serif;
+}
+
+p {
+  line-height: 1.5;
+  margin: 30px 0;
+}
+
+p a {
+  text-decoration: underline;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  font-weight: 800;
+  font-family: "Open Sans", "Helvetica Neue", Helvetica, Arial, sans-serif;
+}
+
+a {
+  color: #212529;
+  -webkit-transition: all 0.2s;
+  -moz-transition: all 0.2s;
+  transition: all 0.2s;
+}
+
+div#deleteButton{
+  margin-left: 370px;
+}
+
+h3#header{
+  text-align: center;
+}

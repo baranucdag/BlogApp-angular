@@ -1,4 +1,5 @@
-<form  [formGroup]="blogAddForm" >
+<div class="container">
+  <form [formGroup]="blogAddForm">
     <div class="form-label">
       <input
         type="number"
@@ -32,18 +33,19 @@
       />
     </div>
     <div class="form-label">
-        <input
-          type="number"
-          formControlName="likedCount"
-          class="form-control"
-          placeholder="Liked Count"
-        />
-      </div>
-      <button
-        class="w-100 btn btn-lg btn-primary"
-        type="submit"
-        (click)="addBlog()"
-      >
-        Save Blog
-      </button>
+      <input
+        type="number"
+        formControlName="likedCount"
+        class="form-control"
+        placeholder="Liked Count"
+      />
+    </div>
+    <button
+      class="w-100 btn btn-lg btn-primary"
+      type="submit"
+      (click)="addBlog()"
+    >
+      Save Blog
+    </button>
   </form>
+</div>

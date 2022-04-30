@@ -1,9 +1,9 @@
-import { AuthService } from './../../services/auth.service';
 import { ImageService } from './../../services/image.service';
 import { DetailService } from './../../services/detail.service';
 import { BlogModel } from 'src/app/models/blogModel';
 import { BlogService } from './../../services/blog.service';
 import { Component, OnInit } from '@angular/core';
+import {ChangeDetectorRef } from '@angular/core';
 
 @Component({
   selector: 'app-blog',
@@ -15,38 +15,37 @@ export class BlogComponent implements OnInit {
   blogId: number;
   blogCount: number = 6;
   blogHeader?: string;
-  backGroundImage = 'assets/images/post-bg.jpg';
   imageDirectoryPath: any;
   constructor(
     private blogService: BlogService,
     private detailService: DetailService,
     private imageService: ImageService,
-    private authService: AuthService
+    private cdref: ChangeDetectorRef
   ) {}
 
   ngOnInit(): void {
-    this.getUserRoles();
     this.detailService.blogDetail.subscribe((detail) => {
       if (detail && detail.blogId) {
         this.blogHeader = detail.blogTitle;
         this.blogId = detail.blogId;
         this.getBackground(this.blogId);
+      }else{
+        this.imageDirectoryPath = 'assets/images/cover.jpg';
+        this.blogHeader='CREATE BLOG'
+        this.cdref.detectChanges();   //to avoid 'Expression has changed after it was checked' error.
       }
     });
   }
 
   //task:eğer default image dönerse blog uygulamasının image ini göster
   getBackground(id: number) {
-    if(this.blogId!=null && this.blogId!=undefined){
+    if (this.blogId != null && this.blogId != undefined) {
       return this.imageService.getByBlogId(id).subscribe((response) => {
-        console.log(response.data.imagePath);
         this.imageDirectoryPath =
-          'https://localhost:44313/uploads/images/'+response.data.imagePath;
-        console.log(this.imageDirectoryPath);
+          'https://localhost:44313/uploads/images/' + response.data.imagePath;
       });
-    }
-    else{
-     return this.imageDirectoryPath = 'assets/images/post-bg.jpg';
+    } else {
+      return (this.imageDirectoryPath = 'assets/images/post-bg.jpg');
     }
   }
 
@@ -60,9 +59,5 @@ export class BlogComponent implements OnInit {
   //increase number of blog on main page
   riseCountOfBlog() {
     this.blogCount = this.blogCount + 5;
-  }
-
-  getUserRoles() {
-    console.log(this.authService.currentRoles);
   }
 }

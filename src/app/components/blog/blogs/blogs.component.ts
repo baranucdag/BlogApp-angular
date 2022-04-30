@@ -1,14 +1,10 @@
 import { ToastrService } from 'ngx-toastr';
 import { AuthService } from './../../../services/auth.service';
-import { LocalStorageService } from './../../../services/local-storage.service';
 import { DetailService } from 'src/app/services/detail.service';
-import { DatePipe } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-import { BlogDetailModel } from 'src/app/models/blogDetailModel';
 import { BlogModel } from 'src/app/models/blogModel';
 import { BlogService } from 'src/app/services/blog.service';
-import { JwtHelperService } from '@auth0/angular-jwt';
 
 @Component({
   selector: 'app-blogs',
@@ -19,7 +15,7 @@ export class BlogsComponent implements OnInit {
   blogs: BlogModel[] = [];
   blogCount: number = 5;
   search = '';
-  blogHeader: string = 'Blog Application';
+  blogHeader: any = 'Blog Application';
   currentUserId: any;
 
   constructor(
@@ -31,15 +27,15 @@ export class BlogsComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
+  this.detailService.blogDetail.next(null);
     this.getCurrentUser();
     this.getBlogs();
   }
 
-  //get all blogs
+  //get all blogs by filter
   getBlogs() {
-    this.blogService.getAll().subscribe((response) => {
+    this.blogService.get(this.search).subscribe((response) => {
       this.blogs = response.data;
-      this.detailService.blogDetail.next(this.blogHeader);
     });
   }
 
@@ -47,7 +43,8 @@ export class BlogsComponent implements OnInit {
   onSelect(id: number) {
     this.router.navigate(['blog/detail/' + id]);
   }
-  //reise the amount of blog on main page
+
+  //raise the amount of blog on main page
   riseCountOfBlog() {
     this.blogCount = this.blogCount + 5;
   }
@@ -65,7 +62,7 @@ export class BlogsComponent implements OnInit {
     else return false;
   }
 
-  //navidate to edit component when author of the blog click to edit button 
+  //navigate to edit component when author of the blog click to edit button 
   navigateEdit(blog:BlogModel){
     this.router.navigate(['blog/edit/' + blog.id]);
   }

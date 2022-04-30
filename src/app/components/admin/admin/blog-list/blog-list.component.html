@@ -19,30 +19,60 @@
     </thead>
     <tbody>
       <tr *ngFor="let blog of blogs">
-          <td>{{ blog.userId }}</td>
-          <td>{{ blog.categoryId }}</td>
-          <td>
-            {{
-              blog.blogTitle.length > 15
-                ? blog.blogTitle.substring(0, 35) + "..."
-                : blog.blogTitle
-            }}
-          </td>
-          <td>
-            {{
-              blog.blogContent.length > 25
-                ? blog.blogContent.substring(0, 45) + "..."
-                : blog.blogContent
-            }}
-          </td>
-          <td>{{ blog.likedCount }}</td>
-          <td>{{ blog.createdAt | date: "mediumDate" }}</td>
+        <td>{{ blog.userId }}</td>
 
-          <td>
-            <button class="btn btn-danger mx-1" (click)="delete(blog)">
-              Delete
-            </button>
-          </td>
+        <td *ngIf="blog.id == selectedBlogId" else categoryId>
+          <input class="form-control" formControlName="categoryId" value="{{ blog.categoryId }}" size="4"  />
+        </td>
+        <td #categoryId *ngIf="blog.id != selectedBlogId">
+          {{ blog.categoryId }}
+        </td>
+
+        <td *ngIf="blog.id == selectedBlogId" else blogTitle>
+          <input class="form-control" formControlName="blogtitle" value="{{ blog.blogTitle }}" />
+        </td>
+        <td #blogTite *ngIf="blog.id != selectedBlogId">
+          {{
+            blog.blogTitle.length > 15
+              ? blog.blogTitle.substring(0, 35) + "..."
+              : blog.blogTitle
+          }}
+        </td>
+
+        <td *ngIf="blog.id == selectedBlogId" else blogContent>
+          <input class="form-control" formControlName="blogContent" value="{{ blog.blogContent }}" size="25"/>
+        </td>
+        <td #blogContent *ngIf="blog.id!=selectedBlogId">
+          {{
+            blog.blogContent.length > 25
+              ? blog.blogContent.substring(0, 45) + "..."
+              : blog.blogContent
+          }}
+        </td>
+
+        <td>{{ blog.likedCount }}</td>
+
+        <td>{{ blog.createdAt | date: "mediumDate" }}</td>
+
+        <td>
+          <button class="btn btn-danger mx-1" (click)="delete(blog)">
+            Delete
+          </button>
+          <button
+            class="btn btn-primary mx-1"
+            (click)="navigateEdit(blog)"
+            *ngIf="blog.id != selectedBlogId"
+          >
+            Update
+          </button>
+          <button
+            class="btn btn-primary mx-1"
+            *ngIf="blog.id == selectedBlogId"
+            (click)="update()"
+          >
+            Save
+          </button>
+        </td>
       </tr>
     </tbody>
   </table>

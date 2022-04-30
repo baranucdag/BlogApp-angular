@@ -9,8 +9,9 @@
       placeholder="Search"
       aria-label="Search"
       [(ngModel)]="search"
+      (keyup.enter)="getBlogs()"
     />
-    <button class="btn btn-outline-success" type="submit">Search</button>
+    <button class="btn btn-outline-success" type="submit" (click)="getBlogs()" >Search</button>
   </div>
 
   <div class="row">
@@ -34,7 +35,7 @@
                 }}
               </h3>
               <p class="post-meta">
-                Created At : {{ blog.createdAt | date: "mediumDate" }}
+                Created At : {{ blog.createdAt | date: "mediumDate" }}  <a id="isAuthor" *ngIf="isAuthor(blog)">You are the author.</a> 
               </p>
             </a>
             <p *ngIf="isAuthor(blog)">

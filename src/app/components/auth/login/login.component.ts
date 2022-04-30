@@ -10,7 +10,9 @@ import { AuthService } from 'src/app/services/auth.service';
   styleUrls: ['./login.component.css']
 })
 export class LoginComponent implements OnInit {
-
+  test : Date = new Date();
+  focus: any;
+  focus1:any;
   loginForm: FormGroup;
   constructor(
     private formBuilder: FormBuilder,

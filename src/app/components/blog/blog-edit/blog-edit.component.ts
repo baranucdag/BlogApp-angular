@@ -1,6 +1,5 @@
 import { BlogModel } from './../../../models/blogModel';
-import { BlogDetailModel } from 'src/app/models/blogDetailModel';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { ToastrModule, ToastrService } from 'ngx-toastr';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Component, OnInit } from '@angular/core';
@@ -13,7 +12,7 @@ import { BlogService } from 'src/app/services/blog.service';
 })
 export class BlogEditComponent implements OnInit {
   blogEditForm: FormGroup;
-  id: number = 7;
+  id: number;
   categoryId: number;
   blogTitle: string;
   blogContent: string;
@@ -21,6 +20,7 @@ export class BlogEditComponent implements OnInit {
     private blogService: BlogService,
     private formBuilder: FormBuilder,
     private route: ActivatedRoute,
+    private router:Router,
     private toasrt: ToastrService
   ) {
     this.getBlogById(7);
@@ -28,6 +28,7 @@ export class BlogEditComponent implements OnInit {
 
   ngOnInit(): void {
     this.getParam();
+    this.getBlogById(this.id);
   }
 
   getParam() {
@@ -41,13 +42,12 @@ export class BlogEditComponent implements OnInit {
   getBlogById(id: number) {
     this.blogService.getBlogById(id).subscribe(
       (response) => {
-        console.log(response.data.blogTitle);
         const blogModel = <BlogModel>response.data;
         this.blogEditForm = this.formBuilder.group({
-          id:blogModel.id,
-          createdAt:blogModel.createdAt,
-          userId:blogModel.userId,
-          likedCount:blogModel.likedCount,
+          id: blogModel.id,
+          createdAt: blogModel.createdAt,
+          userId: blogModel.userId,
+          likedCount: blogModel.likedCount,
           categoryId: [blogModel.categoryId, Validators.required],
           blogTitle: [blogModel.blogTitle, Validators.required],
           blogContent: [blogModel.blogContent, Validators.required],
@@ -59,15 +59,22 @@ export class BlogEditComponent implements OnInit {
     );
   }
 
+  //refresh location
+  refresh(): void {
+    window.location.reload();
+  }
+
+  //update blog
   update() {
     if (this.blogEditForm.valid) {
       let updatedModel: BlogModel = Object.assign({}, this.blogEditForm.value);
       this.blogService.updateBlog(updatedModel).subscribe(
         (response) => {
-          this.toasrt.info("Blog updated succesfully!",updatedModel.blogTitle)
+          this.toasrt.info('Blog updated succesfully!', updatedModel.blogTitle);
+          this.router.navigate(['/blog/detail/'+updatedModel.id])
         },
         (responseError) => {
-          this.toasrt.error("Blog couldn't updated!")
+          this.toasrt.error("Blog couldn't updated!");
         }
       );
     }

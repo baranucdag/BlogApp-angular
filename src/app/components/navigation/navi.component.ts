@@ -13,6 +13,7 @@ export class NaviComponent implements OnInit {
   ngOnInit(): void {
   }
 
+  //return true is user is authenticated
   isAuthenticated(){
     if(localStorage.getItem('token')){
       return true;
@@ -21,8 +22,15 @@ export class NaviComponent implements OnInit {
     }
   }
 
+  //log out function
   logOut(){
     this.authService.logout();
+    this.refresh();
     this.toastr.info("Logged out succesfully!")
+  }
+
+  //refresh location
+  refresh(): void {
+    window.location.reload();
   }
 }
