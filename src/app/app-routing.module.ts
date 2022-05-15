@@ -2,7 +2,7 @@ import { BlogEditComponent } from './components/blog/blog-edit/blog-edit.compone
 import { BlogsComponent } from './components/blog/blogs/blogs.component';
 import { BlogDetailComponent } from './components/blog/blog-detail/blog-detail.component';
 import { AboutComponent } from './components/blog/about/about.component';
-import { LoginGuard } from './guards/login.guard';
+import { LoginGuard } from './core/guards/login.guard';
 import { BlogAddComponent } from './components/blog/blog-add/blog-add.component';
 import { BlogComponent } from './components/blog/blog.component';
 import { NgModule } from '@angular/core';

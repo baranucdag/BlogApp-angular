@@ -1,9 +1,9 @@
-import { BlogModel } from './../../../models/blogModel';
+import { BlogModel } from '../../../core/models/blogModel';
 import { ActivatedRoute, Router } from '@angular/router';
 import { ToastrModule, ToastrService } from 'ngx-toastr';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Component, OnInit } from '@angular/core';
-import { BlogService } from 'src/app/services/blog.service';
+import { BlogService } from 'src/app/core/services/blog.service';
 
 @Component({
   selector: 'app-blog-edit',
@@ -47,7 +47,6 @@ export class BlogEditComponent implements OnInit {
           id: blogModel.id,
           createdAt: blogModel.createdAt,
           userId: blogModel.userId,
-          likedCount: blogModel.likedCount,
           categoryId: [blogModel.categoryId, Validators.required],
           blogTitle: [blogModel.blogTitle, Validators.required],
           blogContent: [blogModel.blogContent, Validators.required],

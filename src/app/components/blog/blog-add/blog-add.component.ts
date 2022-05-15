@@ -1,8 +1,8 @@
-import { AuthService } from './../../../services/auth.service';
+import { AuthService } from '../../../core/services/auth.service';
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ToastrService } from 'ngx-toastr';
-import { BlogService } from 'src/app/services/blog.service';
+import { BlogService } from 'src/app/core/services/blog.service';
 
 @Component({
   selector: 'app-blog-add',
@@ -26,11 +26,10 @@ export class BlogAddComponent implements OnInit {
 
   createBlogAddForm() {
     this.blogAddForm = this.formBuilder.group({
-      userId: [this.currentUserId, Validators.required],
+      userId: this.currentUserId,
       categoryId: ['', Validators.required],
       blogTitle: ['', Validators.required],
       blogContent: ['', Validators.required],
-      likedCount: [''],
     });
   }
   

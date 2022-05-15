@@ -3,43 +3,26 @@
     <div class="form-label">
       <input
         type="number"
-        formControlName="userId"
-        class="form-control"
-        placeholder="User ID"
-      />
-    </div>
-    <div class="form-label">
-      <input
-        type="number"
         formControlName="categoryId"
         class="form-control"
         placeholder="Category ID"
       />
     </div>
     <div class="form-label">
-      <input
-        type="text"
-        formControlName="blogTitle"
-        class="form-control"
+      <textarea
         placeholder="Blog Title"
-      />
+        formControlName="blogTitle"
+        class="form-control ml-1 shadow-none textarea"
+      ></textarea>
     </div>
     <div class="form-label">
-      <input
-        type="text"
-        formControlName="blogContent"
-        class="form-control"
+      <textarea
         placeholder="Blog Content"
-      />
+        formControlName="blogContent"
+        class="form-control ml-1 shadow-none textarea"
+      ></textarea>
     </div>
-    <div class="form-label">
-      <input
-        type="number"
-        formControlName="likedCount"
-        class="form-control"
-        placeholder="Liked Count"
-      />
-    </div>
+
     <button
       class="w-100 btn btn-lg btn-primary"
       type="submit"

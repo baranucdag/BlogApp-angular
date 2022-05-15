@@ -61,3 +61,7 @@ div#deleteButton{
 h3#header{
   text-align: center;
 }
+
+button.btn.btn-primary-outline{
+  background-color: lavender;
+}

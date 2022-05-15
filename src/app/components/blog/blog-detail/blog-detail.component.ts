@@ -1,15 +1,17 @@
-import { CommentModel } from './../../../models/commentModel';
-import { SingleResponseModel } from './../../../models/singleResponseModel';
+import { UserModel } from '../../../core/models/userModel';
+import { UserService } from '../../../core/services/user.service';
+import { FavModel } from '../../../core/models/favModel';
+import { FavService } from '../../../core/services/fav.service';
+import { CommentModel } from '../../../core/models/commentModel';
 import { ToastrService } from 'ngx-toastr';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
-import { CommentService } from './../../../services/comment.service';
-import { AuthService } from './../../../services/auth.service';
+import { CommentService } from '../../../core/services/comment.service';
+import { AuthService } from '../../../core/services/auth.service';
 import { Component, EventEmitter, OnInit, Output } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-import { BlogDetailModel } from 'src/app/models/blogDetailModel';
-import { BlogService } from 'src/app/services/blog.service';
-import { DetailService } from 'src/app/services/detail.service';
-import { param } from 'jquery';
+import { BlogDetailModel } from 'src/app/core/models/blogDetailModel';
+import { BlogService } from 'src/app/core/services/blog.service';
+import { DetailService } from 'src/app/core/services/detail.service';
 
 @Component({
   selector: 'app-blog-detail',
@@ -20,22 +22,29 @@ export class BlogDetailComponent implements OnInit {
   id: number = 0;
   blogDetail: BlogDetailModel;
   comments: CommentModel[] = [];
+  favs: FavModel[] = [];
   commentPostForm: FormGroup;
   currentUserId: number;
+  favCount: number;
+  currentDate: Date;
+  user: UserModel;
 
   constructor(
     private route: ActivatedRoute,
     private blogService: BlogService,
     private detailService: DetailService,
     private commentService: CommentService,
+    private favService: FavService,
     private formBuilder: FormBuilder,
     private authService: AuthService,
-    private toastr: ToastrService
+    private toastr: ToastrService,
+    private userService: UserService
   ) {}
 
   ngOnInit(): void {
     this.getParameter();
     this.createPostCommentForm();
+    this.getFavCount();
     this.getCommentsByBlogId(this.id);
   }
 
@@ -46,6 +55,8 @@ export class BlogDetailComponent implements OnInit {
         this.id = Number(params['id']);
         this.currentUserId = this.authService.getCurrentUserId();
         this.getBlogDetails();
+        this.getFavCount();
+        this.currentDate = new Date();
       }
     });
   }
@@ -73,6 +84,13 @@ export class BlogDetailComponent implements OnInit {
     );
   }
 
+  //get user by user id
+  getUserById(id: number) {
+    this.userService.getUserById(id).subscribe((response) => {
+      this.user = response.data;
+    });
+  }
+
   //craete comment post form
   createPostCommentForm() {
     this.commentPostForm = this.formBuilder.group({
@@ -82,7 +100,7 @@ export class BlogDetailComponent implements OnInit {
 
   //add comment
   addComment() {
-    if(this.currentUserId!=undefined && this.currentUserId!=null){
+    if (this.currentUserId != undefined && this.currentUserId != null) {
       if (this.commentPostForm.valid) {
         let formcommentContent: CommentModel = Object.assign(
           {},
@@ -91,7 +109,7 @@ export class BlogDetailComponent implements OnInit {
         let commentPostModel = {
           userId: this.currentUserId,
           blogId: this.id,
-          commentContent: formcommentContent.commentContent,
+          commentContent: formcommentContent.commentContent
         };
         this.commentService.addComment(commentPostModel).subscribe(
           (response) => {
@@ -105,8 +123,8 @@ export class BlogDetailComponent implements OnInit {
       } else {
         this.toastr.error('comment content cannot be empty!');
       }
-    }
-    else this.toastr.error('If you want to leave a comment you have to login!')
+    } else
+      this.toastr.error('If you want to leave a comment you have to login!');
   }
 
   //delete an comment
@@ -114,7 +132,7 @@ export class BlogDetailComponent implements OnInit {
     this.commentService.deleteComment(deleteModel).subscribe(
       (responnse) => {
         this.toastr.info('comment deleted succesfully!');
-        this.getCommentsByBlogId(this.id);
+        console.log()
       },
       (errorResponse) => {
         this.toastr.error('comment couldnt deleted!');
@@ -122,8 +140,56 @@ export class BlogDetailComponent implements OnInit {
     );
   }
 
+  //check if current user is the owner of comment
   isCommentOwner(comment: CommentModel) {
     if (this.currentUserId == comment.userId) {
+      return true;
+    }
+    return false;
+  }
+
+  //get the count of blog
+  getFavCount() {
+    this.favService.getFavCount(this.id).subscribe((reponse) => {
+      this.favCount = reponse.data;
+    });
+  }
+
+  //add fav
+  addFav() {
+    let favModel = {
+      blogId: this.id,
+      userId: this.currentUserId,
+    };
+    this.favService.addFav(favModel).subscribe(
+      (reponse) => {
+        this.toastr.info('You have just liked blog');
+      },
+      (errorResponse) => {
+        this.toastr.error('Couldnt liked blog');
+      }
+    );
+  }
+
+  //delete fav (when stopping like)
+  deleteFav() {
+    let favModel = {
+      blogId: this.id,
+      userId: this.currentUserId
+    };
+    this.favService.deleteFav(favModel).subscribe(
+      (response) => {
+        this.toastr.info('Like deleted.');
+      },
+      (errorResponse) => {
+        this.toastr.error('couldnt delete the fav');
+      }
+    );
+  }
+
+  //check if user already liked blog
+  get checkIfLiked() {
+    if (this.favs.find((x) => x.userId == this.currentUserId) != null) {
       return true;
     } else return false;
   }

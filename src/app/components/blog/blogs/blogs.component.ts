@@ -1,10 +1,10 @@
 import { ToastrService } from 'ngx-toastr';
-import { AuthService } from './../../../services/auth.service';
-import { DetailService } from 'src/app/services/detail.service';
+import { AuthService } from '../../../core/services/auth.service';
+import { DetailService } from 'src/app/core/services/detail.service';
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-import { BlogModel } from 'src/app/models/blogModel';
-import { BlogService } from 'src/app/services/blog.service';
+import { BlogModel } from 'src/app/core/models/blogModel';
+import { BlogService } from 'src/app/core/services/blog.service';
 
 @Component({
   selector: 'app-blogs',

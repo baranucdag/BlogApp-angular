@@ -1,7 +1,7 @@
-import { ImageService } from './../../services/image.service';
-import { DetailService } from './../../services/detail.service';
-import { BlogModel } from 'src/app/models/blogModel';
-import { BlogService } from './../../services/blog.service';
+import { ImageService } from '../../core/services/image.service';
+import { DetailService } from '../../core/services/detail.service';
+import { BlogModel } from 'src/app/core/models/blogModel';
+import { BlogService } from '../../core/services/blog.service';
 import { Component, OnInit } from '@angular/core';
 import {ChangeDetectorRef } from '@angular/core';
 

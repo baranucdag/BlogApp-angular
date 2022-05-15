@@ -1,4 +1,4 @@
-import { BlogService } from 'src/app/services/blog.service';
+import { BlogService } from 'src/app/core/services/blog.service';
 import { Component, OnInit } from '@angular/core';
 
 @Component({
