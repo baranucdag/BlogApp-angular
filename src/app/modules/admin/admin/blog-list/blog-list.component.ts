@@ -11,8 +11,6 @@ import { Subject } from 'rxjs';
   styleUrls: ['./blog-list.component.css'],
 })
 export class BlogListComponent implements OnInit {
-  dtOptions: DataTables.Settings = {};
-  dtTrigger: Subject<any> = new Subject<any>();
   selectedBlogId: number = 0;
   updateForm: FormGroup;
 
@@ -24,10 +22,6 @@ export class BlogListComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
-    this.dtOptions = {
-      pagingType: 'full_numbers',
-      pageLength: 5,
-    };
     this.getBlogs();
     this.blogUpdateForm();
   }
@@ -71,7 +65,6 @@ export class BlogListComponent implements OnInit {
   getBlogs() {
     this.blogService.getAll().subscribe((response) => {
       this.blogs = response.data;
-      this.dtTrigger.next();
     });
   }
 

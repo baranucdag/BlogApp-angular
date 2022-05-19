@@ -2,28 +2,35 @@
   <form [formGroup]="blogAddForm">
     <div class="form-label">
       <input
-        type="number"
+        type="text"
         formControlName="categoryId"
         class="form-control"
         placeholder="Category ID"
       />
     </div>
+
     <div class="form-label">
+      <span class="input-group-text"> Title </span>
       <textarea
-        placeholder="Blog Title"
+        style="height: 85px"
+        class="form-control"
         formControlName="blogTitle"
-        class="form-control ml-1 shadow-none textarea"
+        aria-label="With textarea"
       ></textarea>
     </div>
+
     <div class="form-label">
+      <span class="input-group-text">Content</span>
       <textarea
-        placeholder="Blog Content"
+        style="height: 120px"
+        class="form-control"
         formControlName="blogContent"
-        class="form-control ml-1 shadow-none textarea"
+        aria-label="With textarea"
       ></textarea>
     </div>
 
     <button
+      style="background-color: #586181"
       class="w-100 btn btn-lg btn-primary"
       type="submit"
       (click)="addBlog()"

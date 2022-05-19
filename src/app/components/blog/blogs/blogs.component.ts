@@ -1,3 +1,4 @@
+import { QueryParamsModel } from './../../../core/models/queryParamsModel';
 import { ToastrService } from 'ngx-toastr';
 import { AuthService } from '../../../core/services/auth.service';
 import { DetailService } from 'src/app/core/services/detail.service';
@@ -13,6 +14,8 @@ import { BlogService } from 'src/app/core/services/blog.service';
 })
 export class BlogsComponent implements OnInit {
   blogs: BlogModel[] = [];
+  sortType: boolean = true;
+  totalCount = 0;
   blogCount: number = 5;
   search = '';
   blogHeader: any = 'Blog Application';
@@ -23,19 +26,26 @@ export class BlogsComponent implements OnInit {
     private router: Router,
     private detailService: DetailService,
     private authService: AuthService,
-    private toastr:ToastrService
+    private toastr: ToastrService
   ) {}
 
   ngOnInit(): void {
-  this.detailService.blogDetail.next(null);
+    this.detailService.blogDetail.next(null);
     this.getCurrentUser();
     this.getBlogs();
   }
 
   //get all blogs by filter
   getBlogs() {
-    this.blogService.get(this.search).subscribe((response) => {
+    let search: QueryParamsModel = {
+      queryString: this.search,
+      sortType: this.sortType,
+      count: this.blogCount,
+      totalCount: this.totalCount,
+    };
+    this.blogService.get(search).subscribe((response) => {
       this.blogs = response.data;
+      console.log(response.data);
     });
   }
 
@@ -58,23 +68,24 @@ export class BlogsComponent implements OnInit {
   isAuthor(blog: BlogModel) {
     if (blog.userId == this.currentUserId) {
       return true;
-    }
-    else return false;
+    } else return false;
   }
 
-  //navigate to edit component when author of the blog click to edit button 
-  navigateEdit(blog:BlogModel){
+  //navigate to edit component when author of the blog click to edit button
+  navigateEdit(blog: BlogModel) {
     this.router.navigate(['blog/edit/' + blog.id]);
   }
 
   //delete given blog
-  delete(blog:BlogModel){
-    this.blogService.deleteBlog(blog).subscribe((response)=>{
-      this.toastr.success("Blog Deleted")
-      this.getBlogs();
-    },
-    (errorResponse)=>{
-      this.toastr.error(errorResponse.message)
-    })
+  delete(blog: BlogModel) {
+    this.blogService.deleteBlog(blog).subscribe(
+      (response) => {
+        this.toastr.success('Blog Deleted');
+        this.getBlogs();
+      },
+      (errorResponse) => {
+        this.toastr.error(errorResponse.message);
+      }
+    );
   }
 }

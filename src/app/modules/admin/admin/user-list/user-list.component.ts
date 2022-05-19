@@ -10,8 +10,6 @@ import { Subject } from 'rxjs';
   styleUrls: ['./user-list.component.css'],
 })
 export class UserListComponent implements OnInit {
-  dtOptions: DataTables.Settings = {};
-  dtTrigger: Subject<any> = new Subject<any>();
 
   users: UserModel[] = [];
 
@@ -21,10 +19,6 @@ export class UserListComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
-    this.dtOptions = {
-      pagingType: 'full_numbers',
-      pageLength: 6,
-    };
     this.getUsers();
   }
 
@@ -34,7 +28,6 @@ export class UserListComponent implements OnInit {
       (response) => {
         this.users = response.data;
         this.toastr.info(response.message);
-        this.dtTrigger.next()
       },
       (errorResponse) => {
         this.toastr.error(errorResponse.message);

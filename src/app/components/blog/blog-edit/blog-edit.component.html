@@ -1,4 +1,4 @@
-<div class="container" >
+<div class="container">
   <form *ngIf="blogEditForm" [formGroup]="blogEditForm">
     <div class="form-label">
       <input
@@ -8,16 +8,32 @@
         placeholder="Category ID"
       />
     </div>
-    <div class="input-group">
-      <span class="input-group-text"> Title   </span>
-      <textarea class="form-control" formControlName="blogTitle" aria-label="With textarea"></textarea>
+    <div class="form-label">
+      <span class="input-group-text"> Title </span>
+      <textarea
+        style="height: 85px"
+        class="form-control"
+        formControlName="blogTitle"
+        aria-label="With textarea"
+      ></textarea>
     </div>
 
-    <div class="input-group">
+    <div class="form-label">
       <span class="input-group-text">Content</span>
-      <textarea class="form-control" formControlName="blogContent" aria-label="With textarea"></textarea>
+      <textarea
+        style="height: 120px"
+        class="form-control"
+        formControlName="blogContent"
+        aria-label="With textarea"
+      ></textarea>
     </div>
-    <button class="w-100 btn btn-lg btn-primary" type="submit" (click)="update()">
+
+    <button
+      style="background-color: #586181"
+      class="w-100 btn btn-lg btn-primary"
+      type="submit"
+      (click)="update()"
+    >
       Save Blog
     </button>
   </form>

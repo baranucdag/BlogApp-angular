@@ -7,7 +7,6 @@ import { SidebarComponent } from './admin/sidebar/sidebar.component';
 import { NavigationComponent } from './admin/navigation/navigation.component';
 import { DashboardComponent } from './admin/dashboard/dashboard.component';
 import { BlogListComponent } from './admin/blog-list/blog-list.component';
-import { DataTablesModule } from 'angular-datatables';
 import { UserListComponent } from './admin/user-list/user-list.component';
 
 
@@ -20,7 +19,7 @@ import { UserListComponent } from './admin/user-list/user-list.component';
     BlogListComponent,
     UserListComponent,
   ],
-  imports: [ReactiveFormsModule, CommonModule, AdminRoutingModule,DataTablesModule ],
+  imports: [ReactiveFormsModule, CommonModule, AdminRoutingModule ],
 
 })
 export class AdminModule {}

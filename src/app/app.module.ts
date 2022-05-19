@@ -6,7 +6,6 @@ import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { ReactiveFormsModule, FormBuilder, FormsModule } from '@angular/forms';
 import { ToastrModule } from 'ngx-toastr';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { DataTablesModule } from 'angular-datatables';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -39,7 +38,6 @@ import { AuthModule } from './modules/auth/auth.module';
     AdminModule,
     AuthModule,
     BrowserModule,
-    DataTablesModule,
     AppRoutingModule,
     HttpClientModule,
     ReactiveFormsModule,

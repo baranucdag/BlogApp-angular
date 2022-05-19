@@ -1,3 +1,4 @@
+import { QueryParamsModel } from './../models/queryParamsModel';
 import { SingleResponseModel } from '../models/singleResponseModel';
 import { ListResponsModel } from '../models/listResponseModel';
 import { HttpClient, HttpParams } from '@angular/common/http';
@@ -14,17 +15,36 @@ export class BlogService {
   constructor(private httClient: HttpClient) {}
 
   //get all blogs
-  getAll():Observable<ListResponsModel<BlogModel>>{
+  getAll(): Observable<ListResponsModel<BlogModel>> {
     let apiUrl = this.baseApiUrl + 'getall';
     return this.httClient.get<ListResponsModel<BlogModel>>(apiUrl);
   }
 
+  //get blogs paged (try to do by cursor paged method)
+  getBlogsPaged(
+    count: number,
+    cursor: number
+  ): Observable<ListResponsModel<BlogModel>> {
+    let apiUrl =
+      this.baseApiUrl + 'GetAllPaged?Count=' + count + '1&Cursor=' + cursor;
+    return this.httClient.get<ListResponsModel<BlogModel>>(apiUrl);
+  }
+
   //get all blogs by filter
-  get(search: string): Observable<ListResponsModel<BlogModel>> {
-    let apiUrl = this.baseApiUrl + 'get';
+  get(queryParams: QueryParamsModel): Observable<ListResponsModel<BlogModel>> {
+    let apiUrl =
+      this.baseApiUrl +
+      'getblogs?QueryString=' +
+      queryParams.queryString +
+      '&SortType=' +
+      queryParams.sortType +
+      '&Count=' +
+      queryParams.count +
+      '&TotalCount=' +
+      queryParams.totalCount;
     let params: HttpParams = new HttpParams();
-    params = params.set('search', search);
-    return this.httClient.get<ListResponsModel<BlogModel>>(apiUrl+'/',{params:params,});
+    params = params.set('search', queryParams.queryString);
+    return this.httClient.get<ListResponsModel<BlogModel>>(apiUrl);
   }
 
   //add a blog

@@ -1,3 +1,5 @@
+import { CategoryService } from './../../../core/services/category.service';
+import { CategoryModel } from './../../../core/models/categoryModel';
 import { AuthService } from '../../../core/services/auth.service';
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
@@ -12,16 +14,20 @@ import { BlogService } from 'src/app/core/services/blog.service';
 export class BlogAddComponent implements OnInit {
   blogAddForm: FormGroup;
   currentUserId:number;
+  categories:CategoryModel[]=[]
+
   constructor(
     private blogService: BlogService,
     private toastService: ToastrService,
     private formBuilder: FormBuilder,
-    private authService:AuthService
+    private authService:AuthService,
+    private categoryService:CategoryService
   ) {}
 
   ngOnInit(): void {
     this.getCurrentUser();
     this.createBlogAddForm();
+    this.getCategories();
   }
 
   createBlogAddForm() {
@@ -33,6 +39,7 @@ export class BlogAddComponent implements OnInit {
     });
   }
   
+  //add blog
   addBlog() {
     if (this.blogAddForm.valid) {
       let blogModel = Object.assign({}, this.blogAddForm.value);
@@ -48,7 +55,16 @@ export class BlogAddComponent implements OnInit {
     }
   }
 
+  //get current user from auth service
   getCurrentUser(){
    this.currentUserId =  this.authService.getCurrentUserId();
+  }
+
+  //get categories
+  getCategories(){
+    this.categoryService.getAllCategories().subscribe((response=>{
+      this.categories = response.data
+
+    }))
   }
 }
