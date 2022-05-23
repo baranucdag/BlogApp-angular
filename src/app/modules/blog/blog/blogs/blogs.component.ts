@@ -1,16 +1,16 @@
-import { QueryParamsModel } from './../../../core/models/queryParamsModel';
-import { ToastrService } from 'ngx-toastr';
-import { AuthService } from '../../../core/services/auth.service';
-import { DetailService } from 'src/app/core/services/detail.service';
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+import { ToastrService } from 'ngx-toastr';
 import { BlogModel } from 'src/app/core/models/blogModel';
+import { QueryParamsModel } from 'src/app/core/models/queryParamsModel';
+import { AuthService } from 'src/app/core/services/auth.service';
 import { BlogService } from 'src/app/core/services/blog.service';
+import { DetailService } from 'src/app/core/services/detail.service';
 
 @Component({
   selector: 'app-blogs',
   templateUrl: './blogs.component.html',
-  styleUrls: ['./blogs.component.css'],
+  styleUrls: ['./blogs.component.css']
 })
 export class BlogsComponent implements OnInit {
   blogs: BlogModel[] = [];

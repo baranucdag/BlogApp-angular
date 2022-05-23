@@ -9,19 +9,20 @@ import { BlogService } from 'src/app/core/services/blog.service';
 @Component({
   selector: 'app-blog-add',
   templateUrl: './blog-add.component.html',
-  styleUrls: ['./blog-add.component.css']
+  styleUrls: ['./blog-add.component.css'],
 })
 export class BlogAddComponent implements OnInit {
   blogAddForm: FormGroup;
-  currentUserId:number;
-  categories:CategoryModel[]=[]
+  currentUserId: number;
+  selectedFile=null;
+  categories: CategoryModel[] = [];
 
   constructor(
     private blogService: BlogService,
     private toastService: ToastrService,
     private formBuilder: FormBuilder,
-    private authService:AuthService,
-    private categoryService:CategoryService
+    private authService: AuthService,
+    private categoryService: CategoryService
   ) {}
 
   ngOnInit(): void {
@@ -38,33 +39,33 @@ export class BlogAddComponent implements OnInit {
       blogContent: ['', Validators.required],
     });
   }
-  
+
   //add blog
   addBlog() {
     if (this.blogAddForm.valid) {
       let blogModel = Object.assign({}, this.blogAddForm.value);
-      this.blogService.addBlog(blogModel).subscribe(response=>{
-        this.toastService.info("Blog added succesfully")
-      },
-      responseError=>{
-        this.toastService.error("Blog Couldnt added")
-      })
-    }
-    else{
-      this.toastService.error("Form is invalid")
+      this.blogService.addBlog(blogModel).subscribe(
+        (response) => {
+          this.toastService.info('Blog added succesfully');
+        },
+        (responseError) => {
+          this.toastService.error('Blog Couldnt added');
+        }
+      );
+    } else {
+      this.toastService.error('Form is invalid');
     }
   }
 
   //get current user from auth service
-  getCurrentUser(){
-   this.currentUserId =  this.authService.getCurrentUserId();
+  getCurrentUser() {
+    this.currentUserId = this.authService.getCurrentUserId();
   }
 
   //get categories
-  getCategories(){
-    this.categoryService.getAllCategories().subscribe((response=>{
-      this.categories = response.data
-
-    }))
+  getCategories() {
+    this.categoryService.getAllCategories().subscribe((response) => {
+      this.categories = response.data;
+    });
   }
 }

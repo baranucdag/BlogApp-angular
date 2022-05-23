@@ -3,7 +3,6 @@ import { BlogModel } from '../../../../core/models/blogModel';
 import { ToastrService } from 'ngx-toastr';
 import { BlogService } from '../../../../core/services/blog.service';
 import { Component, OnInit } from '@angular/core';
-import { Subject } from 'rxjs';
 
 @Component({
   selector: 'app-blog-list',
@@ -13,6 +12,8 @@ import { Subject } from 'rxjs';
 export class BlogListComponent implements OnInit {
   selectedBlogId: number = 0;
   updateForm: FormGroup;
+  pageNumber:number=1;
+  pageSize:number=5;
 
   blogs: BlogModel[] = [];
   constructor(
@@ -22,7 +23,7 @@ export class BlogListComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
-    this.getBlogs();
+    this.getBlogsPaginated(this.pageNumber,this.pageSize);
     this.blogUpdateForm();
   }
 
@@ -64,7 +65,7 @@ export class BlogListComponent implements OnInit {
   //get all blogs from database
   getBlogs() {
     this.blogService.getAll().subscribe((response) => {
-      this.blogs = response.data;
+     // this.blogs = response.data;
     });
   }
 
@@ -86,4 +87,31 @@ export class BlogListComponent implements OnInit {
     this.selectedBlogId = blog.id;
   }
 
+  //get blogs paginated on bakcend
+  getBlogsPaginated(pageNumber:number,pageSize:number){
+    this.blogService.getBlogsPaginated(pageNumber,pageSize).subscribe((response)=>{
+      this.blogs=response;
+      console.log(response)
+    })
+  }
+
+  //increase the number of page
+  increasePageNumber(){
+    this.pageNumber+=1;
+    this.getBlogsPaginated(this.pageNumber,this.pageSize);
+  }
+
+  //decrease the number of page
+  decreasePageNumber(){
+    if(this.pageNumber!=1){
+      this.pageNumber-=1;
+      this.getBlogsPaginated(this.pageNumber,this.pageSize);
+    }
+  }
+
+  //set page number to given number
+  setPageNumber(pageNumber:number){
+    this.pageNumber=pageNumber;
+    this.getBlogsPaginated(this.pageNumber,this.pageSize);
+  }
 }

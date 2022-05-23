@@ -1,3 +1,4 @@
+import { CategoryListComponent } from './admin/category-list/category-list.component';
 import { AdminGuard } from '../../core/guards/admin.guard';
 import { UserListComponent } from './admin/user-list/user-list.component';
 import { BlogListComponent } from './admin/blog-list/blog-list.component';
@@ -16,6 +17,7 @@ const routes: Routes = [
       },
       { path: 'blogs', component: BlogListComponent },
       { path: 'users', component: UserListComponent },
+      {path:'categories',component:CategoryListComponent}
     ],
   },
 ];

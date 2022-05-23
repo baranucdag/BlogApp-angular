@@ -12,6 +12,8 @@ import { Subject } from 'rxjs';
 export class UserListComponent implements OnInit {
 
   users: UserModel[] = [];
+  pageNumber:number=1;
+  pageSize:number=9;
 
   constructor(
     private userService: UserService,
@@ -19,14 +21,14 @@ export class UserListComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
-    this.getUsers();
+    this.getBlogsPaginated(this.pageNumber,this.pageSize);
   }
 
   //get users from db
   getUsers() {
     this.userService.getAllUsers().subscribe(
       (response) => {
-        this.users = response.data;
+        //this.users = response.data;
         this.toastr.info(response.message);
       },
       (errorResponse) => {
@@ -40,11 +42,41 @@ export class UserListComponent implements OnInit {
     this.userService.delete(user).subscribe(
       (response) => {
         this.toastr.info('user deleted');
-        this.getUsers();
+        this.getBlogsPaginated(this.pageNumber,this.pageSize);
       },
       (responseError) => {
         this.toastr.info(responseError.message);
       }
     );
+  }
+
+  //get blogs paginated on bakcend
+  getBlogsPaginated(pageNumber:number,pageSize:number){
+    this.userService.getBlogsPaginated(pageNumber,pageSize).subscribe((response)=>{
+     if(response){
+       console.log(response)
+      this.users=response;
+     }
+    })
+  }
+
+  //increase the number of page
+  increasePageNumber(){
+    this.pageNumber+=1;
+    this.getBlogsPaginated(this.pageNumber,this.pageSize);
+  }
+
+  //decrease the number of page
+  decreasePageNumber(){
+    if(this.pageNumber!=1){
+      this.pageNumber-=1;
+      this.getBlogsPaginated(this.pageNumber,this.pageSize);
+    }
+  }
+
+  //set page number to given number
+  setPageNumber(pageNumber:number){
+    this.pageNumber=pageNumber;
+    this.getBlogsPaginated(this.pageNumber,this.pageSize);
   }
 }

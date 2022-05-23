@@ -1,3 +1,4 @@
+import { BasicResponseModel } from './../models/basicResponseModel';
 import { QueryParamsModel } from './../models/queryParamsModel';
 import { SingleResponseModel } from '../models/singleResponseModel';
 import { ListResponsModel } from '../models/listResponseModel';
@@ -75,5 +76,11 @@ export class BlogService {
   getBlogById(id: number): Observable<SingleResponseModel<BlogModel>> {
     let apiUrl = this.baseApiUrl + 'getblogbyid?id=' + id;
     return this.httClient.get<SingleResponseModel<BlogModel>>(apiUrl);
+  }
+
+  //get blogs paginated on backend
+  getBlogsPaginated(pageNumber:number,pageSize:number):Observable<BlogModel[]>{
+    let apiUrl = this.baseApiUrl + 'GetBlogsPaged?pageNumber='+pageNumber+'&pageSize='+pageSize;
+    return this.httClient.get<BlogModel[]>(apiUrl);
   }
 }

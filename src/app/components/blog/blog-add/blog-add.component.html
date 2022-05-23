@@ -1,5 +1,9 @@
 <div class="container">
   <form [formGroup]="blogAddForm">
+    <div *ngFor="let category of categories">
+      <label for="scales">{{ category.id }} {{ category.categoryName }}</label>
+    </div>
+
     <div class="form-label">
       <input
         type="text"
@@ -8,7 +12,6 @@
         placeholder="Category ID"
       />
     </div>
-
     <div class="form-label">
       <span class="input-group-text"> Title </span>
       <textarea
@@ -22,7 +25,7 @@
     <div class="form-label">
       <span class="input-group-text">Content</span>
       <textarea
-        style="height: 120px"
+        style="height: 195px"
         class="form-control"
         formControlName="blogContent"
         aria-label="With textarea"
@@ -39,3 +42,4 @@
     </button>
   </form>
 </div>
+

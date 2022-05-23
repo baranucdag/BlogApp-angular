@@ -27,4 +27,10 @@ export class UserService {
     return this.httpClient.post(apiUrl,user);
   }
 
+   //get users paginated on backend
+   getBlogsPaginated(pageNumber:number,pageSize:number):Observable<UserModel[]>{
+    let apiUrl = this.baseApiUrl + 'GetUserPaged?pageNumber='+pageNumber+'&pageSize='+pageSize;
+    return this.httpClient.get<UserModel[]>(apiUrl);
+  }
+
 }

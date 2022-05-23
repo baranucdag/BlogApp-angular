@@ -39,7 +39,6 @@ export class LoginComponent implements OnInit {
       let loginModel = Object.assign({}, this.loginForm.value);
       this.authService.login(loginModel).subscribe(
         (response) => {
-          //todo:proje bitince commend'a al
           console.log(response.data);
           this.toastrService.info(response.message);
           if (response.data.token != null) {

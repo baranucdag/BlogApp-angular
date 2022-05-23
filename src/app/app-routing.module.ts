@@ -20,7 +20,7 @@ const routes: Routes = [
       { path: 'about', component: AboutComponent },
       { path: 'edit/:id', component: BlogEditComponent },
     ],
-  }
+  },
 ];
 
 @NgModule({
@@ -28,3 +28,20 @@ const routes: Routes = [
   exports: [RouterModule],
 })
 export class AppRoutingModule {}
+
+/*{ path: '', pathMatch: 'full', redirectTo: 'admin/blogs' },
+  {
+    path: 'blog',
+    loadChildren: () =>
+      import('./modules/blog/blog.module').then((m) => m.BlogModule),
+  },
+  {
+    path: 'auth',
+    loadChildren: () =>
+      import('./modules/auth/auth.module').then((m) => m.AuthModule),
+  },
+  {
+    path: 'admin',
+    loadChildren: () =>
+      import('./modules/admin/admin.module').then((m) => m.AdminModule),
+  },*/

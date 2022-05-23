@@ -1,4 +1,4 @@
-<main
+<div
   class="form-signin"
   style="text-align: center; margin-top: 80px; background-color: #cfdaeb"
 >
@@ -11,7 +11,6 @@
         formControlName="email"
         type="email"
         class="form-control"
-        id="floatingInput"
         placeholder="name@example.com"
       />
       <label for="floatingInput">Email address</label>
@@ -22,7 +21,6 @@
         formControlName="firstName"
         type="text"
         class="form-control"
-        id="floatingInput"
         placeholder="First Name"
       />
       <label for="floatingInput">First Name</label>
@@ -33,7 +31,6 @@
         formControlName="lastName"
         type="text"
         class="form-control"
-        id="floatingInput"
         placeholder="Last Name"
       />
       <label for="floatingInput">Last Name</label>
@@ -43,15 +40,20 @@
         formControlName="password"
         type="password"
         class="form-control"
-        id="floatingPassword"
         placeholder="Password"
       />
       <label for="floatingPassword">Password</label>
     </div>
-
-    <div class="checkbox mb-3">
-      <label> <input type="checkbox" value="remember-me" /> Remember me </label>
+    <div class="form-floating">
+      <input
+        formControlName="passwordCheck"
+        type="password"
+        class="form-control"
+        placeholder="Password Again"
+      />
+      <label for="floatingPassword">Password Again</label>
     </div>
+
     <button
       (click)="register()"
       class="w-100 btn btn-lg btn-primary"
@@ -69,4 +71,4 @@
     >
     <p class="mt-5 mb-3 text-muted">&copy; 2017–2021</p>
   </form>
-</main>
+</div>

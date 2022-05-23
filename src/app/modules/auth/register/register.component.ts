@@ -1,3 +1,4 @@
+import { Router } from '@angular/router';
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ToastrService } from 'ngx-toastr';
@@ -8,7 +9,7 @@ import { AuthService } from 'src/app/core/services/auth.service';
 @Component({
   selector: 'app-register',
   templateUrl: './register.component.html',
-  styleUrls: ['./register.component.css']
+  styleUrls: ['./register.component.css'],
 })
 export class RegisterComponent implements OnInit {
   registerForm: FormGroup;
@@ -16,7 +17,8 @@ export class RegisterComponent implements OnInit {
   constructor(
     private authService: AuthService,
     private toastrService: ToastrService,
-    private formBuilder: FormBuilder
+    private formBuilder: FormBuilder,
+    private router: Router
   ) {}
 
   ngOnInit(): void {
@@ -28,16 +30,15 @@ export class RegisterComponent implements OnInit {
   createRegisterform() {
     this.registerForm = this.formBuilder.group({
       email: ['', Validators.required],
-      firstName: ['', Validators.required],
-      lastName: ['', Validators.required],
-      password: ['', Validators.required],
-      passwordCheck: ['', Validators.required],
+      firstName: ['',Validators.required],
+      lastName: ['',Validators.required],
+      password: ['',Validators.required],
+      passwordCheck: ['',Validators.required]
     });
   }
 
   //register operations
   register() {
-    if (this.registerForm.valid) {
       let registerCheckModel: RegisterCheckModel = Object.assign(
         {},
         this.registerForm.value
@@ -53,6 +54,7 @@ export class RegisterComponent implements OnInit {
           (response) => {
             console.log(response.message);
             this.toastrService.info('registered succesfully!');
+            this.router.navigate(['/login']);
           },
           (errorResponse) => {
             console.log(errorResponse);
@@ -60,9 +62,8 @@ export class RegisterComponent implements OnInit {
         );
       } else {
         this.toastrService.error('Passwords fields must have the same value!');
+        console.log('hata');
       }
-
-    }
   }
 
   //get year

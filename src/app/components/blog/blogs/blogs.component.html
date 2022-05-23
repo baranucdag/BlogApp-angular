@@ -11,7 +11,12 @@
       [(ngModel)]="search"
       (keyup.enter)="getBlogs()"
     />
-    <button class="btn btn-outline-success" type="submit" (click)="getBlogs()" >Search</button>
+    <button class="btn btn-outline-success" type="submit" (click)="getBlogs()">
+      Search
+    </button>
+  </div>
+  <div style="margin-left: 500px;">
+    <i class="bi bi-sort-up">Sort By</i>
   </div>
 
   <div class="row">
@@ -35,7 +40,8 @@
                 }}
               </h3>
               <p class="post-meta">
-                Created At : {{ blog.createdAt | date: "mediumDate" }}  <a id="isAuthor" *ngIf="isAuthor(blog)">You are the author.</a> 
+                Created At : {{ blog.createdAt | date: "mediumDate" }}
+                <a id="isAuthor" *ngIf="isAuthor(blog)">You are the author.</a>
               </p>
             </a>
             <p *ngIf="isAuthor(blog)">

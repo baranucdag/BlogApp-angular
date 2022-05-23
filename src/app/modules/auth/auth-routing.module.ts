@@ -1,5 +1,4 @@
 import { RegisterComponent } from './register/register.component';
-import { RegisterCheckModel } from '../../core/models/registerCheckModel';
 import { LoginComponent } from './login/login.component';
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';

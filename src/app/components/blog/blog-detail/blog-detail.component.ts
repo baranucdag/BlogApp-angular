@@ -1,3 +1,5 @@
+import { BlogModel } from 'src/app/core/models/blogModel';
+import { FavDeletePostModel } from './../../../core/models/favDeletePostModel';
 import { UserModel } from '../../../core/models/userModel';
 import { UserService } from '../../../core/services/user.service';
 import { FavModel } from '../../../core/models/favModel';
@@ -21,11 +23,13 @@ import { DetailService } from 'src/app/core/services/detail.service';
 export class BlogDetailComponent implements OnInit {
   id: number = 0;
   blogDetail: BlogDetailModel;
+  blog: BlogModel;
   comments: CommentModel[] = [];
   favs: FavModel[] = [];
   commentPostForm: FormGroup;
   currentUserId: number;
   favCount: number;
+  selectedFile = null;
   currentDate: Date;
   user: UserModel;
 
@@ -43,7 +47,10 @@ export class BlogDetailComponent implements OnInit {
 
   ngOnInit(): void {
     this.getParameter();
+    this.isAuthor()
+    this.getBlog()
     this.createPostCommentForm();
+    this.getFavsByBlogId(this.id);
     this.getFavCount();
     this.getCommentsByBlogId(this.id);
   }
@@ -55,7 +62,6 @@ export class BlogDetailComponent implements OnInit {
         this.id = Number(params['id']);
         this.currentUserId = this.authService.getCurrentUserId();
         this.getBlogDetails();
-        this.getFavCount();
         this.currentDate = new Date();
       }
     });
@@ -85,8 +91,8 @@ export class BlogDetailComponent implements OnInit {
   }
 
   //get user by user id
-  getUserById(id: number) {
-    this.userService.getUserById(id).subscribe((response) => {
+  getUserById() {
+    this.userService.getUserById(this.id).subscribe((response) => {
       this.user = response.data;
     });
   }
@@ -109,7 +115,7 @@ export class BlogDetailComponent implements OnInit {
         let commentPostModel = {
           userId: this.currentUserId,
           blogId: this.id,
-          commentContent: formcommentContent.commentContent
+          commentContent: formcommentContent.commentContent,
         };
         this.commentService.addComment(commentPostModel).subscribe(
           (response) => {
@@ -132,7 +138,7 @@ export class BlogDetailComponent implements OnInit {
     this.commentService.deleteComment(deleteModel).subscribe(
       (responnse) => {
         this.toastr.info('comment deleted succesfully!');
-        console.log()
+        console.log();
       },
       (errorResponse) => {
         this.toastr.error('comment couldnt deleted!');
@@ -148,12 +154,15 @@ export class BlogDetailComponent implements OnInit {
     return false;
   }
 
-  //get the count of blog
+  //get the fav count of blog
   getFavCount() {
-    this.favService.getFavCount(this.id).subscribe((reponse) => {
-      this.favCount = reponse.data;
+    this.favService.getFavCount(this.id).subscribe((response) => {
+      this.favCount = response.data;
     });
   }
+
+  // create a interval to make request in given time interval
+  // intervalID: any = setInterval(this.getFavCount, 500);
 
   //add fav
   addFav() {
@@ -164,6 +173,7 @@ export class BlogDetailComponent implements OnInit {
     this.favService.addFav(favModel).subscribe(
       (reponse) => {
         this.toastr.info('You have just liked blog');
+        window.location.reload();
       },
       (errorResponse) => {
         this.toastr.error('Couldnt liked blog');
@@ -173,16 +183,29 @@ export class BlogDetailComponent implements OnInit {
 
   //delete fav (when stopping like)
   deleteFav() {
-    let favModel = {
+    let favDeleteModel = {
       blogId: this.id,
-      userId: this.currentUserId
+      userId: this.currentUserId,
     };
-    this.favService.deleteFav(favModel).subscribe(
+    this.favService.deleteById(favDeleteModel).subscribe(
       (response) => {
         this.toastr.info('Like deleted.');
+        window.location.reload();
       },
       (errorResponse) => {
         this.toastr.error('couldnt delete the fav');
+      }
+    );
+  }
+
+  //get all favs by blog id
+  getFavsByBlogId(id: number) {
+    this.favService.getFavsByBlogId(this.id).subscribe(
+      (repsonse) => {
+        this.favs = repsonse.data;
+      },
+      (errorResponse) => {
+        this.toastr.error('Cannot get favs!');
       }
     );
   }
@@ -193,4 +216,28 @@ export class BlogDetailComponent implements OnInit {
       return true;
     } else return false;
   }
+
+  //get blog details
+  getBlog() {
+    this.blogService.getBlogById(this.id).subscribe((response) => {
+      this.blog = response.data;
+    });
+  }
+
+  //check if user is author of the blog
+  isAuthor() {
+    if (this.blog) {
+      if (this.currentUserId == this.blog.userId) {
+        return true;
+      }
+      return false;
+    }
+    return
+  }
+
+  onFileSelected(event: any) {
+    this.selectedFile = event.target.files[0];
+  }
+
+  onUpload() {}
 }

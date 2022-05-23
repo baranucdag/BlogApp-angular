@@ -1,3 +1,4 @@
+import { FavDeletePostModel } from './../models/favDeletePostModel';
 import { Observable } from 'rxjs';
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
@@ -30,9 +31,16 @@ export class FavService {
     return this.httpClient.post(apiUrl, fav);
   }
 
+  //delete fav by user id and blog id
+  deleteById(favDeleteModel:FavDeletePostModel){
+    let apiUrl = this.baseApiUrl + 'DeleteById?blogId='+favDeleteModel.blogId+'&userId='+favDeleteModel.userId;
+    console.log(favDeleteModel)
+    return this.httpClient.post(apiUrl,favDeleteModel);
+  }
+
   //delete fav
   deleteFav(fav:any) {
-    let apiUrl = this.baseApiUrl + 'delete';
+    let apiUrl = this.baseApiUrl + 'deletebyid';
     return this.httpClient.post(apiUrl, fav);
   }
 }

@@ -1,15 +1,15 @@
 <div class="container">
   <table
+  class="table table-hover"
   >
     <thead>
       <tr>
-        <th>User Id</th>
-        <th>Category Id</th>
-        <th>Blog Title</th>
-        <th>Blog Content</th>
-        <th>Liked Amount</th>
-        <th>Created At</th>
-        <th>#</th>
+        <th scope="col">User Id</th>
+        <th scope="col">Category Id</th>
+        <th scope="col">Blog Title</th>
+        <th scope="col">Blog Content</th>
+        <th scope="col">Created At</th>
+        <th scope="col">#</th>
       </tr>
     </thead>
     <tbody>
@@ -72,4 +72,13 @@
       
     </tbody>
   </table>
+  <nav aria-label="Page navigation example">
+    <ul class="pagination">
+      <li class="page-item"><a class="page-link" (click)="decreasePageNumber()">Previous</a></li>
+      <li class="page-item"><a class="page-link" (click)="setPageNumber(1)" >1</a></li>
+      <li class="page-item"><a class="page-link" (click)="setPageNumber(2)">2</a></li>
+      <li class="page-item"><a class="page-link" (click)="setPageNumber(3)">3</a></li>
+      <li class="page-item"><a class="page-link" (click)="increasePageNumber()">Next</a></li>
+    </ul>
+  </nav>
 </div>

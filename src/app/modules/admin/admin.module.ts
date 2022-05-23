@@ -8,6 +8,7 @@ import { NavigationComponent } from './admin/navigation/navigation.component';
 import { DashboardComponent } from './admin/dashboard/dashboard.component';
 import { BlogListComponent } from './admin/blog-list/blog-list.component';
 import { UserListComponent } from './admin/user-list/user-list.component';
+import { CategoryListComponent } from './admin/category-list/category-list.component';
 
 
 @NgModule({
@@ -18,6 +19,7 @@ import { UserListComponent } from './admin/user-list/user-list.component';
     DashboardComponent,
     BlogListComponent,
     UserListComponent,
+    CategoryListComponent,
   ],
   imports: [ReactiveFormsModule, CommonModule, AdminRoutingModule ],
 

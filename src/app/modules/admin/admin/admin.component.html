@@ -1,9 +1,19 @@
-<div class="d-flex toggled" id="wrapper">
-  <app-sidebar style="width: 16rem"></app-sidebar>
+<!-- <div class="d-flex toggled" id="wrapper">
+  <app-sidebar style="width: 16rem; background-color: currentColor;"></app-sidebar>
   <div id="page-content-wrapper">
     <app-navigation></app-navigation>
     <br />
     <router-outlet></router-outlet>
     <br />
+  </div>
+</div> -->
+
+<div class="row">
+  <div class="col-md-3" style="background-color: currentColor">
+    <app-sidebar></app-sidebar>
+  </div>
+  <br />
+  <div style="margin-top:35px" class="col-md-9">
+    <router-outlet></router-outlet>
   </div>
 </div>
