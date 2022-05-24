@@ -9,7 +9,7 @@ import { DashboardComponent } from './admin/dashboard/dashboard.component';
 import { BlogListComponent } from './admin/blog-list/blog-list.component';
 import { UserListComponent } from './admin/user-list/user-list.component';
 import { CategoryListComponent } from './admin/category-list/category-list.component';
-
+import { ModalModule } from 'ngx-bootstrap/modal';
 
 @NgModule({
   declarations: [
@@ -21,7 +21,11 @@ import { CategoryListComponent } from './admin/category-list/category-list.compo
     UserListComponent,
     CategoryListComponent,
   ],
-  imports: [ReactiveFormsModule, CommonModule, AdminRoutingModule ],
-
+  imports: [
+    ReactiveFormsModule,
+    CommonModule,
+    AdminRoutingModule,
+    ModalModule.forRoot(),
+  ],
 })
 export class AdminModule {}

@@ -9,7 +9,13 @@ import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 
 const routes: Routes = [
-  { path: '', pathMatch: 'full', redirectTo: 'blog/blogs' },
+
+  {
+    path: 'auth',
+    loadChildren: () =>
+      import('./modules/auth/auth.module').then((m) => m.AuthModule),
+  },
+  /*{ path: '', pathMatch: 'full', redirectTo: 'blog/blogs' },
   {
     path: 'blog',
     component: BlogComponent,
@@ -20,7 +26,7 @@ const routes: Routes = [
       { path: 'about', component: AboutComponent },
       { path: 'edit/:id', component: BlogEditComponent },
     ],
-  },
+  },*/
 ];
 
 @NgModule({

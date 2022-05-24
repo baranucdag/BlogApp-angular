@@ -1,29 +1,66 @@
+<div style="margin-left: 390px; margin-bottom: 15px">
+  <button
+    style="margin-left: 10px"
+    class="btn btn-primary"
+    data-bs-toggle="modal"
+    data-bs-target="#addCategoryModal"
+  >
+    <i class="bi bi-plus-square"></i> Add Category
+  </button>
+</div>
+<div
+  class="modal fade"
+  id="addCategoryModal"
+  tabindex="-1"
+  aria-labelledby="exampleModalLabel"
+  aria-hidden="true"
+>
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Add New Category</h5>
+        <button
+          type="button"
+          class="btn-close"
+          data-bs-dismiss="modal"
+          aria-label="Close"
+        ></button>
+      </div>
+      <div class="modal-body">
+        <form [formGroup]="addFrom">
+          <label for="recipient-name" class="col-form-label">Category Name:</label>
+        <input type="text" class="form-control" id="recipient-name" formControlName="categoryName">
+        </form>
+        
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">
+          Close
+        </button>
+        <button (click)="addCategory()" type="button" class="btn btn-primary" data-bs-dismiss="modal">Save changes</button>
+      </div>
+    </div>
+  </div>
+</div>
 <table class="table">
-    <thead>
-      <tr>
-        <th scope="col">#</th>
-        <th scope="col">First</th>
-        <th scope="col">Last</th>
-        <th scope="col">Handle</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr>
-        <th scope="row">1</th>
-        <td>Mark</td>
-        <td>Otto</td>
-        <td>@mdo</td>
-      </tr>
-      <tr>
-        <th scope="row">2</th>
-        <td>Jacob</td>
-        <td>Thornton</td>
-        <td>@fat</td>
-      </tr>
-      <tr>
-        <th scope="row">3</th>
-        <td colspan="2">Larry the Bird</td>
-        <td>@twitter</td>
-      </tr>
-    </tbody>
-  </table>
+  <thead>
+    <tr>
+      <th scope="col">#</th>
+      <th scope="col">Id</th>
+      <th scope="col">Category Name</th>
+      <th>Delete Category</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let category of categories">
+      <th scope="row">1</th>
+      <td>{{ category.id }}</td>
+      <td>{{ category.categoryName }}</td>
+      <td>
+        <button class="btn btn-danger mx-1" (click)="deleteCategory(category)">
+          Delete
+        </button>
+      </td>
+    </tr>
+  </tbody>
+</table>

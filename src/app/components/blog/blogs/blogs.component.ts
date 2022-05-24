@@ -89,4 +89,15 @@ export class BlogsComponent implements OnInit {
     );
   }
 
+  //change sort of the blogs
+  changeSortType(){
+    if(this.sortType==true){
+      this.sortType=false
+      this.getBlogs();
+    }else{
+      this.sortType=true
+      this.getBlogs();
+    }
+  }
+
 }

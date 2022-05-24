@@ -1,7 +1,16 @@
 <div class="container">
   <form [formGroup]="blogAddForm">
-    <div *ngFor="let category of categories">
-      <label for="scales">{{ category.id }} {{ category.categoryName }}</label>
+    <div style="margin-bottom: 10px">
+      <div class="row">
+        <div class="col-md-2" *ngFor="let category of categories">
+          <div class="card">
+            <div class="card-body" style="background-color: rgb(100, 152, 221);">
+              <div style="text-align: center;">{{ category.categoryName }}</div>
+              <div style="text-align: center;">{{ category.id }}</div>
+            </div>
+          </div>
+        </div>
+      </div>
     </div>
 
     <div class="form-label">
@@ -42,4 +51,3 @@
     </button>
   </form>
 </div>
-

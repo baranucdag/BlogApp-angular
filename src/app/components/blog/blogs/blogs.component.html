@@ -11,12 +11,18 @@
       [(ngModel)]="search"
       (keyup.enter)="getBlogs()"
     />
-    <button class="btn btn-outline-success" type="submit" (click)="getBlogs()">
+    <button
+      style="border-radius: 4px"
+      class="btn btn-outline-success"
+      (click)="getBlogs()"
+    >
       Search
     </button>
   </div>
-  <div style="margin-left: 500px;">
-    <i class="bi bi-sort-up">Sort By</i>
+  <div style="margin-left: 500px; margin-top: 10px; ">
+    <button class="btn-primary" style="border-radius: 3px">
+      <a class="bi bi-sort-up" (click)="changeSortType()">Sort By Date</a>
+    </button>
   </div>
 
   <div class="row">

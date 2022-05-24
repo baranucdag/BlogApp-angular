@@ -35,8 +35,6 @@ import { AuthModule } from './modules/auth/auth.module';
     BlogEditComponent,
   ],
   imports: [
-    AdminModule,
-    AuthModule,
     BrowserModule,
     AppRoutingModule,
     HttpClientModule,
