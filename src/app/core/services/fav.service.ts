@@ -34,7 +34,6 @@ export class FavService {
   //delete fav by user id and blog id
   deleteById(favDeleteModel:FavDeletePostModel){
     let apiUrl = this.baseApiUrl + 'DeleteById?blogId='+favDeleteModel.blogId+'&userId='+favDeleteModel.userId;
-    console.log(favDeleteModel)
     return this.httpClient.post(apiUrl,favDeleteModel);
   }
 

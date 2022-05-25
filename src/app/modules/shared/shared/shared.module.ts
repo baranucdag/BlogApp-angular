@@ -1,15 +1,20 @@
-import { AdminModule } from './../../admin/admin.module';
-import { BlogModule } from '../../blog/blog.module';
-import { AuthModule } from './../../auth/auth.module';
+
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 
 @NgModule({
-  declarations: [],
+  declarations: [
+  ],
   imports: [
     CommonModule,
+    ReactiveFormsModule,
+    FormsModule,
+  ],
+  exports:[
+    CommonModule,
+    FormsModule,
   ]
 })
 export class SharedModule { }

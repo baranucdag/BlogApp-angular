@@ -1,3 +1,4 @@
+import { CommentDetailModel } from './../../../core/models/commentDetailModel';
 import { BlogModel } from 'src/app/core/models/blogModel';
 import { FavDeletePostModel } from './../../../core/models/favDeletePostModel';
 import { UserModel } from '../../../core/models/userModel';
@@ -24,7 +25,7 @@ export class BlogDetailComponent implements OnInit {
   id: number = 0;
   blogDetail: BlogDetailModel;
   blog: BlogModel;
-  comments: CommentModel[] = [];
+  comments: CommentDetailModel[] = [];
   favs: FavModel[] = [];
   commentPostForm: FormGroup;
   currentUserId: number;
@@ -51,8 +52,11 @@ export class BlogDetailComponent implements OnInit {
     this.getBlog()
     this.createPostCommentForm();
     this.getFavsByBlogId(this.id);
-    this.getFavCount();
     this.getCommentsByBlogId(this.id);
+    this.getFavCount();
+    setInterval(()=>{
+      this.getFavCount();
+    },100)
   }
 
   //get parametr 'id' and set it to id local variable
@@ -80,7 +84,7 @@ export class BlogDetailComponent implements OnInit {
 
   //get comments by blog id
   getCommentsByBlogId(id: number) {
-    this.commentService.getByBlogId(id).subscribe(
+    this.commentService.getCommentDetailsByBlogId(id).subscribe(
       (response) => {
         this.comments = response.data;
       },
@@ -134,11 +138,11 @@ export class BlogDetailComponent implements OnInit {
   }
 
   //delete an comment
-  deleteComment(deleteModel: CommentModel) {
-    this.commentService.deleteComment(deleteModel).subscribe(
+  deleteComment(id:number) {
+    this.commentService.deleteCommentById(id).subscribe(
       (responnse) => {
         this.toastr.info('comment deleted succesfully!');
-        console.log();
+        this.getCommentsByBlogId(this.id);
       },
       (errorResponse) => {
         this.toastr.error('comment couldnt deleted!');
@@ -147,7 +151,7 @@ export class BlogDetailComponent implements OnInit {
   }
 
   //check if current user is the owner of comment
-  isCommentOwner(comment: CommentModel) {
+  isCommentOwner(comment: CommentDetailModel) {
     if (this.currentUserId == comment.userId) {
       return true;
     }
@@ -161,8 +165,8 @@ export class BlogDetailComponent implements OnInit {
     });
   }
 
-  // create a interval to make request in given time interval
-  // intervalID: any = setInterval(this.getFavCount, 500);
+   //create a interval to make request in given time interval
+   
 
   //add fav
   addFav() {
@@ -173,7 +177,6 @@ export class BlogDetailComponent implements OnInit {
     this.favService.addFav(favModel).subscribe(
       (reponse) => {
         this.toastr.info('You have just liked blog');
-        window.location.reload();
       },
       (errorResponse) => {
         this.toastr.error('Couldnt liked blog');
@@ -190,7 +193,6 @@ export class BlogDetailComponent implements OnInit {
     this.favService.deleteById(favDeleteModel).subscribe(
       (response) => {
         this.toastr.info('Like deleted.');
-        window.location.reload();
       },
       (errorResponse) => {
         this.toastr.error('couldnt delete the fav');

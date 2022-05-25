@@ -55,7 +55,7 @@
             <div class="d-flex flex-row user-info">
               <div class="d-flex flex-column justify-content-start ml-2">
                 <span class="d-block font-weight-bold name">{{
-                  comment.userId
+                  comment.userEmail
                 }}</span
                 ><span class="date text-black-50"
                   >Shared publicly at-
@@ -64,7 +64,7 @@
               </div>
               <div id="deleteButton" *ngIf="isCommentOwner(comment)">
                 <button
-                  (click)="deleteComment(comment)"
+                  (click)="deleteComment(comment.commentId)"
                   type="button"
                   class="btn btn-primary-outline"
                 >

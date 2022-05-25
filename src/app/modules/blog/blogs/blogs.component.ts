@@ -1,16 +1,16 @@
+import { QueryParamsModel } from './../../../core/models/queryParamsModel';
+import { ToastrService } from 'ngx-toastr';
+import { AuthService } from '../../../core/services/auth.service';
+import { DetailService } from 'src/app/core/services/detail.service';
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-import { ToastrService } from 'ngx-toastr';
 import { BlogModel } from 'src/app/core/models/blogModel';
-import { QueryParamsModel } from 'src/app/core/models/queryParamsModel';
-import { AuthService } from 'src/app/core/services/auth.service';
 import { BlogService } from 'src/app/core/services/blog.service';
-import { DetailService } from 'src/app/core/services/detail.service';
 
 @Component({
   selector: 'app-blogs',
   templateUrl: './blogs.component.html',
-  styleUrls: ['./blogs.component.css']
+  styleUrls: ['./blogs.component.css'],
 })
 export class BlogsComponent implements OnInit {
   blogs: BlogModel[] = [];
@@ -50,7 +50,7 @@ export class BlogsComponent implements OnInit {
 
   //navigate to detail component by choosen blog
   onSelect(id: number) {
-    this.router.navigate(['blog/detail/' + id]);
+    this.router.navigate(['/detail/' + id]);
   }
 
   //raise the amount of blog on main page
@@ -73,7 +73,7 @@ export class BlogsComponent implements OnInit {
 
   //navigate to edit component when author of the blog click to edit button
   navigateEdit(blog: BlogModel) {
-    this.router.navigate(['blog/edit/' + blog.id]);
+    this.router.navigate(['/edit/' + blog.id]);
   }
 
   //delete given blog
@@ -89,4 +89,15 @@ export class BlogsComponent implements OnInit {
     );
   }
 
-}
+  //change sort of the blogs
+  changeSortType(){
+    if(this.sortType==true){
+      this.sortType=false
+      this.getBlogs();
+    }else{
+      this.sortType=true
+      this.getBlogs();
+    }
+  }
+
+  }

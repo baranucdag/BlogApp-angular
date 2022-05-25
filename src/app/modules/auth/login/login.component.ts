@@ -47,7 +47,7 @@ export class LoginComponent implements OnInit {
           } else {
             this.toastrService.error('Token error!');
           }
-          this.router.navigate(['blog/blogs']);
+          this.router.navigate(['']);
         },
         (responseError) => {
           this.toastrService.error(responseError.error);

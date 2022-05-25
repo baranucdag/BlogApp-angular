@@ -1,23 +1,37 @@
-import { BlogRoutingModule } from './blog-routing.module';
-import { ToastrModule } from 'ngx-toastr';
+import { FooterComponent } from './../../core/components/footer/footer.component';
+import { NaviComponent } from './../../core/components/navigation/navi.component';
+import { ReactiveFormsModule } from '@angular/forms';
+import { SharedModule } from './../shared/shared/shared.module';
+import { BlogComponent } from './blog.component';
+import { BlogsComponent } from './blogs/blogs.component';
+import { BlogEditComponent } from './blog-edit/blog-edit.component';
+import { BlogDetailComponent } from './blog-detail/blog-detail.component';
+import { AboutComponent } from './about/about.component';
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { BlogComponent } from './blog/blog.component';
-import { BlogsComponent } from './blog/blogs/blogs.component';
-import { AboutComponent } from './blog/about/about.component';
-import { BlogEditComponent } from './blog/blog-edit/blog-edit.component';
-import { BlogDetailComponent } from './blog/blog-detail/blog-detail.component';
-import { BlogAddComponent } from './blog/blog-add/blog-add.component';
+
+import { BlogRoutingModule } from './blog-routing.module';
+import { BlogAddComponent } from './blog-add/blog-add.component';
+
 
 @NgModule({
   declarations: [
-    BlogComponent,
-    BlogsComponent,
-    AboutComponent,
-    BlogEditComponent,
-    BlogDetailComponent,
     BlogAddComponent,
+    AboutComponent,
+    BlogDetailComponent,
+    BlogEditComponent,
+    BlogsComponent,
+    BlogComponent,
+    NaviComponent,
+    FooterComponent
   ],
-  imports: [CommonModule, ToastrModule, BlogRoutingModule],
+  imports: [
+    CommonModule,
+    BlogRoutingModule,
+    ReactiveFormsModule,
+    SharedModule
+  ],
+  exports:[
+  ]
 })
-export class BlogModule {}
+export class BlogModule { }

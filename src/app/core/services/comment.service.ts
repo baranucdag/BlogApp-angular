@@ -43,4 +43,10 @@ export class CommentService {
     let apiUrl = this.baseApiUrl + 'delete';
     return this.httpClient.post(apiUrl,model);
   }
+
+  //delete comment by id
+  deleteCommentById(id:number){
+    let apiUrl = this.baseApiUrl + 'DeleteById?id='+id;
+    return this.httpClient.post(apiUrl,id)
+  }
 }
