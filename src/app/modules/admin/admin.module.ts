@@ -10,6 +10,8 @@ import { BlogListComponent } from './admin/blog-list/blog-list.component';
 import { UserListComponent } from './admin/user-list/user-list.component';
 import { CategoryListComponent } from './admin/category-list/category-list.component';
 import { ModalModule } from 'ngx-bootstrap/modal';
+import { OperationClaimComponent } from './admin/ClaimTransactions/operation-claim/operation-claim.component';
+import { UserOperationClaimsComponent } from './admin/ClaimTransactions/user-operation-claims/user-operation-claims.component';
 
 @NgModule({
   declarations: [
@@ -20,6 +22,8 @@ import { ModalModule } from 'ngx-bootstrap/modal';
     BlogListComponent,
     UserListComponent,
     CategoryListComponent,
+    OperationClaimComponent,
+    UserOperationClaimsComponent,
   ],
   imports: [
     ReactiveFormsModule,

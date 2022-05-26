@@ -1,3 +1,5 @@
+import { UserOperationClaimsComponent } from './admin/ClaimTransactions/user-operation-claims/user-operation-claims.component';
+import { OperationClaimComponent } from './admin/ClaimTransactions/operation-claim/operation-claim.component';
 import { CategoryListComponent } from './admin/category-list/category-list.component';
 import { AdminGuard } from '../../core/guards/admin.guard';
 import { UserListComponent } from './admin/user-list/user-list.component';
@@ -17,7 +19,9 @@ const routes: Routes = [
       },
       { path: 'blogs', component: BlogListComponent },
       { path: 'users', component: UserListComponent },
-      {path:'categories',component:CategoryListComponent}
+      {path:'categories',component:CategoryListComponent},
+      {path:'claims',component:OperationClaimComponent},
+      {path:'authassigments',component:UserOperationClaimsComponent}
     ],
   },
 ];
