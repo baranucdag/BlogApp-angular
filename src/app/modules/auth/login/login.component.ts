@@ -11,8 +11,6 @@ import { AuthService } from 'src/app/core/services/auth.service';
 })
 export class LoginComponent implements OnInit {
   test : Date = new Date();
-  focus: any;
-  focus1:any;
   loginForm: FormGroup;
   constructor(
     private formBuilder: FormBuilder,
@@ -22,7 +20,6 @@ export class LoginComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
-    console.log('sad')
     this.createLoginForm();
   }
 

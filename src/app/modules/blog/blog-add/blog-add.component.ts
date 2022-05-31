@@ -1,3 +1,4 @@
+import { Router } from '@angular/router';
 import { CategoryService } from './../../../core/services/category.service';
 import { CategoryModel } from './../../../core/models/categoryModel';
 import { AuthService } from '../../../core/services/auth.service';
@@ -14,7 +15,7 @@ import { BlogService } from 'src/app/core/services/blog.service';
 export class BlogAddComponent implements OnInit {
   blogAddForm: FormGroup;
   currentUserId: number;
-  selectedFile=null;
+  selectedFile:File;
   categories: CategoryModel[] = [];
 
   constructor(
@@ -22,6 +23,7 @@ export class BlogAddComponent implements OnInit {
     private toastService: ToastrService,
     private formBuilder: FormBuilder,
     private authService: AuthService,
+    private router:Router,
     private categoryService: CategoryService
   ) {}
 
@@ -44,9 +46,10 @@ export class BlogAddComponent implements OnInit {
   addBlog() {
     if (this.blogAddForm.valid) {
       let blogModel = Object.assign({}, this.blogAddForm.value);
-      this.blogService.addBlog(blogModel).subscribe(
+      this.blogService.addBlog(this.selectedFile,blogModel).subscribe(
         (response) => {
           this.toastService.info('Blog added succesfully');
+          this.router.navigate([''])
         },
         (responseError) => {
           this.toastService.error('Blog Couldnt added');
@@ -67,5 +70,9 @@ export class BlogAddComponent implements OnInit {
     this.categoryService.getAllCategories().subscribe((response) => {
       this.categories = response.data;
     });
+  }
+
+  onFileSelected(event: any) {
+    this.selectedFile = event.target.files[0];
   }
 }

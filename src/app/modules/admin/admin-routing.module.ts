@@ -1,3 +1,4 @@
+import { UserOperationClaimAddComponent } from './admin/ClaimTransactions/user-operation-claim-add/user-operation-claim-add.component';
 import { UserOperationClaimsComponent } from './admin/ClaimTransactions/user-operation-claims/user-operation-claims.component';
 import { OperationClaimComponent } from './admin/ClaimTransactions/operation-claim/operation-claim.component';
 import { CategoryListComponent } from './admin/category-list/category-list.component';
@@ -11,7 +12,8 @@ import { RouterModule, Routes } from '@angular/router';
 const routes: Routes = [
   {
     path: '',
-    component: AdminComponent,canActivate:[AdminGuard],
+    component: AdminComponent,
+    canActivate: [AdminGuard],
     children: [
       {
         path: '',
@@ -19,9 +21,10 @@ const routes: Routes = [
       },
       { path: 'blogs', component: BlogListComponent },
       { path: 'users', component: UserListComponent },
-      {path:'categories',component:CategoryListComponent},
-      {path:'claims',component:OperationClaimComponent},
-      {path:'authassigments',component:UserOperationClaimsComponent}
+      { path: 'categories', component: CategoryListComponent },
+      { path: 'claims', component: OperationClaimComponent },
+      { path: 'authassignments', component: UserOperationClaimsComponent },
+      { path: 'auth/add', component: UserOperationClaimAddComponent },
     ],
   },
 ];

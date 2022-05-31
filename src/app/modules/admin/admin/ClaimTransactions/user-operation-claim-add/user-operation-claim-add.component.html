@@ -1,0 +1,25 @@
+<div style="margin-left: 390px; margin-bottom: 15px">
+  set An authorization Assignment
+</div>
+<div class="container">
+  <form [formGroup]="addForm">
+    <label>Choose user</label>
+    <select class="form-select" formControlName="userId">
+      <option *ngFor="let user of users" [ngValue]="user.id">
+        
+        {{ user.email }}
+      </option>
+    </select>
+
+    <label> Choose claim</label>
+    <select class="form-select" formControlName="operationClaimId">
+      <option *ngFor="let operationClaim of operationClaims" [ngValue]="operationClaim.id">
+        
+        {{ operationClaim.name }}
+      </option>
+    </select>
+  </form>
+  <div style="margin-top: 20px">
+    <button class="btn btn-primary" (click)="Add()">Add User Operation Claim</button>
+  </div>
+</div>

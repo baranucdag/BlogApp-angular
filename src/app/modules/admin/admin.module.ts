@@ -12,6 +12,7 @@ import { CategoryListComponent } from './admin/category-list/category-list.compo
 import { ModalModule } from 'ngx-bootstrap/modal';
 import { OperationClaimComponent } from './admin/ClaimTransactions/operation-claim/operation-claim.component';
 import { UserOperationClaimsComponent } from './admin/ClaimTransactions/user-operation-claims/user-operation-claims.component';
+import { UserOperationClaimAddComponent } from './admin/ClaimTransactions/user-operation-claim-add/user-operation-claim-add.component';
 
 @NgModule({
   declarations: [
@@ -24,6 +25,7 @@ import { UserOperationClaimsComponent } from './admin/ClaimTransactions/user-ope
     CategoryListComponent,
     OperationClaimComponent,
     UserOperationClaimsComponent,
+    UserOperationClaimAddComponent,
   ],
   imports: [
     ReactiveFormsModule,

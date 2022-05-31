@@ -54,7 +54,7 @@ export class RegisterComponent implements OnInit {
           (response) => {
             console.log(response.message);
             this.toastrService.info('registered succesfully!');
-            this.router.navigate(['/login']);
+            this.router.navigate(['/auth/login']);
           },
           (errorResponse) => {
             console.log(errorResponse);

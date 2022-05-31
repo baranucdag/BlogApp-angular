@@ -1,3 +1,4 @@
+import { ListResponsModel } from './../models/listResponseModel';
 import { Observable } from 'rxjs';
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
@@ -32,15 +33,19 @@ export class OperationClaimService {
   }
 
   //add a claim model
-  addClaim(claimName:string) {
+  addClaim(name:string) {
     let apiUrl = this.baseApiUrl + 'Add';
-    return this.httpClient.post(apiUrl,claimName)
+    return this.httpClient.post(apiUrl,name)
   } 
-
 
   //delete a claim model
   DeleteClaim(claimModel:ClaimModel) {
     let apiUrl = this.baseApiUrl + 'Delete';
     return this.httpClient.post(apiUrl,claimModel)
   } 
+
+  GetAllClaims():Observable<ListResponsModel<ClaimModel>>{
+    let apiUrl = this.baseApiUrl + 'GetAll';
+    return this.httpClient.get<ListResponsModel<ClaimModel>>(apiUrl);
+  }
 }

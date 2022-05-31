@@ -2,10 +2,9 @@
   <button
     style="margin-left: 10px"
     class="btn btn-primary"
-    data-bs-toggle="modal"
-    data-bs-target="#addCategoryModal"
+    routerLink="/admin/auth/add"
   >
-    <i class="bi bi-plus-square"></i> Set An authorization Assignment
+    <i class="bi bi-plus-square"></i> set An authorization Assignment
   </button>
 </div>
 <div
@@ -41,11 +40,7 @@
         <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">
           Close
         </button>
-        <button
-          type="button"
-          class="btn btn-primary"
-          data-bs-dismiss="modal"
-        >
+        <button type="button" class="btn btn-primary" data-bs-dismiss="modal">
           Save changes
         </button>
       </div>
@@ -59,7 +54,7 @@
       <th scope="col">Id</th>
       <th scope="col">User Email</th>
       <th scope="col">Claim Name</th>
-      <th>Delete Claim</th>
+      <th scope="col">Claim Operations</th>
     </tr>
   </thead>
   <tbody>
@@ -69,6 +64,13 @@
       <td>{{ item.email }}</td>
       <td>{{ item.claimName }}</td>
       <td>
+        <button
+          class="btn btn-primary mx-1"
+          data-bs-toggle="modal"
+          data-bs-target="#addCategoryModal"
+        >
+          Update
+        </button>
         <button class="btn btn-danger mx-1" (click)="delete(item)">
           Delete
         </button>

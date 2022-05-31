@@ -236,10 +236,4 @@ export class BlogDetailComponent implements OnInit {
     }
     return
   }
-
-  onFileSelected(event: any) {
-    this.selectedFile = event.target.files[0];
-  }
-
-  onUpload() {}
 }

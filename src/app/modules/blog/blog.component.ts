@@ -37,10 +37,9 @@ export class BlogComponent implements OnInit {
     });
   }
 
-  //task:eğer default image dönerse blog uygulamasının image ini göster
   getBackground(id: number) {
     if (this.blogId != null && this.blogId != undefined) {
-      return this.imageService.getByBlogId(id).subscribe((response) => {
+      return this.blogService.getBlogById(id).subscribe((response) => {
         this.imageDirectoryPath =
           'https://localhost:44313/uploads/images/' + response.data.imagePath;
       });

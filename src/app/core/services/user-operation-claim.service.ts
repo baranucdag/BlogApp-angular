@@ -21,13 +21,13 @@ export class UserOperationClaimService {
     return this.httClient.get<ListResponsModel<UserOperationCLaimModel>>(apiUrl);
   }
 
-  add(userId:number,operationClaimId:number){
-    let apiUrl = this.baseAPiUrl + ''
+  add(model:UserOperationCLaimModel){
+    let apiUrl = this.baseAPiUrl + 'Add';
+    return this.httClient.post(apiUrl,model);
   }
 
   delete(model:UserOperationCLaimModel){
     let apiUrl = this.baseAPiUrl + 'delete';
     return this.httClient.post(apiUrl,model);
   }
-
 }

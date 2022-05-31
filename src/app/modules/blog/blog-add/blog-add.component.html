@@ -1,25 +1,24 @@
 <div class="container">
   <form [formGroup]="blogAddForm">
-    <div style="margin-bottom: 10px">
-      <div class="row">
-        <div class="col-md-2" *ngFor="let category of categories">
-          <div class="card">
-            <div class="card-body" style="background-color: rgb(100, 152, 221);">
-              <div style="text-align: center;">{{ category.categoryName }}</div>
-              <div style="text-align: center;">{{ category.id }}</div>
-            </div>
-          </div>
-        </div>
+    <div style="margin-top: 35px">
+      <h5 style="text-align: center">Image upload</h5>
+      <div class="mb-3">
+        <input
+          class="form-control"
+          type="file"
+          id="formFile"
+          (change)="onFileSelected($event)"
+        />
+        <button class="btn btn-primary">upload</button>
       </div>
     </div>
-
     <div class="form-label">
-      <input
-        type="text"
-        formControlName="categoryId"
-        class="form-control"
-        placeholder="Category ID"
-      />
+      <span class="input-group-text"> Category </span>
+      <select class="form-select" formControlName="categoryId">
+        <option *ngFor="let category of categories" [ngValue]="category.id">
+          {{ category.categoryName }}
+        </option>
+      </select>
     </div>
     <div class="form-label">
       <span class="input-group-text"> Title </span>
@@ -40,14 +39,14 @@
         aria-label="With textarea"
       ></textarea>
     </div>
-
-    <button
-      style="background-color: #586181"
-      class="w-100 btn btn-lg btn-primary"
-      type="submit"
-      (click)="addBlog()"
-    >
-      Save Blog
-    </button>
   </form>
+
+  <button
+    style="background-color: #586181"
+    class="w-100 btn btn-lg btn-primary"
+    type="submit"
+    (click)="addBlog()"
+  >
+    Save Blog
+  </button>
 </div>

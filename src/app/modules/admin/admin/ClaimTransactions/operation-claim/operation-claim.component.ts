@@ -28,7 +28,7 @@ export class OperationClaimComponent implements OnInit {
 
   createClaimAddForm() {
     this.claimAddForm = this.form.group({
-      claimName: ['', Validators.required],
+      name: ['', Validators.required],
     });
   }
 
@@ -37,22 +37,20 @@ export class OperationClaimComponent implements OnInit {
       .getClaimsPaged(pageNumber, pageSize)
       .subscribe((response) => {
         this.claims = response;
-        console.log(response)
       });
   }
 
   addClaim() {
-    if(this.claimAddForm.valid){
-      let claimName = Object.assign({},this.claimAddForm.value)
-      this.operClaimService.addClaim(claimName).subscribe(
+      let name = Object.assign({},this.claimAddForm.value)
+      this.operClaimService.addClaim(name).subscribe(
         (response) => {
           this.toastr.info('claim added');
+          this.getClaimsPaged(this.pageNumber,this.pageSize)
         },
         (errorResponse) => {
           this.toastr.error('claim couldnt added!');
         }
       );
-    }
     
   }
 
@@ -60,6 +58,7 @@ export class OperationClaimComponent implements OnInit {
     this.operClaimService.DeleteClaim(claimMode).subscribe(
       (response) => {
         this.toastr.info('claim deleted');
+        this.getClaimsPaged(this.pageNumber,this.pageSize);
       },
       (errorResponse) => {
         this.toastr.error('claim couldnt deleted');

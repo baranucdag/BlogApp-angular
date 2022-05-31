@@ -4,6 +4,6 @@ export interface BlogModel{
     categoryId:number;
     blogTitle:string;
     blogContent:string;
-    likedCount:number;
+    imagePath:string;
     createdAt:Date;
 }
