@@ -14,6 +14,10 @@ export class BlogListComponent implements OnInit {
   updateForm: FormGroup;
   pageNumber:number=1;
   pageSize:number=5;
+  baran:string;
+  blogTitle:any;
+  blogContent:any;
+
 
   blogs: BlogModel[] = [];
   constructor(
@@ -47,7 +51,6 @@ export class BlogListComponent implements OnInit {
           });
         });
     }
-      
   }
 
   update() {
@@ -91,7 +94,6 @@ export class BlogListComponent implements OnInit {
   getBlogsPaginated(pageNumber:number,pageSize:number){
     this.blogService.getBlogsPaginated(pageNumber,pageSize).subscribe((response)=>{
       this.blogs=response;
-      console.log(response)
     })
   }
 

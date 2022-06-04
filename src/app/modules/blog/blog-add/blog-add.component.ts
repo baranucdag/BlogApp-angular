@@ -31,6 +31,7 @@ export class BlogAddComponent implements OnInit {
     this.getCurrentUser();
     this.createBlogAddForm();
     this.getCategories();
+    this.checkIfValid();
   }
 
   createBlogAddForm() {
@@ -46,12 +47,19 @@ export class BlogAddComponent implements OnInit {
   addBlog() {
     if (this.blogAddForm.valid) {
       let blogModel = Object.assign({}, this.blogAddForm.value);
-      this.blogService.addBlog(this.selectedFile,blogModel).subscribe(
+      const sendForm = new FormData();
+      sendForm.append('UserId',JSON.stringify(blogModel.userId));
+      sendForm.append('CategoryId',JSON.stringify(blogModel.categoryId));
+      sendForm.append('BlogTitle',blogModel.blogTitle);
+      sendForm.append('BlogContent',blogModel.blogContent);
+      sendForm.append('Image',this.selectedFile);
+      this.blogService.addBlog( sendForm).subscribe(
         (response) => {
           this.toastService.info('Blog added succesfully');
           this.router.navigate([''])
         },
         (responseError) => {
+          console.log(sendForm)
           this.toastService.error('Blog Couldnt added');
         }
       );
@@ -74,5 +82,13 @@ export class BlogAddComponent implements OnInit {
 
   onFileSelected(event: any) {
     this.selectedFile = event.target.files[0];
+  }
+
+
+  checkIfValid(){
+    if(this.blogAddForm.valid){
+      return true
+    }
+    else return false
   }
 }

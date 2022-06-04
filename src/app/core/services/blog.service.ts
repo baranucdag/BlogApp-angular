@@ -13,7 +13,6 @@ import { BlogDetailModel } from '../models/blogDetailModel';
 })
 export class BlogService {
   baseApiUrl = 'https://localhost:44313/api/blogs/';
-  a:any;
 
   constructor(private httClient: HttpClient) {}
 
@@ -51,21 +50,15 @@ export class BlogService {
   }
 
   //add a blog
-  addBlog(file:File,blogModel: BlogModel) {
+  addBlog(sendForm:any) {
     let apiUrl ='https://localhost:44313/api/blogs/add'
-    const sendForm = new FormData();
-    sendForm.append('UserId',JSON.stringify(blogModel.userId));
-    sendForm.append('CategoryId',JSON.stringify(blogModel.categoryId));
-    sendForm.append('BlogTitle',blogModel.blogTitle);
-    sendForm.append('BlogContent',blogModel.blogContent);
-    sendForm.append('Image',file);
     return this.httClient.post(apiUrl, sendForm);
   }
 
   //update blog
-  updateBlog(blogModel: BlogModel) {
+  updateBlog(sendForm: any) {
     let apiUrl = this.baseApiUrl + 'update';
-    return this.httClient.post(apiUrl, blogModel);
+    return this.httClient.post(apiUrl, sendForm);
   }
 
   //delete blog

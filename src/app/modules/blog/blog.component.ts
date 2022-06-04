@@ -31,7 +31,7 @@ export class BlogComponent implements OnInit {
         this.getBackground(this.blogId);
       }else{
         this.imageDirectoryPath = 'assets/images/cover.jpg';
-        this.blogHeader='CREATE BLOG'
+        this.blogHeader='Spaced Blog'
         this.cdref.detectChanges();   //to avoid 'Expression has changed after it was checked' error.
       }
     });

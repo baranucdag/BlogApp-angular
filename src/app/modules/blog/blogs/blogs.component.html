@@ -19,38 +19,47 @@
       Search
     </button>
   </div>
-  <div style="margin-left: 500px; margin-top: 10px; ">
-    <button class="btn-primary" style="border-radius: 3px">
+  <div style="margin-left: 500px; margin-top: 10px">
+    <button class="btn-primary" style="border-radius: 3px; margin-bottom: 12px">
       <a class="bi bi-sort-up" (click)="changeSortType()">Sort By Date</a>
     </button>
   </div>
-
+  <hr/>
   <div class="row">
-    <div class="col-lg-8 col-md-10 mx-auto" *ngIf="blogs">
+    <div class="col-lg-10 col-md-10 mx-auto" *ngIf="blogs">
       <div *ngFor="let blog of blogs; let i = index">
         <div *ngIf="i < blogCount">
           <div class="post-preview">
-            <a (click)="onSelect(blog.id)" class="pointer">
-              <h2 class="post-title">
-                {{
-                  blog.blogTitle.length > 38
-                    ? blog.blogTitle.substring(0, 40) + "..."
-                    : blog.blogTitle
-                }}
-              </h2>
-              <h3 class="post-subtitle">
-                {{
-                  blog.blogContent.length > 48
-                    ? blog.blogContent.substring(0, 70) + "..."
-                    : blog.blogContent
-                }}
-              </h3>
-              <p class="post-meta">
-                Created At : {{ blog.createdAt | date: "mediumDate" }}
-                <a id="isAuthor" *ngIf="isAuthor(blog)">You are the author.</a>
-              </p>
+            <a (click)="onSelect(blog.id)" class="pointer" style="margin-bottom:0px;">
+              <div class="container">
+                <div class="row">
+                  <div class="col-4 box box-1"> <img [src]="getImage(blog.imagePath)" [alt]="getImage(blog.imagePath)"></div>
+                  <div class="col-8">
+                    <h2 class="post-title">
+                      {{
+                        blog.blogTitle.length > 30
+                          ? blog.blogTitle.substring(0, 65) + "..."
+                          : blog.blogTitle
+                      }}
+                    </h2>
+                    <h3 class="post-subtitle" style="font-weight: 300;">
+                      {{
+                        blog.blogContent.length > 50
+                          ? blog.blogContent.substring(0, 80) + "..."
+                          : blog.blogContent
+                      }}
+                    </h3>
+                    <p class="post-meta">
+                      Created At : {{ blog.createdAt | date: "mediumDate" }}
+                      <a id="isAuthor" *ngIf="isAuthor(blog)"
+                        >You are the author.</a
+                      >
+                    </p>
+                  </div>
+                </div>
+              </div>
             </a>
-            <p *ngIf="isAuthor(blog)">
+            <p *ngIf="isAuthor(blog)" style="margin-left: 25px; margin-top: 0px; ">
               <a class="btn btn-info" (click)="navigateEdit(blog)">Update</a>
               <a (click)="delete(blog)" class="btn btn-danger">Delete</a>
             </p>

@@ -13,18 +13,21 @@
       </tr>
     </thead>
     <tbody>
+      <form #form="ngForm">
+        
+      </form>
         <tr *ngFor="let blog of blogs">
         <td>{{ blog.userId }}</td>
 
         <td *ngIf="blog.id == selectedBlogId" else categoryId>
-          <input class="form-control" formControlName="categoryId" value="{{ blog.categoryId }}" size="4"  />
+          <input class="form-control"  value="{{ blog.categoryId }}"/>
         </td>
         <td #categoryId *ngIf="blog.id != selectedBlogId">
           {{ blog.categoryId }}
         </td>
 
         <td *ngIf="blog.id == selectedBlogId" else blogTitle>
-          <input class="form-control" formControlName="blogtitle" value="{{ blog.blogTitle }}" />
+          <input class="form-control"  value="{{ blog.blogTitle }}"  size="4"   />
         </td>
         <td #blogTite *ngIf="blog.id != selectedBlogId">
           {{
@@ -35,7 +38,7 @@
         </td>
 
         <td *ngIf="blog.id == selectedBlogId" else blogContent>
-          <input class="form-control" formControlName="blogContent" value="{{ blog.blogContent }}" size="25"/>
+          <input class="form-control"  value="{{ blog.blogContent }}" size="25"/>
         </td>
         <td #blogContent *ngIf="blog.id!=selectedBlogId">
           {{

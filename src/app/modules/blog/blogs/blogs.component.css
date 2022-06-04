@@ -125,3 +125,12 @@ a {
   -moz-transition: all 0.2s;
   transition: all 0.2s;
 }
+
+.box img {
+  width: 85%;
+  height: 85%;
+}
+
+.box1 img {
+  object-fit: cover;
+}

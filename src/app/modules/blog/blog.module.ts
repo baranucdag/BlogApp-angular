@@ -28,7 +28,6 @@ import { BlogAddComponent } from './blog-add/blog-add.component';
   imports: [
     CommonModule,
     BlogRoutingModule,
-    ReactiveFormsModule,
     SharedModule
   ],
   exports:[

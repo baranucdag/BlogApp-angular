@@ -20,6 +20,7 @@ export class BlogsComponent implements OnInit {
   search = '';
   blogHeader: any = 'Blog Application';
   currentUserId: any;
+  imagePath:string="https://localhost:44313/uploads/images/";
 
   constructor(
     private blogService: BlogService,
@@ -100,4 +101,14 @@ export class BlogsComponent implements OnInit {
     }
   }
 
+  //get image of the blog
+  getImage(path:string){
+    if(path != null){
+      return this.imagePath+path;
+    }
+    else return this.imagePath + 'DefaultImage.jpg';
   }
+
+  }
+
+ 

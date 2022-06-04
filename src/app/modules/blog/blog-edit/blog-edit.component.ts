@@ -1,3 +1,5 @@
+import { CategoryModel } from './../../../core/models/categoryModel';
+import { CategoryService } from './../../../core/services/category.service';
 import { BlogModel } from '../../../core/models/blogModel';
 import { ActivatedRoute, Router } from '@angular/router';
 import { ToastrModule, ToastrService } from 'ngx-toastr';
@@ -16,19 +18,24 @@ export class BlogEditComponent implements OnInit {
   categoryId: number;
   blogTitle: string;
   blogContent: string;
+  categories: CategoryModel[];
+  imagePath: string = 'https://localhost:44313/uploads/images/';
+  selectedFile: File;
+  currentImage: any;
+
   constructor(
     private blogService: BlogService,
+    private categoryService: CategoryService,
     private formBuilder: FormBuilder,
     private route: ActivatedRoute,
-    private router:Router,
+    private router: Router,
     private toasrt: ToastrService
-  ) {
-    this.getBlogById(7);
-  }
+  ) {}
 
   ngOnInit(): void {
     this.getParam();
     this.getBlogById(this.id);
+    this.getCategories();
   }
 
   getParam() {
@@ -42,6 +49,10 @@ export class BlogEditComponent implements OnInit {
   getBlogById(id: number) {
     this.blogService.getBlogById(id).subscribe(
       (response) => {
+        if (response.data.imagePath) {
+          this.imagePath = this.imagePath + response.data.imagePath;
+          this.currentImage = response.data.imagePath;
+        }
         const blogModel = <BlogModel>response.data;
         this.blogEditForm = this.formBuilder.group({
           id: blogModel.id,
@@ -58,24 +69,37 @@ export class BlogEditComponent implements OnInit {
     );
   }
 
-  //refresh location
-  refresh(): void {
-    window.location.reload();
-  }
-
   //update blog
   update() {
     if (this.blogEditForm.valid) {
       let updatedModel: BlogModel = Object.assign({}, this.blogEditForm.value);
-      this.blogService.updateBlog(updatedModel).subscribe(
+      console.log(this.selectedFile);
+      const sendForm = new FormData();
+      sendForm.append('Id', JSON.stringify(this.id));
+      sendForm.append('UserId', JSON.stringify(updatedModel.userId));
+      sendForm.append('CategoryId', JSON.stringify(updatedModel.categoryId));
+      sendForm.append('BlogTitle', updatedModel.blogTitle);
+      sendForm.append('BlogContent', updatedModel.blogContent);
+      sendForm.append('Image', this.selectedFile);
+      this.blogService.updateBlog(sendForm).subscribe(
         (response) => {
           this.toasrt.info('Blog updated succesfully!', updatedModel.blogTitle);
-          this.router.navigate(['/blog/detail/'+updatedModel.id])
+          this.router.navigate(['/detail/' + this.id]);
         },
         (responseError) => {
           this.toasrt.error("Blog couldn't updated!");
         }
       );
     }
+  }
+
+  getCategories() {
+    this.categoryService.getAllCategories().subscribe((response) => {
+      this.categories = response.data;
+    });
+  }
+
+  onFileSelected(event: any) {
+    this.selectedFile = event.target.files[0];
   }
 }

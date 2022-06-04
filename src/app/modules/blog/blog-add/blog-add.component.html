@@ -1,15 +1,15 @@
 <div class="container">
   <form [formGroup]="blogAddForm">
-    <div style="margin-top: 35px">
-      <h5 style="text-align: center">Image upload</h5>
-      <div class="mb-3">
-        <input
-          class="form-control"
-          type="file"
-          id="formFile"
-          (change)="onFileSelected($event)"
-        />
-        <button class="btn btn-primary">upload</button>
+        <div style="margin-top: 35px; ">
+          <h5 style="text-align: center">Image upload</h5>
+          <div class="mb-3">
+            <input
+              class="form-control"
+              type="file"
+              id="formFile"
+              (change)="onFileSelected($event)"
+            />
+            <button class="btn btn-primary">upload</button>
       </div>
     </div>
     <div class="form-label">
@@ -45,6 +45,7 @@
     style="background-color: #586181"
     class="w-100 btn btn-lg btn-primary"
     type="submit"
+    [disabled]="!checkIfValid()"
     (click)="addBlog()"
   >
     Save Blog

@@ -32,7 +32,7 @@ export class LoginGuard implements CanActivate {
       return true;
     } else {
       this.toastrService.error('Please login');
-      this.router.navigate(['login']);
+      this.router.navigate(['auth/login']);
       return false;
     }
   }

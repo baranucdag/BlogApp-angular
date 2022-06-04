@@ -1,3 +1,4 @@
+import { SharedModule } from './../shared/shared/shared.module';
 import { ReactiveFormsModule } from '@angular/forms';
 import { AdminRoutingModule } from './admin-routing.module';
 import { NgModule } from '@angular/core';
@@ -28,9 +29,9 @@ import { UserOperationClaimAddComponent } from './admin/ClaimTransactions/user-o
     UserOperationClaimAddComponent,
   ],
   imports: [
-    ReactiveFormsModule,
     CommonModule,
     AdminRoutingModule,
+    SharedModule,
     ModalModule.forRoot(),
   ],
 })
