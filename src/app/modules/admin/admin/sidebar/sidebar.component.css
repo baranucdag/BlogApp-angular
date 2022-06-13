@@ -15,3 +15,7 @@
 a,i,span {
   color: #ffff;
 }
+
+.active-list-item {
+  color: #0c1027 !important; /* Note: You could also use a custom theme */
+}

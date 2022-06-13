@@ -4,8 +4,8 @@
   >
     <thead>
       <tr>
-        <th scope="col">User Id</th>
-        <th scope="col">Category Id</th>
+        <th scope="col">User Email</th>
+        <th scope="col">Category Name</th>
         <th scope="col">Blog Title</th>
         <th scope="col">Blog Content</th>
         <th scope="col">Created At</th>
@@ -16,20 +16,17 @@
       <form #form="ngForm">
         
       </form>
-        <tr *ngFor="let blog of blogs">
-        <td>{{ blog.userId }}</td>
+        <tr *ngFor="let blog of blogDetails">
+        <td>{{ blog.email }}</td>
 
-        <td *ngIf="blog.id == selectedBlogId" else categoryId>
-          <input class="form-control"  value="{{ blog.categoryId }}"/>
-        </td>
-        <td #categoryId *ngIf="blog.id != selectedBlogId">
-          {{ blog.categoryId }}
+        <td >
+          {{ blog.categoryName }}
         </td>
 
-        <td *ngIf="blog.id == selectedBlogId" else blogTitle>
-          <input class="form-control"  value="{{ blog.blogTitle }}"  size="4"   />
+        <td *ngIf="blog.blogId == selectedBlogId" else blogTitle>
+          <input class="form-control"  [(ngModel)]="blogTitle"  size="4"   />
         </td>
-        <td #blogTite *ngIf="blog.id != selectedBlogId">
+        <td #blogTite *ngIf="blog.blogId != selectedBlogId">
           {{
             blog.blogTitle.length > 15
               ? blog.blogTitle.substring(0, 35) + "..."
@@ -37,10 +34,10 @@
           }}
         </td>
 
-        <td *ngIf="blog.id == selectedBlogId" else blogContent>
-          <input class="form-control"  value="{{ blog.blogContent }}" size="25"/>
+        <td *ngIf="blog.blogId == selectedBlogId" else blogContent>
+          <input class="form-control"   [(ngModel)]="blogContent"  size="25"/>
         </td>
-        <td #blogContent *ngIf="blog.id!=selectedBlogId">
+        <td #blogContent *ngIf="blog.blogId!=selectedBlogId">
           {{
             blog.blogContent.length > 25
               ? blog.blogContent.substring(0, 45) + "..."
@@ -58,13 +55,13 @@
           <button
             class="btn btn-primary mx-1"
             (click)="navigateEdit(blog)"
-            *ngIf="blog.id != selectedBlogId"
+            *ngIf="blog.blogId != selectedBlogId"
           >
             Update
           </button>
           <button
             class="btn btn-primary mx-1"
-            *ngIf="blog.id == selectedBlogId"
+            *ngIf="blog.blogId == selectedBlogId"
             (click)="update()"
           >
             Save

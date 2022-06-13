@@ -38,8 +38,8 @@ export class BlogAddComponent implements OnInit {
     this.blogAddForm = this.formBuilder.group({
       userId: this.currentUserId,
       categoryId: ['', Validators.required],
-      blogTitle: ['', Validators.required],
-      blogContent: ['', Validators.required],
+      blogTitle: ['',Validators.required, Validators.minLength(25),Validators.maxLength(500)],
+      blogContent: ['',Validators.required, Validators.minLength(55),Validators.maxLength(2500)],
     });
   }
 
@@ -83,7 +83,6 @@ export class BlogAddComponent implements OnInit {
   onFileSelected(event: any) {
     this.selectedFile = event.target.files[0];
   }
-
 
   checkIfValid(){
     if(this.blogAddForm.valid){

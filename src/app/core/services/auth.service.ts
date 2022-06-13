@@ -19,7 +19,12 @@ export class AuthService {
 
   baseApiUrl = 'https://localhost:44313/api/auth/';
 
-  constructor(private httpClient: HttpClient,private localStorageService:LocalStorageService) {this.setUserStats()}
+  constructor(
+    private httpClient: HttpClient,
+    private localStorageService: LocalStorageService
+  ) {
+    this.setUserStats()
+  }
 
   login(loginModel: LoginModel): Observable<SingleResponseModel<TokenModel>> {
     let apiUrl: string = this.baseApiUrl + 'login';
@@ -30,7 +35,7 @@ export class AuthService {
   }
 
   logout() {
-    this.localStorageService.Remove("token");
+    this.localStorageService.Remove('token');
   }
 
   register(
@@ -64,7 +69,7 @@ export class AuthService {
     return this.currentUserId;
   }
 
-  async setUserStats() {
+  setUserStats() {
     if (this.isAuthenticated()) {
       this.setCurrentUserId();
       this.setRoles();

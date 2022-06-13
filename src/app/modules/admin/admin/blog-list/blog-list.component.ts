@@ -1,3 +1,4 @@
+import { BlogDetailModel } from './../../../../core/models/blogDetailModel';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { BlogModel } from '../../../../core/models/blogModel';
 import { ToastrService } from 'ngx-toastr';
@@ -10,54 +11,43 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./blog-list.component.css'],
 })
 export class BlogListComponent implements OnInit {
+  pageNumber: number = 1;
   selectedBlogId: number = 0;
-  updateForm: FormGroup;
-  pageNumber:number=1;
-  pageSize:number=5;
-  baran:string;
-  blogTitle:any;
-  blogContent:any;
-
+  pageSize: number = 5;
+  baran: string;
+  blogTitle: string;
+  selectedBlog?: BlogDetailModel;
+  blogContent: string;
+  categoryId: any;
+  blogDetails:BlogDetailModel[]=[];
 
   blogs: BlogModel[] = [];
   constructor(
     private blogService: BlogService,
     private toastr: ToastrService,
-    private formBuilder: FormBuilder
   ) {}
 
   ngOnInit(): void {
-    this.getBlogsPaginated(this.pageNumber,this.pageSize);
-    this.blogUpdateForm();
+    this.getBlogsPaginated(this.pageNumber, this.pageSize);
+    this.getBlogDetails()
   }
 
-  blogUpdateForm() {
-    if (
-      this.selectedBlogId != null &&
-      this.selectedBlogId != undefined &&
-      this.selectedBlogId != 0
-    ){
-      this.blogService
-        .getBlogById(this.selectedBlogId)
-        .subscribe((response) => {
-          const blogModel = <BlogModel>response.data;
-          this.updateForm = this.formBuilder.group({
-            id: blogModel.id,
-            userId: blogModel.userId,
-            createdAt: blogModel.createdAt,
-            categoryId: [blogModel.categoryId,Validators.required],
-            blogtitle: [blogModel.blogTitle,Validators.required],
-            blogContent: [blogModel.blogContent,Validators.required],
-          });
-        });
-    }
-  }
 
   update() {
-    let updatedModel: BlogModel = Object.assign({}, this.updateForm.value);
+    let model = {...this.selectedBlog,blogTitle:this.blogTitle,blogContent:this.blogContent};
+    console.log(model)
+    const updatedModel = new FormData();
+    updatedModel.append('Id', JSON.stringify(model.blogId));
+    updatedModel.append('UserId', JSON.stringify(model.userId));
+    updatedModel.append('CategoryId', JSON.stringify(model.categoryId));
+    updatedModel.append('BlogTitle', model.blogTitle);
+    updatedModel.append('BlogContent', model.blogContent);
+    console.log(updatedModel)
     this.blogService.updateBlog(updatedModel).subscribe(
       (response) => {
         this.toastr.info('Blog updated.');
+        this.selectedBlogId = 0;
+        this.getBlogDetails();
       },
       (responseError) => {
         this.toastr.error("blog coulnd't updated!");
@@ -65,19 +55,29 @@ export class BlogListComponent implements OnInit {
     );
   }
 
-  //get all blogs from database
-  getBlogs() {
-    this.blogService.getAll().subscribe((response) => {
-     // this.blogs = response.data;
-    });
+  //get blog details from service (model is detail not standart model)
+  getBlogDetails(){
+    this.blogService.getAllDetails().subscribe((response)=>{
+      this.blogDetails = response.data;
+      console.log(response.data)
+    })
   }
 
   //delete given blog
-  delete(blogModel: BlogModel) {
-    this.blogService.deleteBlog(blogModel).subscribe(
+  delete(blogModel:any) {
+    let deleteModel:BlogModel = {
+      id:blogModel.blogId,
+      categoryId:blogModel.categoryId,
+      userId:blogModel.userId,
+      blogTitle:blogModel.blogTitle,
+      blogContent:blogModel.blogContent,
+      createdAt:blogModel.createdAt,
+      imagePath:blogModel.imagePath
+    }
+    this.blogService.deleteBlog(deleteModel).subscribe(
       (response) => {
         this.toastr.info('Blog Deleted!');
-        this.getBlogs();
+        this.getBlogDetails();
       },
       (errorResponse) => {
         this.toastr.error(errorResponse.message);
@@ -86,34 +86,40 @@ export class BlogListComponent implements OnInit {
   }
 
   //change td colums to input colums when admin click to update button
-  navigateEdit(blog: BlogModel) {
-    this.selectedBlogId = blog.id;
+  navigateEdit(blog: BlogDetailModel) {
+    this.selectedBlog = blog;
+    console.log(blog)
+    this.blogTitle = blog.blogTitle;
+    this.blogContent = blog.blogContent;
+    this.selectedBlogId=blog.blogId
   }
 
   //get blogs paginated on bakcend
-  getBlogsPaginated(pageNumber:number,pageSize:number){
-    this.blogService.getBlogsPaginated(pageNumber,pageSize).subscribe((response)=>{
-      this.blogs=response;
-    })
+  getBlogsPaginated(pageNumber: number, pageSize: number) {
+    this.blogService
+      .getBlogsPaginated(pageNumber, pageSize)
+      .subscribe((response) => {
+        this.blogs = response;
+      });
   }
 
   //increase the number of page
-  increasePageNumber(){
-    this.pageNumber+=1;
-    this.getBlogsPaginated(this.pageNumber,this.pageSize);
+  increasePageNumber() {
+    this.pageNumber += 1;
+    this.getBlogsPaginated(this.pageNumber, this.pageSize);
   }
 
   //decrease the number of page
-  decreasePageNumber(){
-    if(this.pageNumber!=1){
-      this.pageNumber-=1;
-      this.getBlogsPaginated(this.pageNumber,this.pageSize);
+  decreasePageNumber() {
+    if (this.pageNumber != 1) {
+      this.pageNumber -= 1;
+      this.getBlogsPaginated(this.pageNumber, this.pageSize);
     }
   }
 
   //set page number to given number
-  setPageNumber(pageNumber:number){
-    this.pageNumber=pageNumber;
-    this.getBlogsPaginated(this.pageNumber,this.pageSize);
+  setPageNumber(pageNumber: number) {
+    this.pageNumber = pageNumber;
+    this.getBlogsPaginated(this.pageNumber, this.pageSize);
   }
 }

@@ -1,6 +1,5 @@
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ToastrService } from 'ngx-toastr';
-import { HttpClient } from '@angular/common/http';
 import { CategoryService } from './../../../../core/services/category.service';
 import { CategoryModel } from './../../../../core/models/categoryModel';
 import { Component, OnInit } from '@angular/core';

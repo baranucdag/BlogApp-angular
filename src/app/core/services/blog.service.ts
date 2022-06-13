@@ -50,8 +50,8 @@ export class BlogService {
   }
 
   //add a blog
-  addBlog(sendForm:any) {
-    let apiUrl ='https://localhost:44313/api/blogs/add'
+  addBlog(sendForm: any) {
+    let apiUrl = 'https://localhost:44313/api/blogs/add';
     return this.httClient.post(apiUrl, sendForm);
   }
 
@@ -80,8 +80,22 @@ export class BlogService {
   }
 
   //get blogs paginated on backend
-  getBlogsPaginated(pageNumber:number,pageSize:number):Observable<BlogModel[]>{
-    let apiUrl = this.baseApiUrl + 'GetBlogsPaged?pageNumber='+pageNumber+'&pageSize='+pageSize;
+  getBlogsPaginated(
+    pageNumber: number,
+    pageSize: number
+  ): Observable<BlogModel[]> {
+    let apiUrl =
+      this.baseApiUrl +
+      'GetBlogsPaged?pageNumber=' +
+      pageNumber +
+      '&pageSize=' +
+      pageSize;
     return this.httClient.get<BlogModel[]>(apiUrl);
+  }
+
+  //get all blogs details
+  getAllDetails(): Observable<ListResponsModel<BlogDetailModel>> {
+    let apiUrl = this.baseApiUrl + 'GetAllDetalis';
+    return this.httClient.get<ListResponsModel<BlogDetailModel>>(apiUrl);
   }
 }
