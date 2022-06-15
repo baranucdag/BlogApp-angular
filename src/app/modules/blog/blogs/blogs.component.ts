@@ -16,11 +16,12 @@ export class BlogsComponent implements OnInit {
   blogs: BlogModel[] = [];
   sortType: boolean = true;
   totalCount = 0;
+  totalData: number = 0;
   blogCount: number = 5;
   search = '';
   blogHeader: any = 'Blog Application';
-  currentUserId: any;
-  imagePath:string="https://localhost:44313/uploads/images/";
+  currentUserId: number;
+  imagePath: string = 'https://localhost:44313/uploads/images/';
 
   constructor(
     private blogService: BlogService,
@@ -34,6 +35,7 @@ export class BlogsComponent implements OnInit {
     this.detailService.blogDetail.next(null);
     this.getCurrentUser();
     this.getBlogs();
+    console.log(this.currentUserId)
   }
 
   //get all blogs by filter
@@ -46,6 +48,7 @@ export class BlogsComponent implements OnInit {
     };
     this.blogService.get(search).subscribe((response) => {
       this.blogs = response.data;
+      this.totalData = response.data.length;
     });
   }
 
@@ -91,24 +94,27 @@ export class BlogsComponent implements OnInit {
   }
 
   //change sort of the blogs
-  changeSortType(){
-    if(this.sortType==true){
-      this.sortType=false
+  changeSortType() {
+    if (this.sortType == true) {
+      this.sortType = false;
       this.getBlogs();
-    }else{
-      this.sortType=true
+    } else {
+      this.sortType = true;
       this.getBlogs();
     }
   }
 
   //get image of the blog
-  getImage(path:string){
-    if(path != null){
-      return this.imagePath+path;
-    }
-    else return this.imagePath + 'DefaultImage.jpg';
+  getImage(path: string) {
+    if (path != null) {
+      return this.imagePath + path;
+    } else return this.imagePath + 'DefaultImage.jpg';
   }
 
+  //check data amount to disabe 'see more blog' button
+  checkDataAmount(){
+    if(this.totalData % 5 !=0){
+      return false
+    } return true
   }
-
- 
+}

@@ -13,7 +13,7 @@ export class OperationClaimComponent implements OnInit {
   claimAddForm: FormGroup;
   claims: ClaimModel[] = [];
   pageNumber: number = 1;
-  pageSize: number = 8;
+  pageSize: number = 7;
 
   constructor(
     private operClaimService: OperationClaimService,
@@ -36,7 +36,8 @@ export class OperationClaimComponent implements OnInit {
     this.operClaimService
       .getClaimsPaged(pageNumber, pageSize)
       .subscribe((response) => {
-        this.claims = response;
+        this.claims = response.data;
+        console.log(this.claims)
       });
   }
 
@@ -64,5 +65,25 @@ export class OperationClaimComponent implements OnInit {
         this.toastr.error('claim couldnt deleted');
       }
     );
+  }
+
+  //increase the number of page
+  increasePageNumber(){
+    this.pageNumber+=1;
+    this.getClaimsPaged(this.pageNumber,this.pageSize);
+  }
+
+  //decrease the number of page
+  decreasePageNumber(){
+    if(this.pageNumber!=1){
+      this.pageNumber-=1;
+      this.getClaimsPaged(this.pageNumber,this.pageSize);
+    }
+  }
+
+  //set page number to given number
+  setPageNumber(pageNumber:number){
+    this.pageNumber=pageNumber;
+    this.getClaimsPaged(this.pageNumber,this.pageSize);
   }
 }

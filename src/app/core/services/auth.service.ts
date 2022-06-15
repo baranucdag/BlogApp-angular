@@ -69,7 +69,7 @@ export class AuthService {
     return this.currentUserId;
   }
 
-  setUserStats() {
+ async setUserStats() {
     if (this.isAuthenticated()) {
       this.setCurrentUserId();
       this.setRoles();

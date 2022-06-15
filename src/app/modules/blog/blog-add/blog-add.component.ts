@@ -32,14 +32,15 @@ export class BlogAddComponent implements OnInit {
     this.createBlogAddForm();
     this.getCategories();
     this.checkIfValid();
+    console.log(this.currentUserId)
   }
 
   createBlogAddForm() {
     this.blogAddForm = this.formBuilder.group({
       userId: this.currentUserId,
       categoryId: ['', Validators.required],
-      blogTitle: ['',Validators.required, Validators.minLength(25),Validators.maxLength(500)],
-      blogContent: ['',Validators.required, Validators.minLength(55),Validators.maxLength(2500)],
+      blogTitle: ['',Validators.required],
+      blogContent: ['',Validators.required],
     });
   }
 
@@ -75,7 +76,7 @@ export class BlogAddComponent implements OnInit {
 
   //get categories
   getCategories() {
-    this.categoryService.getAllCategories().subscribe((response) => {
+    this.categoryService.getAll().subscribe((response) => {
       this.categories = response.data;
     });
   }

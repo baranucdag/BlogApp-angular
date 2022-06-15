@@ -13,8 +13,16 @@ export class CategoryService {
 
   constructor(private httCliect:HttpClient) { }
 
-  //get all categories
-  getAllCategories():Observable<ListResponsModel<CategoryModel>>{
+  //get all categories paged
+  getAllCategories(pageNumber:number,pageSize:number):Observable<ListResponsModel<CategoryModel>>{
+    let apiUrl = this.baseApiUrl + 'GetAllPaged?pageNumber=' +
+    pageNumber +
+    '&pageSize=' +
+    pageSize;
+    return this.httCliect.get<ListResponsModel<CategoryModel>>(apiUrl);
+  }
+
+  getAll():Observable<ListResponsModel<CategoryModel>>{
     let apiUrl = this.baseApiUrl + 'getall';
     return this.httCliect.get<ListResponsModel<CategoryModel>>(apiUrl);
   }

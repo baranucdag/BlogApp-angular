@@ -11,9 +11,9 @@ export class UserOperationClaimService {
   baseAPiUrl = 'https://localhost:44313/api/UserOperationClaims/'
   constructor(private httClient:HttpClient) { }
 
-  getAllDetailsPaged(pageNumber:number,pageSize:number):Observable<UserOperationCLaimModel[]>{
+  getAllDetailsPaged(pageNumber:number,pageSize:number):Observable<ListResponsModel<UserOperationCLaimModel>>{
     let apiUrl = this.baseAPiUrl + 'GetAllDetails?pageNumber='+pageNumber +'&pageSize=' + pageSize;
-    return this.httClient.get<UserOperationCLaimModel[]>(apiUrl);
+    return this.httClient.get<ListResponsModel<UserOperationCLaimModel>>(apiUrl);
   }
 
   getDetailsByUserId(id:number):Observable<ListResponsModel<UserOperationCLaimModel>>{

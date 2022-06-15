@@ -94,8 +94,8 @@ export class BlogService {
   }
 
   //get all blogs details
-  getAllDetails(): Observable<ListResponsModel<BlogDetailModel>> {
-    let apiUrl = this.baseApiUrl + 'GetAllDetalis';
+  getAllDetails(pageNumber:number,pageSize:number): Observable<ListResponsModel<BlogDetailModel>> {
+    let apiUrl = this.baseApiUrl + 'GetAllDetalis?pageNumber='+pageNumber+'&pageSize='+pageSize;
     return this.httClient.get<ListResponsModel<BlogDetailModel>>(apiUrl);
   }
 }

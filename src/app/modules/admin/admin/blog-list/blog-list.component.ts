@@ -13,13 +13,14 @@ import { Component, OnInit } from '@angular/core';
 export class BlogListComponent implements OnInit {
   pageNumber: number = 1;
   selectedBlogId: number = 0;
-  pageSize: number = 5;
+  pageSize: number = 4;
   baran: string;
   blogTitle: string;
   selectedBlog?: BlogDetailModel;
   blogContent: string;
   categoryId: any;
   blogDetails:BlogDetailModel[]=[];
+  totalData:number=0;
 
   blogs: BlogModel[] = [];
   constructor(
@@ -28,11 +29,8 @@ export class BlogListComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
-    this.getBlogsPaginated(this.pageNumber, this.pageSize);
-    this.getBlogDetails()
+    this.getBlogDetails(this.pageNumber,this.pageSize)
   }
-
-
   update() {
     let model = {...this.selectedBlog,blogTitle:this.blogTitle,blogContent:this.blogContent};
     console.log(model)
@@ -47,7 +45,7 @@ export class BlogListComponent implements OnInit {
       (response) => {
         this.toastr.info('Blog updated.');
         this.selectedBlogId = 0;
-        this.getBlogDetails();
+        this.getBlogDetails(this.pageNumber,this.pageSize);
       },
       (responseError) => {
         this.toastr.error("blog coulnd't updated!");
@@ -56,10 +54,10 @@ export class BlogListComponent implements OnInit {
   }
 
   //get blog details from service (model is detail not standart model)
-  getBlogDetails(){
-    this.blogService.getAllDetails().subscribe((response)=>{
+  getBlogDetails(pageNumber:number,pageSize:number){
+    this.blogService.getAllDetails(pageNumber,pageSize).subscribe((response)=>{
       this.blogDetails = response.data;
-      console.log(response.data)
+      this.totalData = response.data.length;
     })
   }
 
@@ -77,7 +75,7 @@ export class BlogListComponent implements OnInit {
     this.blogService.deleteBlog(deleteModel).subscribe(
       (response) => {
         this.toastr.info('Blog Deleted!');
-        this.getBlogDetails();
+        this.getBlogDetails(this.pageNumber,this.pageSize);
       },
       (errorResponse) => {
         this.toastr.error(errorResponse.message);
@@ -94,32 +92,30 @@ export class BlogListComponent implements OnInit {
     this.selectedBlogId=blog.blogId
   }
 
-  //get blogs paginated on bakcend
-  getBlogsPaginated(pageNumber: number, pageSize: number) {
-    this.blogService
-      .getBlogsPaginated(pageNumber, pageSize)
-      .subscribe((response) => {
-        this.blogs = response;
-      });
-  }
-
   //increase the number of page
   increasePageNumber() {
     this.pageNumber += 1;
-    this.getBlogsPaginated(this.pageNumber, this.pageSize);
+    this.getBlogDetails(this.pageNumber, this.pageSize);
   }
 
   //decrease the number of page
   decreasePageNumber() {
     if (this.pageNumber != 1) {
       this.pageNumber -= 1;
-      this.getBlogsPaginated(this.pageNumber, this.pageSize);
+      this.getBlogDetails(this.pageNumber, this.pageSize);
     }
   }
 
   //set page number to given number
   setPageNumber(pageNumber: number) {
     this.pageNumber = pageNumber;
-    this.getBlogsPaginated(this.pageNumber, this.pageSize);
+    this.getBlogDetails(this.pageNumber, this.pageSize);
   }
+
+    //check data amount to disabe 'see more blog' button
+    checkDataAmount(){
+      if(this.totalData % 4 !=0){
+        return false
+      } return true
+    }
 }

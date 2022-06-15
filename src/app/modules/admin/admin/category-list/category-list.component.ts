@@ -13,6 +13,9 @@ export class CategoryListComponent implements OnInit {
 
   categories: CategoryModel[] = [];
   addFrom:FormGroup
+  pageNumber:number=1;
+  pageSize:number=7;
+  totalData:number=0;
 
   constructor(
     private categoryService: CategoryService,
@@ -21,14 +24,15 @@ export class CategoryListComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
-    this.getCategories();
+    this.getCategories(this.pageNumber,this.pageSize);
     this.createCategoryForm()
     }
 
   //get all categories
-  getCategories() {
-    this.categoryService.getAllCategories().subscribe((response) => {
+  getCategories(pageNumber:number,pageSize:number) {
+    this.categoryService.getAllCategories(pageNumber,pageSize).subscribe((response) => {
       this.categories = response.data;
+      this.totalData = response.data.length
     });
   }
 
@@ -45,7 +49,7 @@ export class CategoryListComponent implements OnInit {
       let categoryName =  Object.assign({},this.addFrom.value)
       this.categoryService.addCategory(categoryName).subscribe((response) => {
         this.toastr.info('Category added!')
-        this.getCategories();
+        this.getCategories(this.pageNumber,this.pageSize);
       },
       (errorResponse)=>{
         this.toastr.error('Category couldnt added!')
@@ -57,9 +61,36 @@ export class CategoryListComponent implements OnInit {
   deleteCategory(category:CategoryModel){
     this.categoryService.deleteCategory(category).subscribe((response)=>{
       this.toastr.info('Category deleted!');
-      this.getCategories();
+      this.getCategories(this.pageNumber,this.pageSize);
     },(errorResponse)=>{
       this.toastr.error('Category couldnt deleted!')
     })
   }
+
+  //increase the number of page
+  increasePageNumber(){
+    this.pageNumber+=1;
+    this.getCategories(this.pageNumber,this.pageSize);
+  }
+
+  //decrease the number of page
+  decreasePageNumber(){
+    if(this.pageNumber!=1){
+      this.pageNumber-=1;
+      this.getCategories(this.pageNumber,this.pageSize);
+    }
+  }
+
+  //set page number to given number
+  setPageNumber(pageNumber:number){
+    this.pageNumber=pageNumber;
+    this.getCategories(this.pageNumber,this.pageSize);
+  }
+
+    //check data amount to disabe 'see more blog' button
+    checkDataAmount(){
+      if(this.totalData % 7 !=0 || this.totalData == 7 || this.totalData == 14){
+        return false
+      } return true
+    }
 }

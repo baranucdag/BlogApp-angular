@@ -1,3 +1,5 @@
+import { UserOperationClaimService } from './../../../../core/services/user-operation-claim.service';
+import { OperationClaimService } from './../../../../core/services/operation-claim.service';
 import { CategoryService } from '../../../../core/services/category.service';
 import { UserService } from '../../../../core/services/user.service';
 import { Component, OnInit } from '@angular/core';
@@ -12,11 +14,15 @@ export class DashboardComponent implements OnInit {
   blogAmount:number;
   userAmount:number;
   categoryAmount:number;
+  claimAmount:number;
+  userOperationClaimAmount:number;
   
   constructor(
     private blogService: BlogService,
     private userService: UserService,
-    private categoryService:CategoryService
+    private categoryService:CategoryService,
+    private operationClaimService:OperationClaimService,
+    private userOperationClaimService:UserOperationClaimService
   ) {}
 
   ngOnInit(): void {
@@ -30,8 +36,14 @@ export class DashboardComponent implements OnInit {
     this.userService.getAllUsers().subscribe((response)=>{
       this.userAmount = response.data.length;
     })
-    this.categoryService.getAllCategories().subscribe((response)=>{
+    this.categoryService.getAll().subscribe((response)=>{
       this.categoryAmount = response.data.length;
+    })
+    this.operationClaimService.GetAllClaims().subscribe((response)=>{
+      this.claimAmount = response.data.length;
+    })
+    this.userOperationClaimService.getAllDetailsPaged(1,1100).subscribe((response)=>{
+      this.userOperationClaimAmount = response.data.length;
     })
   }
 }

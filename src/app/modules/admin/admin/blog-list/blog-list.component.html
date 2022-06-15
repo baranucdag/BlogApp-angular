@@ -1,3 +1,6 @@
+<div class="text text-dark text-center" style="margin-bottom: 15px;">
+  <h3>Blog List Table</h3>
+</div>
 <div class="container">
   <table
   class="table table-hover"
@@ -77,7 +80,7 @@
       <li class="page-item"><a class="page-link" (click)="setPageNumber(1)" >1</a></li>
       <li class="page-item"><a class="page-link" (click)="setPageNumber(2)">2</a></li>
       <li class="page-item"><a class="page-link" (click)="setPageNumber(3)">3</a></li>
-      <li class="page-item"><a class="page-link" (click)="increasePageNumber()">Next</a></li>
+      <li *ngIf="checkDataAmount()" ><a class="page-link" (click)="increasePageNumber()">Next</a></li>
     </ul>
   </nav>
 </div>

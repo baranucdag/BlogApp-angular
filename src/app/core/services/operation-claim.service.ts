@@ -16,14 +16,14 @@ export class OperationClaimService {
   getClaimsPaged(
     pageNumber: number,
     pageSize: number
-  ): Observable<ClaimModel[]> {
+  ): Observable<ListResponsModel<ClaimModel>> {
     let apiUrl =
       this.baseApiUrl +
       'GellAllClaimsPaged?pageNumber=' +
       pageNumber +
       '&pageSize=' +
       pageSize;
-    return this.httpClient.get<ClaimModel[]>(apiUrl);
+    return this.httpClient.get<ListResponsModel<ClaimModel>>(apiUrl);
   }
 
   //get user claims details
@@ -33,18 +33,18 @@ export class OperationClaimService {
   }
 
   //add a claim model
-  addClaim(name:string) {
+  addClaim(name: string) {
     let apiUrl = this.baseApiUrl + 'Add';
-    return this.httpClient.post(apiUrl,name)
-  } 
+    return this.httpClient.post(apiUrl, name);
+  }
 
   //delete a claim model
-  DeleteClaim(claimModel:ClaimModel) {
+  DeleteClaim(claimModel: ClaimModel) {
     let apiUrl = this.baseApiUrl + 'Delete';
-    return this.httpClient.post(apiUrl,claimModel)
-  } 
+    return this.httpClient.post(apiUrl, claimModel);
+  }
 
-  GetAllClaims():Observable<ListResponsModel<ClaimModel>>{
+  GetAllClaims(): Observable<ListResponsModel<ClaimModel>> {
     let apiUrl = this.baseApiUrl + 'GetAll';
     return this.httpClient.get<ListResponsModel<ClaimModel>>(apiUrl);
   }

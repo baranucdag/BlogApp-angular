@@ -28,7 +28,8 @@ export class UserOperationClaimsComponent implements OnInit {
     this.userOperationService
       .getAllDetailsPaged(pageNumber, pageSize)
       .subscribe((response) => {
-        this.userOperationClaims = response;
+        this.userOperationClaims = response.data;
+        console.log(response)
       });
   }
 
@@ -39,5 +40,25 @@ export class UserOperationClaimsComponent implements OnInit {
     },(errorResponse)=>{
       this.toastr.error('User operation claim couldnt deleted!');
     })
+  }
+
+  //increase the number of page
+  increasePageNumber(){
+    this.pageNumber+=1;
+    this.getAllPaged(this.pageNumber,this.pageSize);
+  }
+
+  //decrease the number of page
+  decreasePageNumber(){
+    if(this.pageNumber!=1){
+      this.pageNumber-=1;
+      this.getAllPaged(this.pageNumber,this.pageSize);
+    }
+  }
+
+  //set page number to given number
+  setPageNumber(pageNumber:number){
+    this.pageNumber=pageNumber;
+    this.getAllPaged(this.pageNumber,this.pageSize);
   }
 }

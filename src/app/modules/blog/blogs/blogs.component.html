@@ -24,16 +24,25 @@
       <a class="bi bi-sort-up" (click)="changeSortType()">Sort By Date</a>
     </button>
   </div>
-  <hr/>
+  <hr />
   <div class="row">
     <div class="col-lg-10 col-md-10 mx-auto" *ngIf="blogs">
       <div *ngFor="let blog of blogs; let i = index">
         <div *ngIf="i < blogCount">
           <div class="post-preview">
-            <a (click)="onSelect(blog.id)" class="pointer" style="margin-bottom:0px;">
+            <a
+              (click)="onSelect(blog.id)"
+              class="pointer"
+              style="margin-bottom: 0px"
+            >
               <div class="container">
                 <div class="row">
-                  <div class="col-4 box box-1"> <img [src]="getImage(blog.imagePath)" [alt]="getImage(blog.imagePath)"></div>
+                  <div class="col-4 box box-1">
+                    <img
+                      [src]="getImage(blog.imagePath)"
+                      [alt]="getImage(blog.imagePath)"
+                    />
+                  </div>
                   <div class="col-8">
                     <h2 class="post-title">
                       {{
@@ -42,7 +51,7 @@
                           : blog.blogTitle
                       }}
                     </h2>
-                    <h3 class="post-subtitle" style="font-weight: 300;">
+                    <h3 class="post-subtitle" style="font-weight: 300">
                       {{
                         blog.blogContent.length > 50
                           ? blog.blogContent.substring(0, 80) + "..."
@@ -59,7 +68,10 @@
                 </div>
               </div>
             </a>
-            <p *ngIf="isAuthor(blog)" style="margin-left: 25px; margin-top: 0px; ">
+            <p
+              *ngIf="isAuthor(blog)"
+              style="margin-left: 25px; margin-top: 0px"
+            >
               <a class="btn btn-info" (click)="navigateEdit(blog)">Update</a>
               <a (click)="delete(blog)" class="btn btn-danger">Delete</a>
             </p>
@@ -69,11 +81,15 @@
 
       <div class="clearfix">
         <a
+         
+        >
+        <button [disabled]="!checkDataAmount()"
           id="btnSeeMore"
           class="btn btn-secondary col-lg-6 float-right pointer"
-          (click)="riseCountOfBlog()"
-        >
-          See More Blog
+          (click)="riseCountOfBlog()">
+           See More Blog
+        </button>
+         
         </a>
       </div>
     </div>

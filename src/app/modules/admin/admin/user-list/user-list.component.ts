@@ -13,7 +13,8 @@ export class UserListComponent implements OnInit {
 
   users: UserModel[] = [];
   pageNumber:number=1;
-  pageSize:number=9;
+  pageSize:number=8;
+  totalData:number=0;
 
   constructor(
     private userService: UserService,
@@ -54,8 +55,8 @@ export class UserListComponent implements OnInit {
   getBlogsPaginated(pageNumber:number,pageSize:number){
     this.userService.getBlogsPaginated(pageNumber,pageSize).subscribe((response)=>{
      if(response){
-       console.log(response)
-      this.users=response;
+      this.users=response.data;
+      this.totalData = response.data.length
      }
     })
   }
@@ -78,5 +79,10 @@ export class UserListComponent implements OnInit {
   setPageNumber(pageNumber:number){
     this.pageNumber=pageNumber;
     this.getBlogsPaginated(this.pageNumber,this.pageSize);
+  }
+  checkDataAmount(){
+    if(this.totalData % 8 !=0 || this.totalData == 8 || this.totalData == 16){
+      return false
+    } return true
   }
 }

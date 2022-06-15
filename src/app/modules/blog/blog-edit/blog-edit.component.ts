@@ -94,7 +94,7 @@ export class BlogEditComponent implements OnInit {
   }
 
   getCategories() {
-    this.categoryService.getAllCategories().subscribe((response) => {
+    this.categoryService.getAll().subscribe((response) => {
       this.categories = response.data;
     });
   }
