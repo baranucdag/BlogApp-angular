@@ -14,6 +14,7 @@ export class OperationClaimComponent implements OnInit {
   claims: ClaimModel[] = [];
   pageNumber: number = 1;
   pageSize: number = 7;
+  totalData:number=0;
 
   constructor(
     private operClaimService: OperationClaimService,
@@ -37,7 +38,7 @@ export class OperationClaimComponent implements OnInit {
       .getClaimsPaged(pageNumber, pageSize)
       .subscribe((response) => {
         this.claims = response.data;
-        console.log(this.claims)
+        this.totalData = response.data.length
       });
   }
 
@@ -85,5 +86,11 @@ export class OperationClaimComponent implements OnInit {
   setPageNumber(pageNumber:number){
     this.pageNumber=pageNumber;
     this.getClaimsPaged(this.pageNumber,this.pageSize);
+  }
+
+  checkDataAmount(){
+    if(this.totalData % 7 !=0){
+      return false
+    } return true
   }
 }

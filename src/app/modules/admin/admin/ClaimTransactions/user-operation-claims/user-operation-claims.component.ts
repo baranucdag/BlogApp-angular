@@ -14,6 +14,7 @@ export class UserOperationClaimsComponent implements OnInit {
   pageSize: number = 8;
   userOperationClaims: UserOperationCLaimModel[] = [];
   userOperationClaimAddForm:FormGroup
+  totalData:number=0;
 
   constructor(
     private userOperationService: UserOperationClaimService,
@@ -29,7 +30,7 @@ export class UserOperationClaimsComponent implements OnInit {
       .getAllDetailsPaged(pageNumber, pageSize)
       .subscribe((response) => {
         this.userOperationClaims = response.data;
-        console.log(response)
+        this.totalData = response.data.length
       });
   }
 
@@ -60,5 +61,11 @@ export class UserOperationClaimsComponent implements OnInit {
   setPageNumber(pageNumber:number){
     this.pageNumber=pageNumber;
     this.getAllPaged(this.pageNumber,this.pageSize);
+  }
+
+  checkDataAmount(){
+    if(this.totalData % 8 !=0 ){
+      return false
+    } return true
   }
 }

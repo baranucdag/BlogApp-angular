@@ -17,6 +17,7 @@ export class BlogAddComponent implements OnInit {
   currentUserId: number;
   selectedFile:File;
   categories: CategoryModel[] = [];
+  imagePath:string="";
 
   constructor(
     private blogService: BlogService,
@@ -83,6 +84,12 @@ export class BlogAddComponent implements OnInit {
 
   onFileSelected(event: any) {
     this.selectedFile = event.target.files[0];
+    var reader = new FileReader();
+    reader.readAsDataURL(event.target.files[0]);
+    reader.onload=(event:any)=>{
+      this.imagePath = event.target.result;
+    }
+
   }
 
   checkIfValid(){

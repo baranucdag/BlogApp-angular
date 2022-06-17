@@ -6,14 +6,18 @@
     <h2 style="text-align: center">
       <h4>{{ favCount }}</h4>
       <i
-        *ngIf="checkIfLiked === false  else liked"
+        *ngIf="checkIfLiked === false; else liked"
         (click)="addFav()"
         id="addFav"
         class="bi bi-heart bi-10x"
       ></i>
       <ng-template #liked>
         <i
-        style="color: red" (click)="deleteFav()" id="deleteFav" class="bi bi-heart-fill"></i> 
+          style="color: red"
+          (click)="deleteFav()"
+          id="deleteFav"
+          class="bi bi-heart-fill"
+        ></i>
       </ng-template>
     </h2>
     <p style="color: grey; text-align: center" class="post-meta">
@@ -54,11 +58,12 @@
           <div class="bg-white p-2">
             <div class="d-flex flex-row user-info">
               <div class="d-flex flex-column justify-content-start ml-2">
-                <span class="d-block font-weight-bold name">{{
-                  comment.userEmail
-                }}</span
-                ><span class="date text-black-50"
-                  >Shared publicly at-
+                <span class="d-block name">
+                  <span style="font-weight: bold text-black-50">Owner:</span>
+                  {{ comment.userEmail }}</span
+                >
+                <span class="date text-black-50"
+                  ><span style="font-weight: bold;">Shared publicly at :</span>
                   {{ comment.createdTime | date: "medium" }}</span
                 >
               </div>

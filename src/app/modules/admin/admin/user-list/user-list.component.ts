@@ -81,7 +81,7 @@ export class UserListComponent implements OnInit {
     this.getBlogsPaginated(this.pageNumber,this.pageSize);
   }
   checkDataAmount(){
-    if(this.totalData % 8 !=0 || this.totalData == 8 || this.totalData == 16){
+    if(this.totalData % 8 !=0){
       return false
     } return true
   }

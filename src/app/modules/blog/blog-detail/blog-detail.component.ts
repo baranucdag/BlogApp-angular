@@ -177,6 +177,8 @@ export class BlogDetailComponent implements OnInit {
     this.favService.addFav(favModel).subscribe(
       (reponse) => {
         this.toastr.info('You have just liked blog');
+        this.getFavsByBlogId(this.id)
+        this.checkIfLiked
       },
       (errorResponse) => {
         this.toastr.error('Couldnt liked blog');
@@ -193,6 +195,8 @@ export class BlogDetailComponent implements OnInit {
     this.favService.deleteById(favDeleteModel).subscribe(
       (response) => {
         this.toastr.info('Like deleted.');
+        this.getFavsByBlogId(this.id)
+        this.checkIfLiked
       },
       (errorResponse) => {
         this.toastr.error('couldnt delete the fav');

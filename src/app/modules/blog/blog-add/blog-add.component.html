@@ -1,6 +1,8 @@
 <div class="container">
   <form [formGroup]="blogAddForm">
-        <div style="margin-top: 35px; ">
+    <div class="row">
+      <div class="col-md-6">
+        <div style="margin-top: 35px; margin-bottom: 50px;">
           <h5 style="text-align: center">Image upload</h5>
           <div class="mb-3">
             <input
@@ -10,6 +12,12 @@
               (change)="onFileSelected($event)"
             />
             <button class="btn btn-primary">upload</button>
+          </div>
+        </div>
+      </div>
+      <div *ngIf="imagePath" class="col-md-6" style="margin-top: 35px; margin-bottom: 50px; text-align: center;">
+        <span><h5>Choosen Image</h5></span>
+        <div class="box box-1"><img  [src]="imagePath" [alt]="imagePath"></div>
       </div>
     </div>
     <div class="form-label">

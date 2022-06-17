@@ -23,7 +23,7 @@ export class AuthService {
     private httpClient: HttpClient,
     private localStorageService: LocalStorageService
   ) {
-    this.setUserStats()
+    this.setUserStats();
   }
 
   login(loginModel: LoginModel): Observable<SingleResponseModel<TokenModel>> {
@@ -69,7 +69,7 @@ export class AuthService {
     return this.currentUserId;
   }
 
- async setUserStats() {
+  async setUserStats() {
     if (this.isAuthenticated()) {
       this.setCurrentUserId();
       this.setRoles();

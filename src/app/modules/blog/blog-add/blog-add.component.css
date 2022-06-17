@@ -1,0 +1,8 @@
+.box img {
+    width: 405px;
+    height: 245px;
+  }
+  
+  .box1 img {
+    object-fit: cover;
+  }

@@ -48,7 +48,7 @@
       <li class="page-item">
         <a class="page-link" (click)="setPageNumber(3)">3</a>
       </li>
-      <li class="page-item">
+      <li *ngIf="checkDataAmount()">
         <a class="page-link" (click)="increasePageNumber()">Next</a>
       </li>
     </ul>
