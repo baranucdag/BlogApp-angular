@@ -15,16 +15,16 @@ import { BlogService } from 'src/app/core/services/blog.service';
 export class BlogAddComponent implements OnInit {
   blogAddForm: FormGroup;
   currentUserId: number;
-  selectedFile:File;
+  selectedFile: File;
   categories: CategoryModel[] = [];
-  imagePath:string="";
+  imagePath: string = '';
 
   constructor(
     private blogService: BlogService,
     private toastService: ToastrService,
     private formBuilder: FormBuilder,
     private authService: AuthService,
-    private router:Router,
+    private router: Router,
     private categoryService: CategoryService
   ) {}
 
@@ -33,15 +33,14 @@ export class BlogAddComponent implements OnInit {
     this.createBlogAddForm();
     this.getCategories();
     this.checkIfValid();
-    console.log(this.currentUserId)
   }
 
   createBlogAddForm() {
     this.blogAddForm = this.formBuilder.group({
       userId: this.currentUserId,
       categoryId: ['', Validators.required],
-      blogTitle: ['',Validators.required],
-      blogContent: ['',Validators.required],
+      blogTitle: ['', [Validators.required, Validators.minLength(30)]],
+      blogContent: ['', Validators.required],
     });
   }
 
@@ -50,18 +49,18 @@ export class BlogAddComponent implements OnInit {
     if (this.blogAddForm.valid) {
       let blogModel = Object.assign({}, this.blogAddForm.value);
       const sendForm = new FormData();
-      sendForm.append('UserId',JSON.stringify(blogModel.userId));
-      sendForm.append('CategoryId',JSON.stringify(blogModel.categoryId));
-      sendForm.append('BlogTitle',blogModel.blogTitle);
-      sendForm.append('BlogContent',blogModel.blogContent);
-      sendForm.append('Image',this.selectedFile);
-      this.blogService.addBlog( sendForm).subscribe(
+      sendForm.append('UserId', JSON.stringify(blogModel.userId));
+      sendForm.append('CategoryId', JSON.stringify(blogModel.categoryId));
+      sendForm.append('BlogTitle', blogModel.blogTitle);
+      sendForm.append('BlogContent', blogModel.blogContent);
+      sendForm.append('Image', this.selectedFile);
+      this.blogService.addBlog(sendForm).subscribe(
         (response) => {
           this.toastService.info('Blog added succesfully');
-          this.router.navigate([''])
+          this.router.navigate(['']);
         },
         (responseError) => {
-          console.log(sendForm)
+          console.log(sendForm);
           this.toastService.error('Blog Couldnt added');
         }
       );
@@ -72,7 +71,7 @@ export class BlogAddComponent implements OnInit {
 
   //get current user from auth service
   getCurrentUser() {
-    this.currentUserId = this.authService.getCurrentUserId();
+    this.currentUserId = this.authService.currentUserId;
   }
 
   //get categories
@@ -86,16 +85,14 @@ export class BlogAddComponent implements OnInit {
     this.selectedFile = event.target.files[0];
     var reader = new FileReader();
     reader.readAsDataURL(event.target.files[0]);
-    reader.onload=(event:any)=>{
+    reader.onload = (event: any) => {
       this.imagePath = event.target.result;
-    }
-
+    };
   }
 
-  checkIfValid(){
-    if(this.blogAddForm.valid){
-      return true
-    }
-    else return false
+  checkIfValid() {
+    if (this.blogAddForm.valid) {
+      return true;
+    } else return false;
   }
 }

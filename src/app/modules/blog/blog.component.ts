@@ -1,3 +1,4 @@
+import { AuthService } from 'src/app/core/services/auth.service';
 import { ImageService } from '../../core/services/image.service';
 import { DetailService } from '../../core/services/detail.service';
 import { BlogModel } from 'src/app/core/models/blogModel';
@@ -20,10 +21,13 @@ export class BlogComponent implements OnInit {
     private blogService: BlogService,
     private detailService: DetailService,
     private imageService: ImageService,
-    private cdref: ChangeDetectorRef
+    private cdref: ChangeDetectorRef,
+    private authService:AuthService
   ) {}
 
   ngOnInit(): void {
+    this.authService.setUserStats()
+    console.log(this.authService.currentRoles)
     this.detailService.blogDetail.subscribe((detail) => {
       if (detail && detail.blogId) {
         this.blogHeader = detail.blogTitle;

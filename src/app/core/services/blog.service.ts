@@ -1,4 +1,3 @@
-import { BasicResponseModel } from './../models/basicResponseModel';
 import { QueryParamsModel } from './../models/queryParamsModel';
 import { SingleResponseModel } from '../models/singleResponseModel';
 import { ListResponsModel } from '../models/listResponseModel';

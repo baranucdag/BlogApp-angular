@@ -1,3 +1,4 @@
+import { PageNotFoundComponent } from './core/components/page-not-found/page-not-found.component';
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 
@@ -16,7 +17,12 @@ const routes: Routes = [
     path: 'admin',
     loadChildren: () =>
       import('./modules/admin/admin.module').then((m) => m.AdminModule),
+  },
+  {
+    path:'**',
+    component:PageNotFoundComponent
   }
+  
 ];
 
 @NgModule({

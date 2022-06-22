@@ -13,7 +13,9 @@ import { JwtHelperService } from '@auth0/angular-jwt';
 })
 export class AuthService {
   jwthelperService: JwtHelperService = new JwtHelperService();
-  token: any = localStorage.getItem('token');
+  get token(): any {
+    return localStorage.getItem('token');
+  }
   currentUserId: number;
   currentRoles: string;
 
@@ -22,9 +24,7 @@ export class AuthService {
   constructor(
     private httpClient: HttpClient,
     private localStorageService: LocalStorageService
-  ) {
-    this.setUserStats();
-  }
+  ) {}
 
   login(loginModel: LoginModel): Observable<SingleResponseModel<TokenModel>> {
     let apiUrl: string = this.baseApiUrl + 'login';
@@ -61,15 +61,16 @@ export class AuthService {
     var propUserId = Object.keys(decoded).filter((x) => x.endsWith('/role'))[0];
     this.currentRoles = String(decoded[propUserId]);
   }
+
   getCurrentRoles(): string {
-    console.log(this.currentRoles);
     return this.currentRoles;
   }
   getCurrentUserId(): number {
     return this.currentUserId;
   }
 
-  async setUserStats() {
+  setUserStats() {
+      console.log("setUser")
     if (this.isAuthenticated()) {
       this.setCurrentUserId();
       this.setRoles();

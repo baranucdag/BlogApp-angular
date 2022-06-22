@@ -1,6 +1,5 @@
 import { CommentDetailModel } from './../../../core/models/commentDetailModel';
 import { BlogModel } from 'src/app/core/models/blogModel';
-import { FavDeletePostModel } from './../../../core/models/favDeletePostModel';
 import { UserModel } from '../../../core/models/userModel';
 import { UserService } from '../../../core/services/user.service';
 import { FavModel } from '../../../core/models/favModel';
@@ -48,15 +47,15 @@ export class BlogDetailComponent implements OnInit {
 
   ngOnInit(): void {
     this.getParameter();
-    this.isAuthor()
-    this.getBlog()
+    this.isAuthor();
+    this.getBlog();
     this.createPostCommentForm();
     this.getFavsByBlogId(this.id);
     this.getCommentsByBlogId(this.id);
     this.getFavCount();
-    setInterval(()=>{
+    setInterval(() => {
       this.getFavCount();
-    },100)
+    }, 100);
   }
 
   //get parametr 'id' and set it to id local variable
@@ -64,7 +63,9 @@ export class BlogDetailComponent implements OnInit {
     this.route.params.subscribe((params) => {
       if (params !== null && params !== undefined) {
         this.id = Number(params['id']);
-        this.currentUserId = this.authService.getCurrentUserId();
+        if (this.authService.isAuthenticated()) {
+          this.currentUserId = this.authService.currentUserId;
+        }
         this.getBlogDetails();
         this.currentDate = new Date();
       }
@@ -138,7 +139,7 @@ export class BlogDetailComponent implements OnInit {
   }
 
   //delete an comment
-  deleteComment(id:number) {
+  deleteComment(id: number) {
     this.commentService.deleteCommentById(id).subscribe(
       (responnse) => {
         this.toastr.info('comment deleted succesfully!');
@@ -165,25 +166,25 @@ export class BlogDetailComponent implements OnInit {
     });
   }
 
-   //create a interval to make request in given time interval
-   
-
   //add fav
   addFav() {
-    let favModel = {
-      blogId: this.id,
-      userId: this.currentUserId,
-    };
-    this.favService.addFav(favModel).subscribe(
-      (reponse) => {
-        this.toastr.info('You have just liked blog');
-        this.getFavsByBlogId(this.id)
-        this.checkIfLiked
-      },
-      (errorResponse) => {
-        this.toastr.error('Couldnt liked blog');
-      }
-    );
+    if (this.currentUserId != undefined && this.currentUserId != null) {
+      let favModel = {
+        blogId: this.id,
+        userId: this.currentUserId,
+      };
+      this.favService.addFav(favModel).subscribe(
+        (reponse) => {
+          this.toastr.info('You have just liked blog');
+          this.getFavsByBlogId(this.id);
+          this.checkIfLiked;
+        },
+        (errorResponse) => {
+          this.toastr.error('Couldnt liked blog');
+        }
+      );
+    }
+    else this.toastr.error("If you want to like it you have to login!")
   }
 
   //delete fav (when stopping like)
@@ -195,8 +196,8 @@ export class BlogDetailComponent implements OnInit {
     this.favService.deleteById(favDeleteModel).subscribe(
       (response) => {
         this.toastr.info('Like deleted.');
-        this.getFavsByBlogId(this.id)
-        this.checkIfLiked
+        this.getFavsByBlogId(this.id);
+        this.checkIfLiked;
       },
       (errorResponse) => {
         this.toastr.error('couldnt delete the fav');
@@ -238,6 +239,6 @@ export class BlogDetailComponent implements OnInit {
       }
       return false;
     }
-    return
+    return;
   }
 }

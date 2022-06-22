@@ -27,7 +27,8 @@ export class AdminGuard implements CanActivate {
     | Promise<boolean | UrlTree>
     | boolean
     | UrlTree {
-    if (
+      this.authService.setRoles()
+      if (
       this.authService.currentRoles != null &&
       this.authService.currentRoles != undefined &&
       this.authService.currentRoles.includes('admin')

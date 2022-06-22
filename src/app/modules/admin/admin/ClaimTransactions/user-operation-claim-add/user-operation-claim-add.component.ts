@@ -61,7 +61,7 @@ export class UserOperationClaimAddComponent implements OnInit {
         this.toastr.success('User Operation Claim Added');
       },
       (errorResponse)=>{
-        this.toastr.error('Claim couldnt added!');
+        this.toastr.error(errorResponse.message);
       });
     }
   }

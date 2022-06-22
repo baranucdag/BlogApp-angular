@@ -36,7 +36,7 @@ export class UserOperationClaimsComponent implements OnInit {
 
   delete(model:UserOperationCLaimModel){
     this.userOperationService.delete(model).subscribe((response)=>{
-      this.toastr.info('User operation claim deleted!');
+      this.toastr.info();
       this.getAllPaged(this.pageNumber, this.pageSize)
     },(errorResponse)=>{
       this.toastr.error('User operation claim couldnt deleted!');

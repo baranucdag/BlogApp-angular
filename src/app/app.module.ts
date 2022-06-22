@@ -12,12 +12,14 @@ import { FooterComponent } from './core/components/footer/footer.component';
 import { NaviComponent } from './core/components/navigation/navi.component';
 import { ModalModule } from 'ngx-bootstrap/modal';
 import { ReversePipe } from './core/pipes/reverse.pipe';
+import { PageNotFoundComponent } from './core/components/page-not-found/page-not-found.component';
 
 
 @NgModule({
   declarations: [
     AppComponent,
     ReversePipe,
+    PageNotFoundComponent,
   ],
   imports: [
     BrowserModule,

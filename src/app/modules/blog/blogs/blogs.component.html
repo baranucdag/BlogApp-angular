@@ -4,6 +4,7 @@
 <div class="container">
   <div class="d-flex">
     <input
+    style="height: 45px;"
       class="form-control me-2"
       type="search"
       placeholder="Search"
@@ -12,15 +13,15 @@
       (keyup.enter)="getBlogs()"
     />
     <button
-      style="border-radius: 4px"
+      style="border-radius: 4px ;  padding: 10px;"
       class="btn btn-outline-success"
       (click)="getBlogs()"
     >
       Search
     </button>
   </div>
-  <div style="margin-left: 500px; margin-top: 10px">
-    <button class="btn-primary" style="border-radius: 3px; margin-bottom: 12px">
+  <div style=" margin-top: 10px">
+    <button class="btn btn-primary" style="border-radius: 3px; margin-bottom: 12px; padding: 10px;">
       <a class="bi bi-sort-up" (click)="changeSortType()">Sort By Date</a>
     </button>
   </div>
