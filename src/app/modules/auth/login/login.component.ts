@@ -41,6 +41,7 @@ export class LoginComponent implements OnInit {
           this.toastrService.info(response.message);
           if (response.data.token != null) {
             localStorage.setItem('token', response.data.token);
+            console.log(response.data)
           } else {
             this.toastrService.error('Token error!');
           }

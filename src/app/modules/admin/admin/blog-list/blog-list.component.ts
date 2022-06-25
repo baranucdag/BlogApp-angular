@@ -1,3 +1,4 @@
+import { ResponseModel } from './../../../../core/models/responseModel';
 import { BlogDetailModel } from './../../../../core/models/blogDetailModel';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { BlogModel } from '../../../../core/models/blogModel';
@@ -74,11 +75,13 @@ export class BlogListComponent implements OnInit {
     }
     this.blogService.deleteBlog(deleteModel).subscribe(
       (response) => {
-        this.toastr.info('Blog Deleted!');
+        this.toastr.info(response.message);
+        console.log(response)
         this.getBlogDetails(this.pageNumber,this.pageSize);
       },
       (errorResponse) => {
-        this.toastr.error(errorResponse.message);
+        this.toastr.error(errorResponse.error.message);
+        console.log(errorResponse)
       }
     );
   }

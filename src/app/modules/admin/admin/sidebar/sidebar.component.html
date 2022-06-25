@@ -15,41 +15,52 @@
         <span class="custom-br"></span>
 
         <ul
-          style="margin-top: 45px"
+          style="margin-top: 45px; color: #ffff"
           class="nav nav-pills flex-sm-column flex-row flex-nowrap flex-shrink-1 flex-sm-grow-0 flex-grow-1 mb-sm-auto mb-0 justify-content-center align-items-center align-items-sm-start"
         >
-          <li>
+          <li style="color: #ffff">
             <a
-            routerLinkActive="active-list-item"
-              routerLink="/admin"
-              data-bs-toggle="collapse"
+              routerLink="/admin/dashboard"
               class="nav-link px-sm-0 px-2"
+              routerLinkActive="active-list-item"
             >
               <i class="fs-5 bi-speedometer2"></i
-              ><span class="ms-1 d-none d-sm-inline" >Dashboard</span>
+              ><span class="ms-1 d-none d-sm-inline">Dashboard</span>
             </a>
           </li>
           <li>
-            <a routerLink="/admin/blogs" class="nav-link px-sm-0 px-2">
+            <a
+              routerLink="/admin/blogs"
+              class="nav-link px-sm-0 px-2"
+              routerLinkActive="active-list-item"
+            >
               <i class="fs-5 bi-grid"></i
               ><span class="ms-1 d-none d-sm-inline">Blogs</span></a
             >
           </li>
 
           <li>
-            <a routerLink="/admin/categories" class="nav-link px-sm-0 px-2">
+            <a
+              routerLink="/admin/categories"
+              class="nav-link px-sm-0 px-2"
+              routerLinkActive="active-list-item"
+            >
               <i class="fs-5 bi-table"></i
               ><span class="ms-1 d-none d-sm-inline">Categories</span></a
             >
           </li>
           <li>
-            <a routerLink="/admin/users" class="nav-link px-sm-0 px-2">
+            <a
+              routerLink="/admin/users"
+              class="nav-link px-sm-0 px-2"
+              routerLinkActive="active-list-item"
+            >
               <i class="fs-5 bi-people"></i
               ><span class="ms-1 d-none d-sm-inline">Users</span>
             </a>
           </li>
           <li class="dropdown">
-            <a
+            <a routerLinkActive="active-list-item"
               href="#"
               class="nav-link dropdown-toggle px-sm-0 px-1"
               id="dropdown"
@@ -63,19 +74,34 @@
               class="dropdown-menu dropdown-menu-dark text-small shadow"
               aria-labelledby="dropdown"
             >
-              <li><a routerLink="/admin/claims" class="dropdown-item">Claim Operations</a></li>
               <li>
-                <a routerLink="/admin/authassignments" class="dropdown-item">Authorization Assigments</a>
+                <a
+                  routerLink="/admin/auth/claims"
+                  class="dropdown-item"
+                  routerLinkActive="active-list-item"
+                  >Claims</a
+                >
+              </li>
+              <li>
+                <a
+                  routerLink="/admin/auth/authassignments"
+                  class="dropdown-item"
+                  routerLinkActive="active-list-item"
+                  >Authorization Assigments</a
+                >
               </li>
             </ul>
           </li>
         </ul>
+        <div style="margin-bottom: 45px">
+          <span
+            ><a style="text-align: center; color: #ffff; text-decoration: none;" routerLink="/"
+              ><i class="bi bi-house-door"></i>
+              Go Back To Home
+            </a></span
+          >
+        </div>
       </div>
     </div>
   </div>
 </div>
-
-
-
-
-

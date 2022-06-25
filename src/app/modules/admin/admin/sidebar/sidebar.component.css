@@ -12,10 +12,11 @@
   background-color: #e6e6e6; /*change color*/
 }
 
-a,i,span {
+span {
   color: #ffff;
 }
 
-.active-list-item {
-  color: #0c1027 !important; /* Note: You could also use a custom theme */
+
+.active-list-item{
+  color: red;
 }

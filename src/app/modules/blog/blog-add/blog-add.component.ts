@@ -17,7 +17,7 @@ export class BlogAddComponent implements OnInit {
   currentUserId: number;
   selectedFile: File;
   categories: CategoryModel[] = [];
-  imagePath: string = '';
+  imagePath: string = 'https://localhost:44313/uploads/images/DefaultImage.jpg';
 
   constructor(
     private blogService: BlogService,
@@ -39,8 +39,8 @@ export class BlogAddComponent implements OnInit {
     this.blogAddForm = this.formBuilder.group({
       userId: this.currentUserId,
       categoryId: ['', Validators.required],
-      blogTitle: ['', [Validators.required, Validators.minLength(30)]],
-      blogContent: ['', Validators.required],
+      blogTitle: ['', [Validators.required, Validators.minLength(30),Validators.maxLength(400)]],
+      blogContent:['', [Validators.required, Validators.minLength(45),Validators.maxLength(2500)]]
     });
   }
 
@@ -56,7 +56,7 @@ export class BlogAddComponent implements OnInit {
       sendForm.append('Image', this.selectedFile);
       this.blogService.addBlog(sendForm).subscribe(
         (response) => {
-          this.toastService.info('Blog added succesfully');
+          this.toastService.info(response.message);
           this.router.navigate(['']);
         },
         (responseError) => {
@@ -82,12 +82,14 @@ export class BlogAddComponent implements OnInit {
   }
 
   onFileSelected(event: any) {
-    this.selectedFile = event.target.files[0];
-    var reader = new FileReader();
-    reader.readAsDataURL(event.target.files[0]);
-    reader.onload = (event: any) => {
-      this.imagePath = event.target.result;
-    };
+    if (event) {
+      this.selectedFile = event.target.files[0];
+      var reader = new FileReader();
+      reader.readAsDataURL(event.target.files[0]);
+      reader.onload = (event: any) => {
+        this.imagePath = event.target.result;
+      };
+    }
   }
 
   checkIfValid() {

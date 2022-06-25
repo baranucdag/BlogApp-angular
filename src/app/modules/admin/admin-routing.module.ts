@@ -17,14 +17,15 @@ const routes: Routes = [
     children: [
       {
         path: '',
-        component: DashboardComponent,
+        redirectTo: 'dashboard',
       },
+      { path: 'dashboard', component: DashboardComponent },
       { path: 'blogs', component: BlogListComponent },
       { path: 'users', component: UserListComponent },
       { path: 'categories', component: CategoryListComponent },
-      { path: 'claims', component: OperationClaimComponent },
-      { path: 'authassignments', component: UserOperationClaimsComponent },
       { path: 'auth/add', component: UserOperationClaimAddComponent },
+      { path: 'auth/claims', component: OperationClaimComponent },
+      { path: 'auth/authassignments', component: UserOperationClaimsComponent },
     ],
   },
 ];

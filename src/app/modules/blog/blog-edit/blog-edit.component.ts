@@ -93,13 +93,22 @@ export class BlogEditComponent implements OnInit {
     }
   }
 
+  //get categories from service
   getCategories() {
     this.categoryService.getAll().subscribe((response) => {
       this.categories = response.data;
     });
   }
 
+  //get selected file(image)
   onFileSelected(event: any) {
-    this.selectedFile = event.target.files[0];
+    if (event) {
+      this.selectedFile = event.target.files[0];
+      var reader = new FileReader();
+      reader.readAsDataURL(event.target.files[0]);
+      reader.onload = (event: any) => {
+        this.imagePath = event.target.result;
+      };
+    }
   }
 }

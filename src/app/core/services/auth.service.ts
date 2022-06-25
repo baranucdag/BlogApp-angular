@@ -34,6 +34,13 @@ export class AuthService {
     );
   }
 
+  isExpired() {
+    let token: string | null = this.localStorageService.get('token');
+    if (token != null && token != undefined){
+      return this.jwthelperService.isTokenExpired(token);
+    }else return false
+  }
+
   logout() {
     this.localStorageService.Remove('token');
   }
@@ -70,7 +77,6 @@ export class AuthService {
   }
 
   setUserStats() {
-      console.log("setUser")
     if (this.isAuthenticated()) {
       this.setCurrentUserId();
       this.setRoles();

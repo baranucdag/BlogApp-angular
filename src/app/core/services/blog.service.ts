@@ -6,6 +6,7 @@ import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { BlogModel } from '../models/blogModel';
 import { BlogDetailModel } from '../models/blogDetailModel';
+import { ResponseModel } from '../models/responseModel';
 
 @Injectable({
   providedIn: 'root',
@@ -49,9 +50,9 @@ export class BlogService {
   }
 
   //add a blog
-  addBlog(sendForm: any) {
+  addBlog(sendForm: any):Observable<ResponseModel>{
     let apiUrl = 'https://localhost:44313/api/blogs/add';
-    return this.httClient.post(apiUrl, sendForm);
+    return this.httClient.post<ResponseModel>(apiUrl, sendForm);
   }
 
   //update blog
@@ -61,9 +62,9 @@ export class BlogService {
   }
 
   //delete blog
-  deleteBlog(blogModel: BlogModel) {
+  deleteBlog(blogModel: BlogModel) :Observable<ResponseModel>{
     let apiUrl = this.baseApiUrl + 'delete';
-    return this.httClient.post(apiUrl, blogModel);
+    return this.httClient.post<ResponseModel>(apiUrl, blogModel);
   }
 
   //get blog details

@@ -4,6 +4,7 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { CategoryModel } from '../models/categoryModel';
 import { AotCompiler } from '@angular/compiler';
+import { ResponseModel } from '../models/responseModel';
 
 @Injectable({
   providedIn: 'root'
@@ -28,14 +29,14 @@ export class CategoryService {
   }
 
   //add category
-  addCategory(categoryName:string){
+  addCategory(categoryName:string):Observable<ResponseModel>{
     let apiUrl = this.baseApiUrl + 'add';
-    return this.httCliect.post(apiUrl,categoryName);
+    return this.httCliect.post<ResponseModel>(apiUrl,categoryName);
   }
 
   //delete category
-  deleteCategory(category:CategoryModel){
+  deleteCategory(category:CategoryModel):Observable<ResponseModel>{
     let apiUrl = this.baseApiUrl + 'delete';
-    return this.httCliect.post(apiUrl,category);
+    return this.httCliect.post<ResponseModel>(apiUrl,category);
   }
 }

@@ -60,10 +60,11 @@ export class CategoryListComponent implements OnInit {
   //delete a category
   deleteCategory(category:CategoryModel){
     this.categoryService.deleteCategory(category).subscribe((response)=>{
-      this.toastr.info('Category deleted!');
+      this.toastr.info(response.message);
+      console.log(response)
       this.getCategories(this.pageNumber,this.pageSize);
     },(errorResponse)=>{
-      this.toastr.error('Category couldnt deleted!')
+      this.toastr.error(errorResponse.error.message)
     })
   }
 

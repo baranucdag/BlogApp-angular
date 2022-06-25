@@ -7,6 +7,7 @@ import { UserOperationCLaimModel } from './../../../../../core/models/userOperat
 import { OperationClaimService } from './../../../../../core/services/operation-claim.service';
 import { UserService } from './../../../../../core/services/user.service';
 import { Component, OnInit } from '@angular/core';
+import { Route, Router } from '@angular/router';
 
 @Component({
   selector: 'app-user-operation-claim-add',
@@ -21,9 +22,10 @@ export class UserOperationClaimAddComponent implements OnInit {
   constructor(
     private userService: UserService,
     private operationService: OperationClaimService,
-    private userOperationService:UserOperationClaimService,
-    private toastr:ToastrService,
-    private form: FormBuilder
+    private userOperationService: UserOperationClaimService,
+    private toastr: ToastrService,
+    private form: FormBuilder,
+    private router:Router
   ) {}
 
   ngOnInit(): void {
@@ -53,16 +55,22 @@ export class UserOperationClaimAddComponent implements OnInit {
     });
   }
 
-  Add(){
-    if(this.addForm.value){
-      let model:UserOperationCLaimModel = Object.assign({},this.addForm.value)
-      console.log(model)
-      this.userOperationService.add(model).subscribe((response)=>{
-        this.toastr.success('User Operation Claim Added');
-      },
-      (errorResponse)=>{
-        this.toastr.error(errorResponse.message);
-      });
+  Add() {
+    if (this.addForm.value) {
+      let model: UserOperationCLaimModel = Object.assign(
+        {},
+        this.addForm.value
+      );
+      this.userOperationService.add(model).subscribe(
+        (response) => {
+          console.log(response.message);
+          this.toastr.success('User Operation Claim Added');
+          this.router.navigate(['/admin/auth/authassignments'])
+        },
+        (responseError) => {
+          this.toastr.error(responseError.error.message);
+        }
+      );
     }
   }
 }

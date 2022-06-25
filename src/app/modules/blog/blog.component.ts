@@ -27,7 +27,6 @@ export class BlogComponent implements OnInit {
 
   ngOnInit(): void {
     this.authService.setUserStats()
-    console.log(this.authService.currentRoles)
     this.detailService.blogDetail.subscribe((detail) => {
       if (detail && detail.blogId) {
         this.blogHeader = detail.blogTitle;
@@ -39,6 +38,7 @@ export class BlogComponent implements OnInit {
         this.cdref.detectChanges();   //to avoid 'Expression has changed after it was checked' error.
       }
     });
+    console.log(this.authService.isExpired())
   }
 
   getBackground(id: number) {

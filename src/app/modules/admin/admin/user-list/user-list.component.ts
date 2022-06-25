@@ -42,11 +42,13 @@ export class UserListComponent implements OnInit {
   delete(user: UserModel) {
     this.userService.delete(user).subscribe(
       (response) => {
-        this.toastr.info('user deleted');
+        this.toastr.info(response.message);
+        console.log(response)
         this.getBlogsPaginated(this.pageNumber,this.pageSize);
       },
       (responseError) => {
         this.toastr.info(responseError.message);
+        console.log(responseError)
       }
     );
   }

@@ -25,12 +25,17 @@ export class NaviComponent implements OnInit {
   //log out function
   logOut(){
     this.authService.logout();
-    this.refresh();
     this.toastr.info("Logged out succesfully!")
   }
 
-  //refresh location
-  refresh(): void {
-    window.location.reload();
+  //check if user is admin
+  isAdmin(){
+    if(this.authService.isAuthenticated()){
+       if(this.authService.getCurrentRoles().includes("admin")){
+    return true
+   }
+   else return false
+    }else return false
+  
   }
 }

@@ -1,3 +1,4 @@
+import { ResponseModel } from './../models/responseModel';
 import { ListResponsModel } from '../models/listResponseModel';
 import { UserModel } from '../models/userModel';
 import { SingleResponseModel } from '../models/singleResponseModel';
@@ -22,9 +23,9 @@ export class UserService {
     return this.httpClient.get<ListResponsModel<UserModel>>(apiUrl);
   }
 
-  delete(user:UserModel){
+  delete(user:UserModel):Observable<ResponseModel>{
     let apiUrl = this.baseApiUrl + 'delete';
-    return this.httpClient.post(apiUrl,user);
+    return this.httpClient.post<ResponseModel>(apiUrl,user);
   }
 
    //get users paginated on backend

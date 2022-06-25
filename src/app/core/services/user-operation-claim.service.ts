@@ -1,3 +1,4 @@
+import { ResponseModel } from './../models/responseModel';
 import { UserOperationCLaimModel } from './../models/userOperationClaimModel';
 import { Observable } from 'rxjs';
 import { HttpClient } from '@angular/common/http';
@@ -21,13 +22,13 @@ export class UserOperationClaimService {
     return this.httClient.get<ListResponsModel<UserOperationCLaimModel>>(apiUrl);
   }
 
-  add(model:UserOperationCLaimModel){
+  add(model:UserOperationCLaimModel):Observable<ResponseModel>{
     let apiUrl = this.baseAPiUrl + 'Add';
-    return this.httClient.post(apiUrl,model);
+    return this.httClient.post<ResponseModel>(apiUrl,model);
   }
 
-  delete(model:UserOperationCLaimModel){
+  delete(model:UserOperationCLaimModel):Observable<ResponseModel>{
     let apiUrl = this.baseAPiUrl + 'delete';
-    return this.httClient.post(apiUrl,model);
+    return this.httClient.post<ResponseModel>(apiUrl,model);
   }
 }

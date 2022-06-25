@@ -58,12 +58,9 @@
           <div class="bg-white p-2">
             <div class="d-flex flex-row user-info">
               <div class="d-flex flex-column justify-content-start ml-2">
-                <span class="d-block name">
-                  <span style="font-weight: bold text-black-50">Owner:</span>
-                  {{ comment.userEmail }}</span
-                >
-                <span class="date text-black-50"
-                  ><span style="font-weight: bold;">Shared publicly at :</span>
+                <span class="d-block name text-black-50">
+                  <span style="font-weight: bold text-black-50"><a style="font-weight:500">Owner</a>:</span>
+                  {{ comment.userEmail }} ||
                   {{ comment.createdTime | date: "medium" }}</span
                 >
               </div>
@@ -89,7 +86,7 @@
         <div class="bg-light p-2">
           <form [formGroup]="commentPostForm">
             <div class="d-flex flex-row align-items-start">
-              <textarea
+              <textarea 
                 formControlName="commentContent"
                 class="form-control ml-1 shadow-none textarea"
               ></textarea>

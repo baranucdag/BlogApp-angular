@@ -35,8 +35,6 @@ export class BlogsComponent implements OnInit {
     this.detailService.blogDetail.next(null);
     this.getCurrentUser();
     this.getBlogs();
-    console.log(this.authService.getCurrentUserId())
-    console.log(this.authService.isAuthenticated())
   }
 
   //get all blogs by filter
